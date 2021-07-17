@@ -71,7 +71,22 @@
             android:name="wordGroupsWithWords"
             app:argType="com.example.vsensei.data.WordGroupWithWords[]" />
         <action
-            android:id="@+id/action_groupSelectFragment_to_scoresFragment"
-            app:destination="@id/scoresFragment" />
+            android:id="@+id/action_groupSelectFragment_to_practiceFragment"
+            app:destination="@id/practiceFragment" />
+        <argument
+            android:name="practiceType"
+            app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/practiceFragment"
+        android:name="com.example.vsensei.view.ui.PracticeFragment"
+        android:label="{practiceType}"
+        tools:layout="@layout/fragment_practice" >
+        <argument
+            android:name="practiceType"
+            app:argType="string" />
+        <argument
+            android:name="wordGroupWithWords"
+            app:argType="com.example.vsensei.data.WordGroupWithWords" />
+    </fragment>
 </navigation>

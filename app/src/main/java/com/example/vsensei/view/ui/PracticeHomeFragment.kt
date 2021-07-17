@@ -44,8 +44,18 @@ class PracticeHomeFragment : Fragment() {
         wordViewModel.wordGroupsWithWords.observe(viewLifecycleOwner, { wordGroupsWithWords ->
             binding.emptyGroupsDisplay.isVisible = wordGroupsWithWords.isEmpty()
             binding.practiceDisplay.isVisible = wordGroupsWithWords.isNotEmpty()
+            binding.guessTheWordButton.setOnClickListener {
+                val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
+                    wordGroupsWithWords.toTypedArray(),
+                    getString(R.string.guess_the_word)
+                )
+                findNavController().navigate(action)
+            }
             binding.guessTheMeaningButton.setOnClickListener {
-                val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(wordGroupsWithWords.toTypedArray())
+                val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
+                    wordGroupsWithWords.toTypedArray(),
+                    getString(R.string.guess_the_meaning)
+                )
                 findNavController().navigate(action)
             }
         })
