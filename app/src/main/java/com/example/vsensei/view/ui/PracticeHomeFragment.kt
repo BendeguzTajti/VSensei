@@ -10,14 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.transition.Fade
 import com.example.vsensei.R
-import com.example.vsensei.databinding.FragmentPracticeBinding
+import com.example.vsensei.databinding.FragmentPracticeHomeBinding
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class PracticeFragment : Fragment() {
+class PracticeHomeFragment : Fragment() {
 
-    private var _binding: FragmentPracticeBinding? = null
+    private var _binding: FragmentPracticeHomeBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var wordViewModel: WordViewModel
@@ -29,7 +29,7 @@ class PracticeFragment : Fragment() {
         exitTransition = Fade().apply {
             duration = 150
         }
-        _binding = FragmentPracticeBinding.inflate(inflater, container, false)
+        _binding = FragmentPracticeHomeBinding.inflate(inflater, container, false)
         wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         return binding.root
     }
@@ -45,7 +45,7 @@ class PracticeFragment : Fragment() {
             binding.emptyGroupsDisplay.isVisible = wordGroupsWithWords.isEmpty()
             binding.practiceDisplay.isVisible = wordGroupsWithWords.isNotEmpty()
             binding.guessTheMeaningButton.setOnClickListener {
-                val action = PracticeFragmentDirections.actionPracticeFragmentToGroupSelectFragment(wordGroupsWithWords.toTypedArray())
+                val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(wordGroupsWithWords.toTypedArray())
                 findNavController().navigate(action)
             }
         })

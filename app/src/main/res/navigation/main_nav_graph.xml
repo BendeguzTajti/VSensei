@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/practiceFragment">
+    app:startDestination="@id/practiceHomeFragment">
 
     <fragment
-        android:id="@+id/practiceFragment"
-        android:name="com.example.vsensei.view.ui.PracticeFragment"
+        android:id="@+id/practiceHomeFragment"
+        android:name="com.example.vsensei.view.ui.PracticeHomeFragment"
         android:label="@string/practice"
-        tools:layout="@layout/fragment_practice" >
+        tools:layout="@layout/fragment_practice_home" >
         <action
-            android:id="@+id/action_practiceFragment_to_groupSelectFragment"
+            android:id="@+id/action_practiceHomeFragment_to_groupSelectFragment"
             app:destination="@id/groupSelectFragment" />
     </fragment>
     <fragment
@@ -66,10 +66,12 @@
     <dialog
         android:id="@+id/groupSelectFragment"
         android:name="com.example.vsensei.view.ui.GroupSelectFragment"
-        android:label="fragment_group_select"
-        tools:layout="@layout/fragment_group_select" >
+        android:label="fragment_group_select" >
         <argument
             android:name="wordGroupsWithWords"
             app:argType="com.example.vsensei.data.WordGroupWithWords[]" />
+        <action
+            android:id="@+id/action_groupSelectFragment_to_scoresFragment"
+            app:destination="@id/scoresFragment" />
     </dialog>
 </navigation>

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.practiceFragment,
+                R.id.practiceHomeFragment,
                 R.id.dictionaryFragment,
                 R.id.scoresFragment,
                 R.id.newGroupFragment
