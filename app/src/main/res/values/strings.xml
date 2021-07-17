@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">VSensei</string>
+    <string name="practice">Practice</string>
+    <string name="scores">Scores</string>
+    <string name="words">Dictionary</string>
+    <string name="add_words">Add words</string>
+    <string name="missing_words">It looks like you don\'t have any words added.\n Add words and start practicing!</string>
+    <string name="new_group">New group</string>
+    <string name="group_name">Group name</string>
+    <string name="create_group">Create group</string>
+    <string name="group_name_ex">E.g. Foods and Drinks</string>
+    <string name="group_name_error">Missing group name</string>
+    <string name="groups">Groups</string>
+    <string name="num_of_words">%1$d word(s)</string>
+    <string name="delete">Delete</string>
+    <string name="undo">Undo</string>
+    <string name="item_removed">\"%1$s\" removed</string>
+    <string name="japanese">Japanese</string>
+    <string name="english">English</string>
+    <string name="hungarian">Hungarian</string>
+    <string name="practiced_language">Practiced language</string>
+    <string-array name="languages">
+        <item>@string/english</item>
+        <item>@string/japanese</item>
+        <item>@string/hungarian</item>
+    </string-array>
+    <string name="new_word">New word</string>
+    <string name="add_word">Add word</string>
+    <string name="kanji" translatable="false">Kanji</string>
+    <string name="kanji_example">E.g. 面白い</string>
+    <string name="hiragana" translatable="false">Hiragana</string>
+    <string name="hiragana_example">E.g. おもしろい</string>
+    <string name="romaji" translatable="false">Romaji</string>
+    <string name="romaji_example">E.g. omoshiroi</string>
+    <string name="word_meaning">Meaning</string>
+    <string name="new_word_hint">%1$s word</string>
+    <string name="main_word_error">Missing word</string>
+    <string name="word_meaning_error">Missing word meaning</string>
+    <string name="guess_the_word">Guess the word</string>
+    <string name="guess_the_meaning">Guess the meaning</string>
+    <string name="what_do_you_want_to_practice">What do you want to practice?</string>
+    <string name="select_group">Select group</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VSensei</string>
+    <string name="practice">Gyakorlás</string>
+    <string name="scores">Eredmények</string>
+    <string name="words">Szótár</string>
+    <string name="add_words">Szavak hozzáadása</string>
+    <string name="missing_words">Úgy tűnik, hogy még nem adtál meg szavakat. Adj meg néhány szót és kezdd el a gyakorlást!</string>
+    <string name="new_group">Új csoport</string>
+    <string name="group_name">Csoportnév</string>
+    <string name="create_group">Csoport létrehozása</string>
+    <string name="group_name_ex">Pl. Ételek és Italok</string>
+    <string name="group_name_error">Nem adtál meg csoportnevet</string>
+    <string name="groups">Csoportok</string>
+    <string name="num_of_words">%1$d szó</string>
+    <string name="delete">Törlés</string>
+    <string name="undo">Visszavonás</string>
+    <string name="item_removed">\"%1$s\" törölve</string>
+    <string name="practiced_language">Gyakorolt nyelv</string>
+    <string name="new_word">Új szó</string>
+    <string name="japanese">Japán</string>
+    <string name="hungarian">Magyar</string>
+    <string name="english">Angol</string>
+    <string name="add_word">Szó hozzáadása</string>
+    <string name="kanji_example">Pl. 面白い</string>
+    <string name="hiragana_example">Pl. おもしろい</string>
+    <string name="romaji_example">Pl. omoshiroi</string>
+    <string name="word_meaning">Szó jelentése</string>
+    <string name="new_word_hint">%1$s szó</string>
+    <string name="main_word_error">Nem adtál meg szót</string>
+    <string name="word_meaning_error">Nem adtad meg a szó jelentését</string>
+    <string name="guess_the_word">Találd ki a szót</string>
+    <string name="guess_the_meaning">Találd ki a jelentést</string>
+    <string name="what_do_you_want_to_practice">Mit szeretnél gyakorolni?</string>
+    <string name="select_group">Válassz csoportot</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/practiceFragment">
+
+    <fragment
+        android:id="@+id/practiceFragment"
+        android:name="com.example.vsensei.view.ui.PracticeFragment"
+        android:label="@string/practice"
+        tools:layout="@layout/fragment_practice" >
+        <action
+            android:id="@+id/action_practiceFragment_to_groupSelectFragment"
+            app:destination="@id/groupSelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dictionaryFragment"
+        android:name="com.example.vsensei.view.ui.DictionaryFragment"
+        android:label="@string/groups"
+        tools:layout="@layout/fragment_dictionary">
+        <action
+            android:id="@+id/action_dictionaryFragment_to_newGroupFragment"
+            app:destination="@id/newGroupFragment" />
+        <action
+            android:id="@+id/action_dictionaryFragment_to_wordGroupFragment"
+            app:destination="@id/wordGroupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scoresFragment"
+        android:name="com.example.vsensei.view.ui.ScoresFragment"
+        android:label="@string/scores"
+        tools:layout="@layout/fragment_scores" />
+    <fragment
+        android:id="@+id/newGroupFragment"
+        android:name="com.example.vsensei.view.ui.NewGroupFragment"
+        android:label="@string/groups"
+        tools:layout="@layout/fragment_new_group" />
+    <fragment
+        android:id="@+id/wordGroupFragment"
+        android:name="com.example.vsensei.view.ui.WordGroupFragment"
+        android:label="{groupName}"
+        tools:layout="@layout/fragment_word_group">
+        <argument
+            android:name="groupName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_wordGroupFragment_to_newWordFragment"
+            app:destination="@id/newWordFragment" />
+        <argument
+            android:name="wordGroup"
+            app:argType="com.example.vsensei.data.WordGroup" />
+    </fragment>
+    <fragment
+        android:id="@+id/newWordFragment"
+        android:name="com.example.vsensei.view.ui.NewWordFragment"
+        android:label="{groupName}"
+        tools:layout="@layout/fragment_new_word">
+        <argument
+            android:name="groupName"
+            app:argType="string" />
+        <argument
+            android:name="wordGroup"
+            app:argType="com.example.vsensei.data.WordGroup" />
+    </fragment>
+    <dialog
+        android:id="@+id/groupSelectFragment"
+        android:name="com.example.vsensei.view.ui.GroupSelectFragment"
+        android:label="fragment_group_select"
+        tools:layout="@layout/fragment_group_select" >
+        <argument
+            android:name="wordGroupsWithWords"
+            app:argType="com.example.vsensei.data.WordGroupWithWords[]" />
+    </dialog>
+</navigation>

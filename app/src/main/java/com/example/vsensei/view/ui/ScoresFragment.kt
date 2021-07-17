@@ -1,0 +1,23 @@
+package com.example.vsensei.view.ui
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.transition.Fade
+import com.example.vsensei.R
+
+class ScoresFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        exitTransition = Fade().apply {
+            duration = 150
+        }
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_scores, container, false)
+    }
+}

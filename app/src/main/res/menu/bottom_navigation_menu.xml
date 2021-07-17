@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/practiceFragment"
+        android:icon="@drawable/ic_practice"
+        android:title="@string/practice" />
+    <item
+        android:id="@+id/dictionaryFragment"
+        android:icon="@drawable/ic_words"
+        android:title="@string/words" />
+    <item
+        android:id="@+id/scoresFragment"
+        android:icon="@drawable/ic_scores"
+        android:title="@string/scores" />
+</menu>
