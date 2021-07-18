@@ -15,6 +15,7 @@
         <item name="colorSurface">@color/white</item>
         <item name="colorControlNormal">@color/dark_blue_200</item>
         <item name="android:textColorPrimary">@color/dark_blue_500</item>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
 
@@ -45,7 +46,16 @@
         <item name="errorIconTint">@color/red_200</item>
     </style>
 
+    <style name="Widget.App.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Snackbar</item>
+        <item name="actionTextColorAlpha">1</item>
+    </style>
+
     <style name="Widget.App.SnackbarButton" parent="Widget.MaterialComponents.Button.TextButton.Snackbar">
         <item name="android:textColor">@color/yellow_500</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Snackbar" parent="">
+        <item name="backgroundTint">@color/dark_blue_500</item>
     </style>
 </resources>
