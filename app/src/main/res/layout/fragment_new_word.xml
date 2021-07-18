@@ -1,121 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="?attr/colorSurface"
+    android:padding="18dp"
+    tools:background="#FAFAFA"
     tools:context=".view.ui.NewWordFragment">
 
-    <com.google.android.material.card.MaterialCardView
+
+    <TextView
+        android:id="@+id/card_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_word"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/word_primary_container"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="12dp"
-        android:transitionGroup="true"
-        android:transitionName="newWordCardTransition"
-        app:cardBackgroundColor="?attr/colorPrimaryVariant">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@id/card_title"
+        tools:helperText="@string/hiragana_example"
+        tools:hint="@string/hiragana">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/word_primary_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="12dp">
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="?android:attr/textColorPrimary" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/close_button"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                app:icon="@drawable/ic_close"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconTint="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/card_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/new_word"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/close_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/close_button" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/word_primary_variant_container"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:hint="@string/kanji"
+        app:helperText="@string/kanji_example"
+        app:layout_constraintTop_toBottomOf="@id/word_primary_container">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/word_primary_container"
-                style="@style/ThemeOverlay.App.TextInputLayout.Secondary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                app:layout_constraintTop_toBottomOf="@id/card_title"
-                tools:helperText="@string/hiragana_example"
-                tools:hint="@string/hiragana">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/word_primary_variant_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="?android:attr/textColorPrimary" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/word_primary_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@android:color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/word_meaning_container"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:hint="@string/word_meaning"
+        app:layout_constraintTop_toBottomOf="@id/word_primary_variant_container">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/word_primary_variant_container"
-                style="@style/ThemeOverlay.App.TextInputLayout.Secondary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:hint="@string/kanji"
-                app:helperText="@string/kanji_example"
-                app:layout_constraintTop_toBottomOf="@id/word_primary_container">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/word_meaning_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="?android:attr/textColorPrimary" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/word_primary_variant_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@android:color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_word_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/add_word"
+        android:textColor="@android:color/white"
+        app:backgroundTint="?attr/colorPrimaryVariant"
+        app:layout_constraintTop_toBottomOf="@id/word_meaning_container"
+        app:rippleColor="@android:color/darker_gray" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/word_meaning_container"
-                style="@style/ThemeOverlay.App.TextInputLayout.Secondary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:hint="@string/word_meaning"
-                app:layout_constraintTop_toBottomOf="@id/word_primary_variant_container">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/word_meaning_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@android:color/white" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/add_word_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/add_word"
-                android:textColor="?android:textColorPrimary"
-                app:backgroundTint="@android:color/white"
-                app:layout_constraintTop_toBottomOf="@id/word_meaning_container"
-                app:rippleColor="@android:color/darker_gray" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

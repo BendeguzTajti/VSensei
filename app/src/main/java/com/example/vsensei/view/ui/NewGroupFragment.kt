@@ -1,9 +1,7 @@
 package com.example.vsensei.view.ui
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,23 +13,14 @@ import com.example.vsensei.R
 import com.example.vsensei.data.WordGroup
 import com.example.vsensei.databinding.FragmentNewGroupBinding
 import com.example.vsensei.viewmodel.WordViewModel
-import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class NewGroupFragment : Fragment() {
+class NewGroupFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentNewGroupBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var wordViewModel: WordViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val enterTransition = MaterialContainerTransform().apply {
-            scrimColor = Color.TRANSPARENT
-            drawingViewId = R.id.nav_host_fragment
-        }
-        sharedElementEnterTransition = enterTransition
-    }
 
     override fun onResume() {
         super.onResume()
@@ -63,7 +52,6 @@ class NewGroupFragment : Fragment() {
         binding.languageSelector.setOnItemClickListener { _, _, position, _ ->
             wordViewModel.saveSelectedLanguageIndex(position)
         }
-        binding.closeButton.setOnClickListener { findNavController().navigateUp() }
         binding.createGroupButton.setOnClickListener {
             val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(view.windowToken, 0)

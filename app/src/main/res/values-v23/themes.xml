@@ -15,14 +15,14 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="colorSurface">@color/white</item>
-        <item name="colorControlNormal">@color/dark_blue_200</item>
+        <item name="colorControlNormal">@color/dark_blue_500</item>
         <item name="android:textColorPrimary">@color/dark_blue_500</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
 
     <style name="ThemeOverlay.App.ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/dark_blue_500</item>
+        <item name="colorControlNormal">@color/dark_blue_200</item>
     </style>
 
     <style name="ThemeOverlay.App.TextInputLayout.Secondary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">

@@ -1,9 +1,7 @@
 package com.example.vsensei.view.ui
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,24 +13,15 @@ import com.example.vsensei.R
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentNewWordBinding
 import com.example.vsensei.viewmodel.WordViewModel
-import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class NewWordFragment : Fragment() {
+class NewWordFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentNewWordBinding? = null
     private val binding get() = _binding!!
     private val args: NewWordFragmentArgs by navArgs()
 
     private lateinit var wordViewModel: WordViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val enterTransition = MaterialContainerTransform().apply {
-            scrimColor = Color.TRANSPARENT
-            drawingViewId = R.id.nav_host_fragment
-        }
-        sharedElementEnterTransition = enterTransition
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +34,6 @@ class NewWordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.closeButton.setOnClickListener { findNavController().navigateUp() }
         val languages = resources.getStringArray(R.array.languages)
         val selectedLanguageIndex = args.wordGroup.selectedLanguageIndex
         when(languages[selectedLanguageIndex]) {

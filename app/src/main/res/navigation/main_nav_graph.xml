@@ -9,7 +9,7 @@
         android:id="@+id/practiceHomeFragment"
         android:name="com.example.vsensei.view.ui.PracticeHomeFragment"
         android:label="@string/practice"
-        tools:layout="@layout/fragment_practice_home" >
+        tools:layout="@layout/fragment_practice_home">
         <action
             android:id="@+id/action_practiceHomeFragment_to_groupSelectFragment"
             app:destination="@id/groupSelectFragment" />
@@ -31,10 +31,10 @@
         android:name="com.example.vsensei.view.ui.ScoresFragment"
         android:label="@string/scores"
         tools:layout="@layout/fragment_scores" />
-    <fragment
+    <dialog
         android:id="@+id/newGroupFragment"
         android:name="com.example.vsensei.view.ui.NewGroupFragment"
-        android:label="@string/groups"
+        android:label="@string/new_group"
         tools:layout="@layout/fragment_new_group" />
     <fragment
         android:id="@+id/wordGroupFragment"
@@ -51,22 +51,19 @@
             android:name="wordGroup"
             app:argType="com.example.vsensei.data.WordGroup" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/newWordFragment"
         android:name="com.example.vsensei.view.ui.NewWordFragment"
-        android:label="{groupName}"
+        android:label="@string/new_word"
         tools:layout="@layout/fragment_new_word">
-        <argument
-            android:name="groupName"
-            app:argType="string" />
         <argument
             android:name="wordGroup"
             app:argType="com.example.vsensei.data.WordGroup" />
-    </fragment>
+    </dialog>
     <dialog
         android:id="@+id/groupSelectFragment"
         android:name="com.example.vsensei.view.ui.GroupSelectFragment"
-        android:label="fragment_group_select" >
+        android:label="fragment_group_select">
         <argument
             android:name="wordGroupsWithWords"
             app:argType="com.example.vsensei.data.WordGroupWithWords[]" />
@@ -81,7 +78,7 @@
         android:id="@+id/practiceFragment"
         android:name="com.example.vsensei.view.ui.PracticeFragment"
         android:label="{practiceType}"
-        tools:layout="@layout/fragment_practice" >
+        tools:layout="@layout/fragment_practice">
         <argument
             android:name="practiceType"
             app:argType="string" />

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -41,11 +40,8 @@ class DictionaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addNewGroupButton.setOnClickListener {
-            exitTransition = Hold()
-            reenterTransition = Hold()
             val action = DictionaryFragmentDirections.actionDictionaryFragmentToNewGroupFragment()
-            val extras = FragmentNavigatorExtras(it to "newGroupCardTransition")
-            findNavController().navigate(action, extras)
+            findNavController().navigate(action)
         }
         wordGroupsRecyclerViewInit()
     }

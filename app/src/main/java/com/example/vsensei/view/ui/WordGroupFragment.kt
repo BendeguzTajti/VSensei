@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,7 +17,6 @@ import com.example.vsensei.view.adapter.WordAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.Hold
 
 class WordGroupFragment : Fragment() {
 
@@ -43,11 +41,8 @@ class WordGroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addNewWordButton.setOnClickListener {
-            exitTransition = Hold()
-            reenterTransition = Hold()
-            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(args.groupName, args.wordGroup)
-            val extras = FragmentNavigatorExtras(it to "newWordCardTransition")
-            findNavController().navigate(action, extras)
+            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(args.wordGroup)
+            findNavController().navigate(action)
         }
         wordsRecyclerViewInit()
     }
