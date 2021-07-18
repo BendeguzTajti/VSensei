@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.practiceHomeFragment,
                 R.id.dictionaryFragment,
                 R.id.scoresFragment,
-                R.id.newGroupFragment
             )
         )
         setSupportActionBar(binding.toolbar)

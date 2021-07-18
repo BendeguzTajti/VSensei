@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
 import com.example.vsensei.data.WordGroup
 import com.example.vsensei.databinding.FragmentNewGroupBinding
@@ -60,7 +59,7 @@ class NewGroupFragment : BottomSheetDialogFragment() {
                 val selectedLanguageIndex = wordViewModel.getLatestSelectedLanguageIndex()
                 val wordGroup = WordGroup(0, groupName, 0, selectedLanguageIndex, System.currentTimeMillis())
                 wordViewModel.addWordGroup(wordGroup)
-                findNavController().navigateUp()
+                dismiss()
             }
         }
     }

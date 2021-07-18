@@ -19,9 +19,9 @@
             style="@style/Widget.MaterialComponents.Toolbar.Surface"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:theme="@style/ThemeOverlay.App.ToolbarTheme"
-            app:title="Home"
-            app:titleTextColor="?attr/colorPrimary" />
+            android:theme="@style/ThemeOverlay.App.ToolbarTheme"
+            app:titleTextColor="?attr/colorPrimary"
+            tools:title="Practice" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

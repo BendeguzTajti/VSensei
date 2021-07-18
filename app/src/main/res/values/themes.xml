@@ -23,29 +23,6 @@
         <item name="colorControlNormal">@color/dark_blue_200</item>
     </style>
 
-    <style name="ThemeOverlay.App.TextInputLayout.Secondary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="hintTextColor">@android:color/darker_gray</item>
-        <item name="android:textColorHint">@android:color/darker_gray</item>
-        <item name="helperTextTextColor">@android:color/white</item>
-        <item name="boxStrokeColor">@android:color/white</item>
-        <item name="boxBackgroundColor">@color/dark_blue_200</item>
-        <item name="boxStrokeErrorColor">@color/red_200</item>
-        <item name="errorTextColor">@color/red_200</item>
-        <item name="errorIconTint">@color/red_200</item>
-    </style>
-
-    <style name="ThemeOverlay.App.TextInputLayout.Secondary.DropDownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
-        <item name="hintTextColor">@android:color/darker_gray</item>
-        <item name="android:textColorHint">@android:color/darker_gray</item>
-        <item name="helperTextTextColor">@android:color/white</item>
-        <item name="endIconTint">@android:color/white</item>
-        <item name="boxStrokeColor">@android:color/white</item>
-        <item name="boxBackgroundColor">@color/dark_blue_200</item>
-        <item name="boxStrokeErrorColor">@color/red_200</item>
-        <item name="errorTextColor">@color/red_200</item>
-        <item name="errorIconTint">@color/red_200</item>
-    </style>
-
     <style name="Widget.App.Snackbar" parent="Widget.MaterialComponents.Snackbar">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Snackbar</item>
         <item name="actionTextColorAlpha">1</item>

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.data.Word
@@ -58,7 +57,7 @@ class NewWordFragment : BottomSheetDialogFragment() {
                     binding.wordMeaningInput.text.toString()
                 )
                 wordViewModel.addWord(word)
-                findNavController().navigateUp()
+                dismiss()
             }
         }
     }
