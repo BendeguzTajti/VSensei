@@ -13,7 +13,7 @@ class GroupSelectFragment : DialogFragment() {
     private val args: GroupSelectFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext())
+        return MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
             .setTitle(R.string.select_group)
             .setItems(args.wordGroupsWithWords.map { it.wordGroup.groupName }.toTypedArray()) { _, which ->
                 val action = GroupSelectFragmentDirections.actionGroupSelectFragmentToPracticeFragment(
