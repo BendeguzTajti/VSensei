@@ -52,4 +52,14 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="ThemeOverlay.App.TextInputLayout.Secondary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="hintTextColor">@android:color/darker_gray</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="boxStrokeColor">#F9A826</item>
+        <item name="endIconTint">#F9A826</item>
+        <item name="boxBackgroundColor">@color/dark_blue_500</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+    </style>
+
 </resources>
