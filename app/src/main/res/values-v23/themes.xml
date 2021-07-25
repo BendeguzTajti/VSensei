@@ -59,9 +59,11 @@
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="boxStrokeColor">#F9A826</item>
         <item name="endIconTint">#F9A826</item>
-        <item name="boxBackgroundColor">@color/dark_blue_500</item>
+        <item name="boxBackgroundColor">@color/color_states_guess_input</item>
         <item name="boxCornerRadiusTopStart">12dp</item>
         <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
     </style>
 
 </resources>

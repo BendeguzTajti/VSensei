@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/initial" />
+
+    <ConstraintSet android:id="@+id/merged">
+        <Constraint
+            android:id="@+id/guess_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/word_container"
+            motion:layout_constraintEnd_toEndOf="@id/word_container"
+            motion:layout_constraintStart_toStartOf="@id/word_container" />
+        <Constraint android:id="@+id/word_container">
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="?attr/colorPrimaryVariant" />
+        </Constraint>
+    </ConstraintSet>
+
+    <Transition
+        motion:constraintSetEnd="@+id/merged"
+        motion:constraintSetStart="@+id/initial"
+        motion:duration="250"
+        motion:motionInterpolator="easeOut">
+
+        <KeyFrameSet>
+
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="99"
+                motion:motionTarget="@+id/guess_container" />
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/guess_container" />
+
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet
+        android:id="@+id/success"
+        motion:deriveConstraintsFrom="@+id/merged">
+        <Constraint android:id="@+id/word_container">
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="#4a934a" />
+        </Constraint>
+    </ConstraintSet>
+
+    <Transition
+        motion:constraintSetEnd="@+id/success"
+        motion:constraintSetStart="@+id/merged"
+        motion:duration="400">
+
+        <KeyFrameSet>
+
+            <KeyAttribute
+                android:scaleX="1.05"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/word_container" />
+            <KeyAttribute
+                android:scaleY="1.05"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/word_container" />
+            <KeyAttribute
+                android:scaleX="1.05"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/word_container" />
+            <KeyAttribute
+                android:scaleY="1.05"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/word_container" />
+            <KeyAttribute
+                android:scaleX="1.0"
+                motion:framePosition="65"
+                motion:motionTarget="@+id/word_container" />
+            <KeyAttribute
+                android:scaleY="1.0"
+                motion:framePosition="65"
+                motion:motionTarget="@+id/word_container" />
+
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet
+        android:id="@+id/failure"
+        motion:deriveConstraintsFrom="@+id/merged">
+
+        <Constraint android:id="@+id/word_container">
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@color/red_500" />
+        </Constraint>
+
+    </ConstraintSet>
+
+    <Transition
+        motion:constraintSetEnd="@+id/failure"
+        motion:constraintSetStart="@+id/merged"
+        motion:duration="400">
+
+        <KeyFrameSet>
+
+            <KeyAttribute
+                android:translationX="10dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/word_container" />
+            <KeyAttribute
+                android:translationX="-10dp"
+                motion:framePosition="20"
+                motion:motionTarget="@+id/word_container" />
+            <KeyAttribute
+                android:translationX="0dp"
+                motion:framePosition="40"
+                motion:motionTarget="@+id/word_container" />
+        </KeyFrameSet>
+
+    </Transition>
+
+</MotionScene>

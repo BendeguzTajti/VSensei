@@ -30,7 +30,7 @@ class PracticeHomeFragment : Fragment() {
             duration = 150
         }
         _binding = FragmentPracticeHomeBinding.inflate(inflater, container, false)
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
+        wordViewModel = ViewModelProvider(requireActivity()).get(WordViewModel::class.java)
         return binding.root
     }
 

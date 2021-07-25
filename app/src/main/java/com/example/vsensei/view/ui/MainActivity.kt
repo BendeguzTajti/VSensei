@@ -2,6 +2,7 @@ package com.example.vsensei.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -32,6 +33,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
         binding.bottomNavigation.setOnNavigationItemReselectedListener {  }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.practiceFragment) {
+                binding.bottomNavigation.visibility = View.GONE
+            } else {
+                binding.bottomNavigation.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

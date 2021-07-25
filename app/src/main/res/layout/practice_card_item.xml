@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_practice_item_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/practice_card_item_scene">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/guess_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="14dp"
+        app:cardBackgroundColor="?attr/colorPrimaryVariant"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="@id/word_container"
+        app:layout_constraintStart_toStartOf="@id/word_container"
+        app:layout_constraintTop_toBottomOf="@id/word_container">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/guess_layout"
+            style="@style/ThemeOverlay.App.TextInputLayout.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/answer"
+            app:endIconDrawable="@drawable/ic_send"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/guess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/word_container"
@@ -15,7 +50,7 @@
         app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".4">
+        app:layout_constraintVertical_bias=".35">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,28 +119,4 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/guess_container"
-        style="@style/ThemeOverlay.App.TextInputLayout.Secondary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="14dp"
-        android:hint="@string/answer"
-        app:endIconDrawable="@drawable/ic_send"
-        app:endIconMode="custom"
-        app:layout_constraintEnd_toEndOf="@id/word_container"
-        app:layout_constraintStart_toStartOf="@id/word_container"
-        app:layout_constraintTop_toBottomOf="@id/word_container">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/guess"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textColor="@color/white" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
