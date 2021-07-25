@@ -16,6 +16,8 @@
         <!-- Customize your theme here. -->
         <item name="colorSurface">@color/white</item>
         <item name="colorControlNormal">@color/dark_blue_500</item>
+        <item name="colorPositive">@color/green_500</item>
+        <item name="colorNegative">@color/red_500</item>
         <item name="android:textColorPrimary">@color/dark_blue_500</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>

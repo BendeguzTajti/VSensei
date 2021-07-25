@@ -12,5 +12,6 @@
     <color name="dark_blue_200">#575A89</color>
     <color name="red_200">#FF7597</color>
     <color name="red_500">#D14642</color>
+    <color name="green_500">#4A934A</color>
     <color name="yellow_500">#F9A826</color>
 </resources>

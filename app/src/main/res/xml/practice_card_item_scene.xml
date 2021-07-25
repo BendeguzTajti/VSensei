@@ -49,7 +49,7 @@
         <Constraint android:id="@+id/word_container">
             <CustomAttribute
                 motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="#4a934a" />
+                motion:customColorValue="?attr/colorPositive" />
         </Constraint>
     </ConstraintSet>
 
@@ -96,7 +96,7 @@
         <Constraint android:id="@+id/word_container">
             <CustomAttribute
                 motion:attributeName="cardBackgroundColor"
-                motion:customColorValue="@color/red_500" />
+                motion:customColorValue="?attr/colorNegative" />
         </Constraint>
 
     </ConstraintSet>

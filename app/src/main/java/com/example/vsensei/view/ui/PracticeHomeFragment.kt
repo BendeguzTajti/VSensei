@@ -30,6 +30,7 @@ class PracticeHomeFragment : Fragment() {
             duration = 150
         }
         _binding = FragmentPracticeHomeBinding.inflate(inflater, container, false)
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)?.isVisible = true
         wordViewModel = ViewModelProvider(requireActivity()).get(WordViewModel::class.java)
         return binding.root
     }

@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PracticeFragment : Fragment() {
 
@@ -22,6 +24,7 @@ class PracticeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPracticeBinding.inflate(inflater, container, false)
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)?.isVisible = false
         return binding.root
     }
 

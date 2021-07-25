@@ -30,13 +30,17 @@ class PracticeCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val currentWord: Word = requireArguments().get(CURRENT_WORD) as Word
         val groupLanguage: String = requireArguments().get(GROUP_LANGUAGE) as String
+        val isAnswerVisible = savedInstanceState?.getBoolean(IS_ANSWER_VISIBLE, false) ?: false
+        val isGuessEnabled = savedInstanceState?.getBoolean(IS_GUESS_ENABLED, true) ?: true
         binding.wordPrimary.text = if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
+        binding.guessLayout.isEnabled = isGuessEnabled
         binding.wordPrimaryVariant.apply {
             isVisible = !currentWord.wordPrimaryVariant.isNullOrBlank()
             text = "(${currentWord.wordPrimary})"
         }
         binding.audioButton.text = groupLanguage
         binding.wordMeaning.text = currentWord.wordMeaning
+        binding.wordMeaning.visibility = if (isAnswerVisible) View.VISIBLE else View.INVISIBLE
         binding.guessLayout.setEndIconOnClickListener {
             if (!binding.guess.text.isNullOrBlank()) {
                 binding.guessLayout.isEnabled = false
@@ -59,6 +63,12 @@ class PracticeCardFragment : Fragment() {
         })
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(IS_ANSWER_VISIBLE, binding.wordMeaning.isVisible)
+        outState.putBoolean(IS_GUESS_ENABLED, binding.guessLayout.isEnabled)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -68,6 +78,8 @@ class PracticeCardFragment : Fragment() {
 
         private const val CURRENT_WORD = "CURRENT_WORD"
         private const val GROUP_LANGUAGE = "GROUP_LANGUAGE"
+        private const val IS_ANSWER_VISIBLE = "IS_ANSWER_VISIBLE"
+        private const val IS_GUESS_ENABLED = "IS_GUESS_ENABLED"
 
         @JvmStatic
         fun newInstance(currentWord: Word, groupLanguage: String) =
