@@ -1,5 +1,6 @@
 package com.example.vsensei.view.ui
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,11 +19,18 @@ class PracticeCardFragment : Fragment() {
     private var _binding: FragmentPracticeCardBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var correctAnswerSoundPlayer: MediaPlayer
+    private lateinit var wrongAnswerSoundPlayer: MediaPlayer
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding =  FragmentPracticeCardBinding.inflate(inflater, container, false)
+        correctAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.correct_answer)
+        correctAnswerSoundPlayer.setOnCompletionListener { it.release() }
+        wrongAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.wrong_answer)
+        wrongAnswerSoundPlayer.setOnCompletionListener { it.release() }
         return binding.root
     }
 
@@ -53,8 +61,13 @@ class PracticeCardFragment : Fragment() {
                 if (currentId == R.id.merged) {
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val wordMeaning = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
-                    val stateId = if (guess == wordMeaning) R.id.success else R.id.failure
-                    motionLayout.transitionToState(stateId)
+                    if (guess == wordMeaning) {
+                        correctAnswerSoundPlayer.start()
+                        motionLayout.transitionToState(R.id.success)
+                    } else {
+                        wrongAnswerSoundPlayer.start()
+                        motionLayout.transitionToState(R.id.failure)
+                    }
                 }
                 if (currentId == R.id.success || currentId == R.id.failure) {
                     binding.wordMeaning.isVisible = true
@@ -72,6 +85,8 @@ class PracticeCardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        correctAnswerSoundPlayer.release()
+        wrongAnswerSoundPlayer.release()
     }
 
     companion object {

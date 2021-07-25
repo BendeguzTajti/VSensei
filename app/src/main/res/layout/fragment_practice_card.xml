@@ -5,6 +5,7 @@
     android:id="@+id/card_practice_item_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     app:layoutDescription="@xml/practice_card_item_scene">
 
     <androidx.cardview.widget.CardView
