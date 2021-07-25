@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.vsensei.view.widget.SavingMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_practice_item_root"
@@ -119,4 +119,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</com.example.vsensei.view.widget.SavingMotionLayout>

@@ -30,7 +30,13 @@ class PracticeFragment : Fragment() {
         val wordGroupWithWords = args.wordGroupWithWords
         val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
         val languages = resources.getStringArray(R.array.languages)
-        binding.practiceCardsViewPager.adapter = PracticeCardAdapter(wordGroupWithWords.words, languages[selectedLanguageIndex])
+        val adapter = PracticeCardAdapter(
+            wordGroupWithWords.words,
+            languages[selectedLanguageIndex],
+            childFragmentManager,
+            lifecycle
+        )
+        binding.practiceCardsViewPager.adapter = adapter
     }
 
     override fun onDestroyView() {
