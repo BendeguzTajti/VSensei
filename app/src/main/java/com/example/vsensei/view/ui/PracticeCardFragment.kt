@@ -24,7 +24,7 @@ class PracticeCardFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         wordGuessCallback = try {
-            requireActivity() as PracticeCardAdapter.WordGuessCallback
+            requireParentFragment() as PracticeCardAdapter.WordGuessCallback
         } catch (e: ClassCastException) {
             null
         }
@@ -42,6 +42,7 @@ class PracticeCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val currentWord: Word = requireArguments().get(CURRENT_WORD) as Word
         val groupLanguage: String = requireArguments().get(GROUP_LANGUAGE) as String
+        val currentPosition: Int = requireArguments().get(CURRENT_POSITION) as Int
         val isAnswerVisible = savedInstanceState?.getBoolean(IS_ANSWER_VISIBLE, false) ?: false
         val isGuessEnabled = savedInstanceState?.getBoolean(IS_GUESS_ENABLED, true) ?: true
         binding.wordPrimary.text = if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
@@ -51,6 +52,9 @@ class PracticeCardFragment : Fragment() {
             text = "(${currentWord.wordPrimary})"
         }
         binding.audioButton.text = groupLanguage
+        binding.audioButton.setOnClickListener {
+            wordGuessCallback?.sayWord(currentWord.wordPrimary)
+        }
         binding.wordMeaning.text = currentWord.wordMeaning
         binding.wordMeaning.visibility = if (isAnswerVisible) View.VISIBLE else View.INVISIBLE
         binding.guessLayout.setEndIconOnClickListener {
@@ -66,10 +70,10 @@ class PracticeCardFragment : Fragment() {
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val wordMeaning = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
                     if (guess == wordMeaning) {
-                        wordGuessCallback?.onCorrectAnswer()
+                        wordGuessCallback?.onCorrectAnswer(currentPosition)
                         motionLayout.transitionToState(R.id.success)
                     } else {
-                        wordGuessCallback?.onWrongAnswer()
+                        wordGuessCallback?.onWrongAnswer(currentPosition)
                         motionLayout.transitionToState(R.id.failure)
                     }
                 }
@@ -99,15 +103,17 @@ class PracticeCardFragment : Fragment() {
     companion object {
         private const val CURRENT_WORD = "CURRENT_WORD"
         private const val GROUP_LANGUAGE = "GROUP_LANGUAGE"
+        private const val CURRENT_POSITION = "CURRENT_POSITION"
         private const val IS_ANSWER_VISIBLE = "IS_ANSWER_VISIBLE"
         private const val IS_GUESS_ENABLED = "IS_GUESS_ENABLED"
 
         @JvmStatic
-        fun newInstance(currentWord: Word, groupLanguage: String) =
+        fun newInstance(currentWord: Word, groupLanguage: String, currentPosition: Int) =
             PracticeCardFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(CURRENT_WORD, currentWord)
                     putString(GROUP_LANGUAGE, groupLanguage)
+                    putInt(CURRENT_POSITION, currentPosition)
                 }
             }
     }

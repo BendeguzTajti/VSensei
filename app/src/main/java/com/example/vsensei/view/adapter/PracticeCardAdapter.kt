@@ -19,11 +19,12 @@ class PracticeCardAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return PracticeCardFragment.newInstance(words[position], selectedLanguage)
+        return PracticeCardFragment.newInstance(words[position], selectedLanguage, position)
     }
 
     interface WordGuessCallback {
-        fun onCorrectAnswer()
-        fun onWrongAnswer()
+        fun sayWord(word: String)
+        fun onCorrectAnswer(currentPosition: Int)
+        fun onWrongAnswer(currentPosition: Int)
     }
 }
