@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.data.Word
@@ -20,14 +20,13 @@ class NewWordFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private val args: NewWordFragmentArgs by navArgs()
 
-    private lateinit var wordViewModel: WordViewModel
+    private val wordViewModel: WordViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewWordBinding.inflate(inflater, container, false)
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         return binding.root
     }
 

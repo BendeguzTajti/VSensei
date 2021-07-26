@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -23,7 +23,7 @@ class DictionaryFragment : Fragment() {
     private var _binding: FragmentDictionaryBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var wordViewModel: WordViewModel
+    private val wordViewModel: WordViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +33,6 @@ class DictionaryFragment : Fragment() {
             duration = 150
         }
         _binding = FragmentDictionaryBinding.inflate(inflater, container, false)
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         return binding.root
     }
 

@@ -8,7 +8,7 @@ import com.example.vsensei.data.Word
 import com.example.vsensei.view.ui.PracticeCardFragment
 
 class PracticeCardAdapter(
-    val words: List<Word>,
+    private val words: List<Word>,
     private val selectedLanguage: String,
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
@@ -22,4 +22,8 @@ class PracticeCardAdapter(
         return PracticeCardFragment.newInstance(words[position], selectedLanguage)
     }
 
+    interface WordGuessCallback {
+        fun onCorrectAnswer()
+        fun onWrongAnswer()
+    }
 }

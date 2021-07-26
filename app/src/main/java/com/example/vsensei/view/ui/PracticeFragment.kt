@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
+import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PracticeFragment : Fragment() {
@@ -18,6 +20,8 @@ class PracticeFragment : Fragment() {
 
     private var _binding: FragmentPracticeBinding? = null
     private val binding get() = _binding!!
+
+    private val wordViewModel: WordViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +43,10 @@ class PracticeFragment : Fragment() {
             childFragmentManager,
             lifecycle
         )
-        binding.practiceCardsViewPager.adapter = adapter
+        binding.practiceCardsViewPager.apply {
+            isUserInputEnabled = false
+            this.adapter = adapter
+        }
     }
 
     override fun onDestroyView() {

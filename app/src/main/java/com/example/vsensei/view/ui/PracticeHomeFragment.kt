@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.transition.Fade
 import com.example.vsensei.R
@@ -20,7 +20,7 @@ class PracticeHomeFragment : Fragment() {
     private var _binding: FragmentPracticeHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var wordViewModel: WordViewModel
+    private val wordViewModel: WordViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +31,6 @@ class PracticeHomeFragment : Fragment() {
         }
         _binding = FragmentPracticeHomeBinding.inflate(inflater, container, false)
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)?.isVisible = true
-        wordViewModel = ViewModelProvider(requireActivity()).get(WordViewModel::class.java)
         return binding.root
     }
 

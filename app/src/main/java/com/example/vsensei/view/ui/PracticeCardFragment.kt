@@ -1,6 +1,6 @@
 package com.example.vsensei.view.ui
 
-import android.media.MediaPlayer
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,25 +12,29 @@ import androidx.core.view.isVisible
 import com.example.vsensei.R
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
+import com.example.vsensei.view.adapter.PracticeCardAdapter
 import java.util.*
 
 class PracticeCardFragment : Fragment() {
 
     private var _binding: FragmentPracticeCardBinding? = null
     private val binding get() = _binding!!
+    private var wordGuessCallback: PracticeCardAdapter.WordGuessCallback? = null
 
-    private lateinit var correctAnswerSoundPlayer: MediaPlayer
-    private lateinit var wrongAnswerSoundPlayer: MediaPlayer
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        wordGuessCallback = try {
+            requireActivity() as PracticeCardAdapter.WordGuessCallback
+        } catch (e: ClassCastException) {
+            null
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding =  FragmentPracticeCardBinding.inflate(inflater, container, false)
-        correctAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.correct_answer)
-        correctAnswerSoundPlayer.setOnCompletionListener { it.release() }
-        wrongAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.wrong_answer)
-        wrongAnswerSoundPlayer.setOnCompletionListener { it.release() }
         return binding.root
     }
 
@@ -62,10 +66,10 @@ class PracticeCardFragment : Fragment() {
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val wordMeaning = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
                     if (guess == wordMeaning) {
-                        correctAnswerSoundPlayer.start()
+                        wordGuessCallback?.onCorrectAnswer()
                         motionLayout.transitionToState(R.id.success)
                     } else {
-                        wrongAnswerSoundPlayer.start()
+                        wordGuessCallback?.onWrongAnswer()
                         motionLayout.transitionToState(R.id.failure)
                     }
                 }
@@ -85,12 +89,14 @@ class PracticeCardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        correctAnswerSoundPlayer.release()
-        wrongAnswerSoundPlayer.release()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        wordGuessCallback = null
     }
 
     companion object {
-
         private const val CURRENT_WORD = "CURRENT_WORD"
         private const val GROUP_LANGUAGE = "GROUP_LANGUAGE"
         private const val IS_ANSWER_VISIBLE = "IS_ANSWER_VISIBLE"

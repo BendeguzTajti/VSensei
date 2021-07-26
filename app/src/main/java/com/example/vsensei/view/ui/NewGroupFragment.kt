@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.example.vsensei.R
 import com.example.vsensei.data.WordGroup
 import com.example.vsensei.databinding.FragmentNewGroupBinding
@@ -19,7 +19,7 @@ class NewGroupFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentNewGroupBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var wordViewModel: WordViewModel
+    private val wordViewModel: WordViewModel by activityViewModels()
 
     override fun onResume() {
         super.onResume()
@@ -33,7 +33,6 @@ class NewGroupFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewGroupBinding.inflate(inflater, container, false)
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         return binding.root
     }
 
