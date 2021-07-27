@@ -23,8 +23,8 @@ class NewGroupFragment : BottomSheetDialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        val languages = resources.getStringArray(R.array.languages)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, languages)
+        val displayLanguages = resources.getStringArray(R.array.display_languages)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, displayLanguages)
         binding.languageSelector.setAdapter(arrayAdapter)
     }
 
@@ -39,14 +39,14 @@ class NewGroupFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val latestPosition = wordViewModel.getLatestSelectedLanguageIndex()
-        val languages = resources.getStringArray(R.array.languages)
+        val displayLanguages = resources.getStringArray(R.array.display_languages)
         binding.languageSelector.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputManager.hideSoftInputFromWindow(view.windowToken, 0)
             }
         }
-        binding.languageSelector.setText(languages[latestPosition], false)
+        binding.languageSelector.setText(displayLanguages[latestPosition], false)
         binding.languageSelector.setOnItemClickListener { _, _, position, _ ->
             wordViewModel.saveSelectedLanguageIndex(position)
         }
@@ -54,9 +54,17 @@ class NewGroupFragment : BottomSheetDialogFragment() {
             val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(view.windowToken, 0)
             if (isValidData()) {
+                val localeLanguages = resources.getStringArray(R.array.locale_languages)
                 val groupName = binding.groupNameInput.text.toString()
                 val selectedLanguageIndex = wordViewModel.getLatestSelectedLanguageIndex()
-                val wordGroup = WordGroup(0, groupName, 0, selectedLanguageIndex, System.currentTimeMillis())
+                val wordGroup = WordGroup(
+                    0,
+                    groupName,
+                    0,
+                    selectedLanguageIndex,
+                    localeLanguages[selectedLanguageIndex],
+                    System.currentTimeMillis()
+                )
                 wordViewModel.addWordGroup(wordGroup)
                 dismiss()
             }

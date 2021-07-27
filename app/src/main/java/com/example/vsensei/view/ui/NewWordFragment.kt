@@ -32,15 +32,15 @@ class NewWordFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val languages = resources.getStringArray(R.array.languages)
+        val displayLanguages = resources.getStringArray(R.array.display_languages)
         val selectedLanguageIndex = args.wordGroup.selectedLanguageIndex
-        when(languages[selectedLanguageIndex]) {
+        when(displayLanguages[selectedLanguageIndex]) {
             getString(R.string.japanese) -> {
                 binding.wordPrimaryContainer.setHint(R.string.hiragana)
                 binding.wordPrimaryContainer.helperText = getString(R.string.hiragana_example)
             }
             else -> {
-                binding.wordPrimaryContainer.hint = getString(R.string.new_word_hint, languages[selectedLanguageIndex])
+                binding.wordPrimaryContainer.hint = getString(R.string.new_word_hint, displayLanguages[selectedLanguageIndex])
                 binding.wordPrimaryVariantContainer.visibility = View.GONE
             }
         }

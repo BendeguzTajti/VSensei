@@ -13,5 +13,6 @@ data class WordGroup(
     val groupName : String,
     val wordsCount: Int,
     val selectedLanguageIndex: Int,
+    val localeLanguage: String,
     val timeCreated: Long
 ) : Parcelable

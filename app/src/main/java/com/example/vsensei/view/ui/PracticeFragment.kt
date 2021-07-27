@@ -2,6 +2,8 @@ package com.example.vsensei.view.ui
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.speech.tts.TextToSpeech
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +17,7 @@ import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.android.ext.android.inject
 import java.util.*
 
 class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
@@ -25,20 +28,16 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private val binding get() = _binding!!
 
     private val wordViewModel: WordViewModel by activityViewModels()
+    private val textToSpeech: TextToSpeech? by inject()
 
-    private var textToSpeech: TextToSpeech? = null
+
     private lateinit var correctAnswerSoundPlayer: MediaPlayer
     private lateinit var wrongAnswerSoundPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        textToSpeech = TextToSpeech(requireContext()) { status ->
-            if (status != TextToSpeech.ERROR) {
-                textToSpeech?.language = Locale.JAPAN
-            } else {
-                textToSpeech = null
-            }
-        }
+        val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
+        textToSpeech?.language = locale
         correctAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.correct_answer)
         wrongAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.wrong_answer)
     }
@@ -56,10 +55,10 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         super.onViewCreated(view, savedInstanceState)
         val wordGroupWithWords = args.wordGroupWithWords
         val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
-        val languages = resources.getStringArray(R.array.languages)
+        val displayLanguages = resources.getStringArray(R.array.display_languages)
         val adapter = PracticeCardAdapter(
             wordGroupWithWords.words,
-            languages[selectedLanguageIndex],
+            displayLanguages[selectedLanguageIndex],
             childFragmentManager,
             lifecycle
         )
@@ -78,10 +77,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         super.onDestroy()
         correctAnswerSoundPlayer.release()
         wrongAnswerSoundPlayer.release()
-        textToSpeech?.let {
-            it.stop()
-            it.shutdown()
-        }
+        textToSpeech?.stop()
     }
 
     override fun sayWord(word: String) {
@@ -90,9 +86,17 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     override fun onCorrectAnswer(currentPosition: Int) {
         correctAnswerSoundPlayer.start()
+        Handler(Looper.getMainLooper()).postDelayed(
+            {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
+            1400
+        )
     }
 
     override fun onWrongAnswer(currentPosition: Int) {
         wrongAnswerSoundPlayer.start()
+        Handler(Looper.getMainLooper()).postDelayed(
+            {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
+            2000
+        )
     }
 }
