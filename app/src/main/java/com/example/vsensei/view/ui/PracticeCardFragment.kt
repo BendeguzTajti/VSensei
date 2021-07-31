@@ -70,10 +70,10 @@ class PracticeCardFragment : Fragment() {
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val wordMeaning = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
                     if (guess == wordMeaning) {
-                        wordGuessCallback?.onCorrectAnswer(currentPosition)
+                        wordGuessCallback?.onWordGuessed(currentPosition, true)
                         motionLayout.transitionToState(R.id.success)
                     } else {
-                        wordGuessCallback?.onWrongAnswer(currentPosition)
+                        wordGuessCallback?.onWordGuessed(currentPosition, false)
                         motionLayout.transitionToState(R.id.failure)
                     }
                 }

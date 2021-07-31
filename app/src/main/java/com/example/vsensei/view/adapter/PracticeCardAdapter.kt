@@ -24,7 +24,6 @@ class PracticeCardAdapter(
 
     interface WordGuessCallback {
         fun sayWord(word: String)
-        fun onCorrectAnswer(currentPosition: Int)
-        fun onWrongAnswer(currentPosition: Int)
+        fun onWordGuessed(currentPosition: Int, isCorrectGuess: Boolean)
     }
 }

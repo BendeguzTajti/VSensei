@@ -84,19 +84,19 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         textToSpeech?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
-    override fun onCorrectAnswer(currentPosition: Int) {
-        correctAnswerSoundPlayer.start()
-        Handler(Looper.getMainLooper()).postDelayed(
-            {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
-            1400
-        )
-    }
-
-    override fun onWrongAnswer(currentPosition: Int) {
-        wrongAnswerSoundPlayer.start()
-        Handler(Looper.getMainLooper()).postDelayed(
-            {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
-            2000
-        )
+    override fun onWordGuessed(currentPosition: Int, isCorrectGuess: Boolean) {
+        if (isCorrectGuess) {
+            correctAnswerSoundPlayer.start()
+            Handler(Looper.getMainLooper()).postDelayed(
+                {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
+                1400
+            )
+        } else {
+            wrongAnswerSoundPlayer.start()
+            Handler(Looper.getMainLooper()).postDelayed(
+                {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
+                2000
+            )
+        }
     }
 }
