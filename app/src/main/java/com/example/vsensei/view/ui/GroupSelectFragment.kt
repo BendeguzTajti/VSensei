@@ -2,7 +2,9 @@ package com.example.vsensei.view.ui
 
 import android.app.Dialog
 import android.os.Bundle
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
@@ -20,7 +22,9 @@ class GroupSelectFragment : DialogFragment() {
                     args.practiceType,
                     args.wordGroupsWithWords[which]
                 )
-                findNavController().navigate(action)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity())
+                val extras = ActivityNavigatorExtras(options)
+                findNavController().navigate(action, extras)
             }
             .show()
     }

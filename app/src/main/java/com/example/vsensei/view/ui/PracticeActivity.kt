@@ -6,15 +6,15 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityPracticeBinding
-import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.platform.MaterialFadeThrough
 
 class PracticeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPracticeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val enter = com.google.android.material.transition.platform.MaterialFadeThrough()
-        window.enterTransition = enter
+        window.enterTransition = MaterialFadeThrough()
+        window.allowEnterTransitionOverlap = true
         super.onCreate(savedInstanceState)
         binding = ActivityPracticeBinding.inflate(layoutInflater)
         setContentView(binding.root)

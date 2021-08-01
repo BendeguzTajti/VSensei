@@ -71,5 +71,5 @@ dependencies {
     implementation 'org.koin:koin-androidx-scope:2.0.0-rc-2'
 
     // Leak Canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 }
