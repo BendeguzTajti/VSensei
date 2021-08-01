@@ -3,11 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/practice_nav_graph"
-    app:startDestination="@id/practiceFragment2">
+    app:startDestination="@id/practiceFragment">
 
     <fragment
-        android:id="@+id/practiceFragment2"
+        android:id="@+id/practiceFragment"
         android:name="com.example.vsensei.view.ui.PracticeFragment"
         android:label="{practiceType}"
-        tools:layout="@layout/fragment_practice" />
+        tools:layout="@layout/fragment_practice" >
+        <action
+            android:id="@+id/action_practiceFragment_to_practiceResultFragment"
+            app:destination="@id/practiceResultFragment"
+            app:popUpTo="@id/practice_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/practiceResultFragment"
+        android:name="com.example.vsensei.view.ui.PracticeResultFragment"
+        android:label="{practiceType}"
+        tools:layout="@layout/fragment_practice_result" >
+        <argument
+            android:name="practiceType"
+            app:argType="string" />
+    </fragment>
 </navigation>

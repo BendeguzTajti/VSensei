@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeSummary
@@ -16,6 +17,7 @@ import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -73,7 +75,11 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
             this.adapter = adapter
         }
         practiceViewModel.currentCardPosition().observe(viewLifecycleOwner, { currentPosition ->
-            binding.practiceCardsViewPager.currentItem = currentPosition
+            if (currentPosition < args.wordGroupWithWords.words.size) {
+                binding.practiceCardsViewPager.currentItem = currentPosition
+            } else {
+                navigateToPracticeResult()
+            }
         })
     }
 
@@ -106,6 +112,14 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
             practiceSummary.wrongGuesses.add(args.wordGroupWithWords.words[position])
             wrongAnswerSoundPlayer.start()
         }
+    }
+
+    private fun navigateToPracticeResult() {
+        practiceViewModel.setCurrentPracticeSummary(practiceSummary)
+        practiceViewModel.savePracticeSummary(practiceSummary)
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        val action = PracticeFragmentDirections.actionPracticeFragmentToPracticeResultFragment(args.practiceType)
+        findNavController().navigate(action)
     }
 
     companion object {

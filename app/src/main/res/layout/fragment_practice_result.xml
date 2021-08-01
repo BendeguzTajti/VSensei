@@ -30,17 +30,19 @@
         app:layout_constraintTop_toTopOf="@id/result_icon"
         app:layout_constraintVertical_bias="0.008"
         app:trackColor="?attr/colorPrimary"
-        app:trackThickness="2dp" />
+        app:trackThickness="2dp"
+        tools:progress="100" />
 
     <TextView
+        android:id="@+id/percent_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="90%"
         android:textColor="#F9A826"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/correct_guess_percent"
         app:layout_constraintEnd_toEndOf="@id/correct_guess_percent"
         app:layout_constraintStart_toStartOf="@id/correct_guess_percent"
-        app:layout_constraintTop_toTopOf="@id/correct_guess_percent" />
+        app:layout_constraintTop_toTopOf="@id/correct_guess_percent"
+        tools:text="100%" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
