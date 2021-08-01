@@ -26,9 +26,6 @@ class PracticeHomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        exitTransition = Fade().apply {
-            duration = 150
-        }
         _binding = FragmentPracticeHomeBinding.inflate(inflater, container, false)
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)?.isVisible = true
         return binding.root

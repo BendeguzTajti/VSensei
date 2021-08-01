@@ -3,6 +3,7 @@ package com.example.vsensei.view.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityPracticeBinding
@@ -13,8 +14,10 @@ class PracticeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPracticeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.enterTransition = MaterialFadeThrough()
-        window.allowEnterTransitionOverlap = true
+        window.apply {
+            enterTransition = MaterialFadeThrough()
+            allowEnterTransitionOverlap = true
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityPracticeBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -22,6 +25,12 @@ class PracticeActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         navController.setGraph(R.navigation.practice_nav_graph, intent.extras)
         setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController)
+        val appBarConfiguration = AppBarConfiguration.Builder().build()
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finishAfterTransition()
+        return true
     }
 }

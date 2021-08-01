@@ -29,9 +29,6 @@ class DictionaryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        exitTransition = Fade().apply {
-            duration = 150
-        }
         _binding = FragmentDictionaryBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
+import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
@@ -28,6 +29,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private val practiceViewModel: PracticeViewModel by activityViewModels()
     private val textToSpeech: TextToSpeech? by inject()
 
+    private lateinit var practiceSummary: PracticeSummary
     private lateinit var correctAnswerSoundPlayer: MediaPlayer
     private lateinit var wrongAnswerSoundPlayer: MediaPlayer
 
@@ -50,6 +52,12 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        practiceSummary = savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(
+            args.wordGroupWithWords.wordGroup.groupName,
+            arrayListOf(),
+            arrayListOf(),
+            System.currentTimeMillis()
+        )
         val wordGroupWithWords = args.wordGroupWithWords
         val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
         val displayLanguages = resources.getStringArray(R.array.display_languages)
@@ -61,11 +69,17 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         )
         binding.practiceCardsViewPager.apply {
             isUserInputEnabled = false
+            offscreenPageLimit = 1
             this.adapter = adapter
         }
         practiceViewModel.currentCardPosition().observe(viewLifecycleOwner, { currentPosition ->
             binding.practiceCardsViewPager.currentItem = currentPosition
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(PRACTICE_SUMMARY_KEY, practiceSummary)
     }
 
     override fun onDestroyView() {
@@ -84,11 +98,17 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         textToSpeech?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
-    override fun onWordGuessed(isCorrectGuess: Boolean) {
+    override fun onWordGuessed(position: Int, isCorrectGuess: Boolean) {
         if (isCorrectGuess) {
+            practiceSummary.correctGuesses.add(args.wordGroupWithWords.words[position])
             correctAnswerSoundPlayer.start()
         } else {
+            practiceSummary.wrongGuesses.add(args.wordGroupWithWords.words[position])
             wrongAnswerSoundPlayer.start()
         }
+    }
+
+    companion object {
+        private const val PRACTICE_SUMMARY_KEY = "PRACTICE_SUMMARY_KEY"
     }
 }

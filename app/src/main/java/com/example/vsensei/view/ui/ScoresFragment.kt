@@ -14,9 +14,6 @@ class ScoresFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        exitTransition = Fade().apply {
-            duration = 150
-        }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_scores, container, false)
     }
