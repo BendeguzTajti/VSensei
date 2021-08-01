@@ -16,7 +16,7 @@ class GroupSelectFragment : DialogFragment() {
         return MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
             .setTitle(R.string.select_group)
             .setItems(args.wordGroupsWithWords.map { it.wordGroup.groupName }.toTypedArray()) { _, which ->
-                val action = GroupSelectFragmentDirections.actionGroupSelectFragmentToPracticeFragment(
+                val action = GroupSelectFragmentDirections.actionGroupSelectFragmentToPracticeActivity(
                     args.practiceType,
                     args.wordGroupsWithWords[which]
                 )

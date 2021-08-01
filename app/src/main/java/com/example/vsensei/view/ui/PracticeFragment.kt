@@ -13,19 +13,19 @@ import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
-import com.example.vsensei.viewmodel.WordViewModel
+import com.example.vsensei.viewmodel.PracticeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
 import java.util.*
 
 class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
-    private val args: PracticeFragmentArgs by navArgs()
+    private val args by navArgs<PracticeActivityArgs>()
 
     private var _binding: FragmentPracticeBinding? = null
     private val binding get() = _binding!!
 
-    private val wordViewModel: WordViewModel by activityViewModels()
+    private val practiceViewModel: PracticeViewModel by activityViewModels()
     private val textToSpeech: TextToSpeech? by inject()
 
     private lateinit var correctAnswerSoundPlayer: MediaPlayer
@@ -63,7 +63,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
             isUserInputEnabled = false
             this.adapter = adapter
         }
-        wordViewModel.currentCardPosition().observe(viewLifecycleOwner, { currentPosition ->
+        practiceViewModel.currentCardPosition().observe(viewLifecycleOwner, { currentPosition ->
             binding.practiceCardsViewPager.currentItem = currentPosition
         })
     }

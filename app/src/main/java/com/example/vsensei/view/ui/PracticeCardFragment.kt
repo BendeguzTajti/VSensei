@@ -14,7 +14,7 @@ import com.example.vsensei.R
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
-import com.example.vsensei.viewmodel.WordViewModel
+import com.example.vsensei.viewmodel.PracticeViewModel
 import java.util.*
 
 class PracticeCardFragment : Fragment() {
@@ -23,7 +23,7 @@ class PracticeCardFragment : Fragment() {
     private val binding get() = _binding!!
     private var wordGuessCallback: PracticeCardAdapter.WordGuessCallback? = null
 
-    private val wordViewModel: WordViewModel by activityViewModels()
+    private val practiceViewModel: PracticeViewModel by activityViewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,11 +76,11 @@ class PracticeCardFragment : Fragment() {
                     if (guess == wordMeaning) {
                         wordGuessCallback?.onWordGuessed(true)
                         motionLayout.transitionToState(R.id.success)
-                        wordViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
+                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
                     } else {
                         wordGuessCallback?.onWordGuessed(false)
                         motionLayout.transitionToState(R.id.failure)
-                        wordViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
+                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
                     }
                 }
                 if (currentId == R.id.success || currentId == R.id.failure) {
