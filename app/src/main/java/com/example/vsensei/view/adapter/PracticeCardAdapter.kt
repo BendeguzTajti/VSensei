@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.vsensei.data.Word
 import com.example.vsensei.view.ui.PracticeCardFragment
+import com.example.vsensei.view.ui.PracticeResultFragment
 
 class PracticeCardAdapter(
     private val words: List<Word>,
@@ -15,15 +16,19 @@ class PracticeCardAdapter(
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
-        return words.size
+        return words.size + 1
     }
 
     override fun createFragment(position: Int): Fragment {
-        return PracticeCardFragment.newInstance(words[position], selectedLanguage, position)
+        return if (position < words.size) {
+            PracticeCardFragment.newInstance(words[position], selectedLanguage, position)
+        } else {
+            PracticeResultFragment()
+        }
     }
 
     interface WordGuessCallback {
         fun sayWord(word: String)
-        fun onWordGuessed(currentPosition: Int, isCorrectGuess: Boolean)
+        fun onWordGuessed(isCorrectGuess: Boolean)
     }
 }

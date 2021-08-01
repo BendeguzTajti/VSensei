@@ -2,8 +2,6 @@ package com.example.vsensei.view.ui
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.speech.tts.TextToSpeech
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,7 +27,6 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     private val wordViewModel: WordViewModel by activityViewModels()
     private val textToSpeech: TextToSpeech? by inject()
-
 
     private lateinit var correctAnswerSoundPlayer: MediaPlayer
     private lateinit var wrongAnswerSoundPlayer: MediaPlayer
@@ -66,6 +63,9 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
             isUserInputEnabled = false
             this.adapter = adapter
         }
+        wordViewModel.currentCardPosition().observe(viewLifecycleOwner, { currentPosition ->
+            binding.practiceCardsViewPager.currentItem = currentPosition
+        })
     }
 
     override fun onDestroyView() {
@@ -84,19 +84,11 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         textToSpeech?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
-    override fun onWordGuessed(currentPosition: Int, isCorrectGuess: Boolean) {
+    override fun onWordGuessed(isCorrectGuess: Boolean) {
         if (isCorrectGuess) {
             correctAnswerSoundPlayer.start()
-            Handler(Looper.getMainLooper()).postDelayed(
-                {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
-                1400
-            )
         } else {
             wrongAnswerSoundPlayer.start()
-            Handler(Looper.getMainLooper()).postDelayed(
-                {binding.practiceCardsViewPager.currentItem = currentPosition + 1},
-                2000
-            )
         }
     }
 }

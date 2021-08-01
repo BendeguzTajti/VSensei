@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import com.example.vsensei.R
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
+import com.example.vsensei.viewmodel.WordViewModel
 import java.util.*
 
 class PracticeCardFragment : Fragment() {
@@ -20,6 +22,8 @@ class PracticeCardFragment : Fragment() {
     private var _binding: FragmentPracticeCardBinding? = null
     private val binding get() = _binding!!
     private var wordGuessCallback: PracticeCardAdapter.WordGuessCallback? = null
+
+    private val wordViewModel: WordViewModel by activityViewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -70,11 +74,13 @@ class PracticeCardFragment : Fragment() {
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val wordMeaning = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
                     if (guess == wordMeaning) {
-                        wordGuessCallback?.onWordGuessed(currentPosition, true)
+                        wordGuessCallback?.onWordGuessed(true)
                         motionLayout.transitionToState(R.id.success)
+                        wordViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
                     } else {
-                        wordGuessCallback?.onWordGuessed(currentPosition, false)
+                        wordGuessCallback?.onWordGuessed(false)
                         motionLayout.transitionToState(R.id.failure)
+                        wordViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
                     }
                 }
                 if (currentId == R.id.success || currentId == R.id.failure) {

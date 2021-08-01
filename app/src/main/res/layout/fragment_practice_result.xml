@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ui.PracticeResultFragment">
+
+    <ImageView
+        android:id="@+id/result_icon"
+        android:layout_width="260dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_result"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/correct_guess_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorColor="#F9A826"
+        app:indicatorSize="70dp"
+        app:layout_constraintBottom_toBottomOf="@id/result_icon"
+        app:layout_constraintEnd_toEndOf="@id/result_icon"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="@id/result_icon"
+        app:layout_constraintTop_toTopOf="@id/result_icon"
+        app:layout_constraintVertical_bias="0.008"
+        app:trackColor="?attr/colorPrimary"
+        app:trackThickness="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="90%"
+        android:textColor="#F9A826"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/correct_guess_percent"
+        app:layout_constraintEnd_toEndOf="@id/correct_guess_percent"
+        app:layout_constraintStart_toStartOf="@id/correct_guess_percent"
+        app:layout_constraintTop_toTopOf="@id/correct_guess_percent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

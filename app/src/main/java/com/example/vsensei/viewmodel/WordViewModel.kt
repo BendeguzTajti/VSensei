@@ -2,16 +2,14 @@ package com.example.vsensei.viewmodel
 
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.vsensei.data.Word
 import com.example.vsensei.data.WordGroup
 import com.example.vsensei.data.WordGroupDatabase
 import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.repository.Repository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class WordViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,6 +18,11 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
     val allWordGroups: LiveData<List<WordGroupWithWords>>
     val wordGroupsWithWords: LiveData<List<WordGroupWithWords>>
     private var wordsByGroupId: LiveData<List<Word>>? = null
+    private val currentCardPosition: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>().also {
+            it.value = 0
+        }
+    }
 
     init {
         val sharedPreferences = application.getSharedPreferences("VSensei", Context.MODE_PRIVATE)
@@ -66,6 +69,15 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
             wordsByGroupId = repository.wordsByGroupId(groupId)
         }
         return wordsByGroupId!!
+    }
+
+    fun currentCardPosition(): LiveData<Int> = currentCardPosition
+
+    fun setCurrentCardPosition(currentPosition: Int, replaceDelay: Long) {
+        viewModelScope.launch {
+            delay(replaceDelay)
+            currentCardPosition.value = currentPosition
+        }
     }
 
     fun getLatestSelectedLanguageIndex(): Int = repository.getLatestSelectedLanguageIndex()
