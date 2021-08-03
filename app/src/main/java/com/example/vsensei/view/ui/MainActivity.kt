@@ -2,6 +2,7 @@ package com.example.vsensei.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,6 +31,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.scoresFragment,
             )
         )
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id == R.id.splashScreenFragment) {
+                binding.appBarLayout.visibility = View.INVISIBLE
+                binding.bottomNavigation.visibility = View.INVISIBLE
+            } else {
+                binding.appBarLayout.visibility = View.VISIBLE
+                binding.bottomNavigation.visibility = View.VISIBLE
+            }
+        }
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)

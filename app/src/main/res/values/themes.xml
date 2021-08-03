@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.VSensei" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_blue_200</item>
         <item name="colorPrimaryVariant">@color/dark_blue_500</item>
@@ -40,8 +41,10 @@
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text
+        </item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text
+        </item>
     </style>
 
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
