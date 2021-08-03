@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/practiceHomeFragment">
 
     <fragment
         android:id="@+id/practiceHomeFragment"
@@ -86,16 +86,4 @@
             android:name="wordGroupWithWords"
             app:argType="com.example.vsensei.data.WordGroupWithWords" />
     </activity>
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.example.vsensei.view.ui.SplashScreenFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen">
-        <action
-            android:id="@+id/action_splashScreenFragment_to_practiceHomeFragment"
-            app:destination="@id/practiceHomeFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/main_nav_graph" />
-    </fragment>
 </navigation>
