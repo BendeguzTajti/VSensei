@@ -33,6 +33,9 @@ class PracticeResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.homeButton.setOnClickListener {
+            requireActivity().finishAfterTransition()
+        }
         practiceViewModel.currentPracticeSummary().observe(viewLifecycleOwner, { practiceSummary ->
             val practicePercent = practiceSummary.getPercent()
             binding.percentLabel.text = getString(R.string.practice_percent, practicePercent)
@@ -40,6 +43,11 @@ class PracticeResultFragment : Fragment() {
                 binding.correctGuessPercent.setProgress(practicePercent, true)
             } else {
                 binding.correctGuessPercent.progress = practicePercent
+            }
+            if (practicePercent >= 60) {
+                binding.practiceResultTitle.text = getString(R.string.good_job)
+            } else {
+                binding.practiceResultTitle.text = getString(R.string.better_luck_next_time)
             }
         })
     }
