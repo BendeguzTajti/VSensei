@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.transition.Fade
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentDictionaryBinding
 import com.example.vsensei.view.adapter.WordGroupAdapter
@@ -17,13 +15,14 @@ import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.Hold
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class DictionaryFragment : Fragment() {
 
     private var _binding: FragmentDictionaryBinding? = null
     private val binding get() = _binding!!
 
-    private val wordViewModel: WordViewModel by activityViewModels()
+    private val wordViewModel: WordViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

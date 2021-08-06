@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,6 +16,7 @@ import com.example.vsensei.view.adapter.WordAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class WordGroupFragment : Fragment() {
 
@@ -24,7 +24,7 @@ class WordGroupFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: WordGroupFragmentArgs by navArgs()
 
-    private lateinit var wordViewModel: WordViewModel
+    private val wordViewModel: WordViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,6 @@ class WordGroupFragment : Fragment() {
             duration = 150
         }
         _binding = FragmentWordGroupBinding.inflate(inflater, container, false)
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
         return binding.root
     }
 

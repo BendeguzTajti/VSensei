@@ -6,20 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class PracticeHomeFragment : Fragment() {
 
     private var _binding: FragmentPracticeHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val wordViewModel: WordViewModel by activityViewModels()
+    private val wordViewModel: WordViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

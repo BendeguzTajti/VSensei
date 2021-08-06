@@ -1,30 +1,19 @@
 package com.example.vsensei.viewmodel
 
-import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
 import com.example.vsensei.data.Word
 import com.example.vsensei.data.WordGroup
-import com.example.vsensei.data.WordGroupDatabase
 import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WordViewModel(application: Application) : AndroidViewModel(application) {
+class WordViewModel(private val repository: Repository) : ViewModel() {
 
-    private val repository: Repository
-    val allWordGroups: LiveData<List<WordGroupWithWords>>
-    val wordGroupsWithWords: LiveData<List<WordGroupWithWords>>
+    val allWordGroups: LiveData<List<WordGroupWithWords>> = repository.allWordGroups
+    val wordGroupsWithWords: LiveData<List<WordGroupWithWords>> =
+        Transformations.map(allWordGroups) { wordGroups -> wordGroups.filter { it.words.isNotEmpty() } }
     private var wordsByGroupId: LiveData<List<Word>>? = null
-
-    init {
-        val sharedPreferences = application.getSharedPreferences("VSensei", Context.MODE_PRIVATE)
-        val wordGroupDao = WordGroupDatabase.getDatabase(application).wordGroupDao()
-        repository = Repository(sharedPreferences, wordGroupDao)
-        allWordGroups = repository.allWordGroups
-        wordGroupsWithWords = Transformations.map(allWordGroups) { wordGroups -> wordGroups.filter { it.words.isNotEmpty() } }
-    }
 
     fun addWordGroup(wordGroup: WordGroup) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -4,6 +4,7 @@
     <style name="Theme.VSensei" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="android:colorBackground">@color/white</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_blue_500</item>
         <item name="colorPrimaryVariant">@color/dark_blue_700</item>

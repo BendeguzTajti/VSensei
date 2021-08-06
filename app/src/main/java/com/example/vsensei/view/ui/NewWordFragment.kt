@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentNewWordBinding
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NewWordFragment : BottomSheetDialogFragment() {
 
@@ -20,7 +20,7 @@ class NewWordFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private val args: NewWordFragmentArgs by navArgs()
 
-    private val wordViewModel: WordViewModel by activityViewModels()
+    private val wordViewModel: WordViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

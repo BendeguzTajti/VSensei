@@ -9,12 +9,12 @@ import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import com.example.vsensei.R
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class PracticeCardFragment : Fragment() {
@@ -23,7 +23,7 @@ class PracticeCardFragment : Fragment() {
     private val binding get() = _binding!!
     private var wordGuessCallback: PracticeCardAdapter.WordGuessCallback? = null
 
-    private val practiceViewModel: PracticeViewModel by activityViewModels()
+    private val practiceViewModel: PracticeViewModel by sharedViewModel()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

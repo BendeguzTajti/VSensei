@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
@@ -19,6 +18,7 @@ import com.example.vsensei.viewmodel.PracticeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
@@ -28,7 +28,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private var _binding: FragmentPracticeBinding? = null
     private val binding get() = _binding!!
 
-    private val practiceViewModel: PracticeViewModel by activityViewModels()
+    private val practiceViewModel: PracticeViewModel by sharedViewModel()
     private val textToSpeech: TextToSpeech? by inject()
 
     private lateinit var practiceSummary: PracticeSummary

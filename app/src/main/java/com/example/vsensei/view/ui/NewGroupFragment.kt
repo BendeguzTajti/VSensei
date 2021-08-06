@@ -7,19 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
-import androidx.fragment.app.activityViewModels
 import com.example.vsensei.R
 import com.example.vsensei.data.WordGroup
 import com.example.vsensei.databinding.FragmentNewGroupBinding
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NewGroupFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentNewGroupBinding? = null
     private val binding get() = _binding!!
 
-    private val wordViewModel: WordViewModel by activityViewModels()
+    private val wordViewModel: WordViewModel by sharedViewModel()
 
     override fun onResume() {
         super.onResume()
