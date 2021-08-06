@@ -48,4 +48,12 @@ class Repository(private val sharedPreferences: SharedPreferences, private val w
     fun getLatestSelectedLanguageIndex(): Int {
         return sharedPreferences.getInt("SELECTED_LANGUAGE", 0)
     }
+
+    fun saveUiMode(currentNightMode: Int?) {
+        currentNightMode?.let {
+            sharedPreferences.edit {
+                putInt("CURRENT_NIGHT_MODE", it)
+            }
+        }
+    }
 }

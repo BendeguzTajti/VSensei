@@ -11,7 +11,7 @@
                 android:name="path_1"
                 android:pathData="M 19.071 19.071 C 22.976 15.165 22.976 8.835 19.071 4.929 C 15.165 1.024 8.835 1.024 4.929 4.929 C 1.024 8.835 1.024 15.165 4.929 19.071 C 8.835 22.976 15.165 22.976 19.071 19.071 Z"
                 android:strokeWidth="1.8"
-                android:strokeColor="?attr/colorPrimary" />
+                android:strokeColor="?attr/colorPrimaryVariant" />
             <group
                 android:name="group"
                 android:pivotX="12"
@@ -20,7 +20,7 @@
                 android:scaleY="0">
                 <path
                     android:name="path_2"
-                    android:fillColor="?attr/colorPrimaryVariant"
+                    android:fillColor="?attr/colorPrimary"
                     android:pathData="M 2 0 L 8.875 0 C 9.608 4.625 10.957 8.424 12 12.63 C 13.379 8.735 14.248 4.156 15.437 0 L 22 0 C 19.538 7.911 17.207 15.999 14.811 24 L 9.19 24 C 6.834 15.947 4.401 7.996 2 0 Z"
                     android:strokeWidth="1" />
             </group>

@@ -13,12 +13,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityMainBinding
+import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.google.android.material.transition.platform.MaterialFadeThrough
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
+    private val userOptionsViewModel: UserOptionsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window.exitTransition = MaterialFadeThrough()
@@ -54,9 +58,11 @@ class MainActivity : AppCompatActivity() {
         return if (item.itemId == R.id.app_theme) {
             when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
                 Configuration.UI_MODE_NIGHT_YES -> {
+                    userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_NO)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
                 Configuration.UI_MODE_NIGHT_NO -> {
+                    userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_YES)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
             }

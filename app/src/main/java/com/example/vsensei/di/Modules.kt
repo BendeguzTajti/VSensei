@@ -8,6 +8,7 @@ import com.example.vsensei.data.WordGroupDao
 import com.example.vsensei.data.WordGroupDatabase
 import com.example.vsensei.repository.Repository
 import com.example.vsensei.viewmodel.PracticeViewModel
+import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.example.vsensei.viewmodel.WordViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -26,6 +27,7 @@ val appModules = module {
     // VIEW-MODEL
     viewModel { WordViewModel(get()) }
     viewModel { PracticeViewModel() }
+    viewModel { UserOptionsViewModel(get()) }
 
     // DataBase
     single { provideDataBase(get()) }
