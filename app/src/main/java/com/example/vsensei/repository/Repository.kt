@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.example.vsensei.data.Word
 import com.example.vsensei.data.WordGroup
 import com.example.vsensei.data.WordGroupDao
+import com.example.vsensei.util.Constants
 
 class Repository(private val sharedPreferences: SharedPreferences, private val wordGroupDao: WordGroupDao) {
 
@@ -41,18 +42,18 @@ class Repository(private val sharedPreferences: SharedPreferences, private val w
 
     fun saveSelectedLanguageIndex(selectedLanguageIndex: Int) {
         sharedPreferences.edit {
-            putInt("SELECTED_LANGUAGE", selectedLanguageIndex)
+            putInt(Constants.SELECTED_LANGUAGE_KEY, selectedLanguageIndex)
         }
     }
 
     fun getLatestSelectedLanguageIndex(): Int {
-        return sharedPreferences.getInt("SELECTED_LANGUAGE", 0)
+        return sharedPreferences.getInt(Constants.SELECTED_LANGUAGE_KEY, 0)
     }
 
     fun saveUiMode(currentNightMode: Int?) {
         currentNightMode?.let {
             sharedPreferences.edit {
-                putInt("CURRENT_NIGHT_MODE", it)
+                putInt(Constants.CURRENT_NIGHT_MODE_KEY, it)
             }
         }
     }

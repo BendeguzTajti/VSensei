@@ -7,6 +7,7 @@ import androidx.room.Room
 import com.example.vsensei.data.WordGroupDao
 import com.example.vsensei.data.WordGroupDatabase
 import com.example.vsensei.repository.Repository
+import com.example.vsensei.util.Constants
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.example.vsensei.viewmodel.WordViewModel
@@ -36,7 +37,7 @@ val appModules = module {
     single { provideWordGroupDao(get()) }
 }
 
-private fun provideSharedPreferences(context: Context): SharedPreferences = context.getSharedPreferences("VSensei", Context.MODE_PRIVATE)
+private fun provideSharedPreferences(context: Context): SharedPreferences = context.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
 
 private fun provideTextToSpeech(context: Context): TextToSpeech? {
     var textToSpeech: TextToSpeech?
@@ -52,7 +53,7 @@ private fun provideDataBase(context: Context): WordGroupDatabase {
     return Room.databaseBuilder(
         context.applicationContext,
         WordGroupDatabase::class.java,
-        "word_group_database"
+        Constants.DATABASE_NAME
     ).build()
 }
 

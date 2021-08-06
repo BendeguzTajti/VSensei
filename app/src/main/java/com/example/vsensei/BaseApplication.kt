@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.vsensei.di.appModules
+import com.example.vsensei.util.Constants
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -19,7 +20,7 @@ class BaseApplication : Application() {
             androidContext(this@BaseApplication)
             modules(appModules)
         }
-        val savedNightMode = sharedPreferences.getInt("CURRENT_NIGHT_MODE", -1)
+        val savedNightMode = sharedPreferences.getInt(Constants.CURRENT_NIGHT_MODE_KEY, -1)
         val currentNightMode = resources?.configuration?.uiMode?.and(
             Configuration.UI_MODE_NIGHT_MASK)
         if (savedNightMode != -1 && savedNightMode != currentNightMode) {
