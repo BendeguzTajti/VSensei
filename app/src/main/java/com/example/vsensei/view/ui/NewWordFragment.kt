@@ -48,12 +48,15 @@ class NewWordFragment : BottomSheetDialogFragment() {
             val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(view.windowToken, 0)
             if (isValidData()) {
+                val wordPrimary = binding.wordPrimaryInput.text.toString()
+                val wordPrimaryVariant = if (binding.wordPrimaryVariantInput.text.isNullOrBlank()) null else binding.wordPrimaryVariantInput.text.toString()
+                val wordMeaning = binding.wordMeaningInput.text.toString()
                 val word = Word(
                     0,
                     args.wordGroup.groupId,
-                    binding.wordPrimaryInput.text.toString(),
-                    binding.wordPrimaryVariantInput.text.toString(),
-                    binding.wordMeaningInput.text.toString()
+                    wordPrimary,
+                    wordPrimaryVariant,
+                    wordMeaning
                 )
                 wordViewModel.addWord(word)
                 dismiss()

@@ -65,6 +65,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
         val displayLanguages = resources.getStringArray(R.array.display_languages)
         val adapter = PracticeCardAdapter(
+            args.practiceType,
             wordGroupWithWords.words,
             displayLanguages[selectedLanguageIndex],
             childFragmentManager,

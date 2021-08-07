@@ -10,6 +10,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.isVisible
 import com.example.vsensei.R
+import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
@@ -44,55 +45,28 @@ class PracticeCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val practiceType: PracticeType = requireArguments().get(PRACTICE_TYPE) as PracticeType
         val currentWord: Word = requireArguments().get(CURRENT_WORD) as Word
-        val groupLanguage: String = requireArguments().get(GROUP_LANGUAGE) as String
-        val currentPosition: Int = requireArguments().get(CURRENT_POSITION) as Int
         val isAnswerVisible = savedInstanceState?.getBoolean(IS_ANSWER_VISIBLE, false) ?: false
         val isGuessEnabled = savedInstanceState?.getBoolean(IS_GUESS_ENABLED, true) ?: true
-        binding.wordPrimary.text = if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
         binding.guessLayout.isEnabled = isGuessEnabled
-        binding.wordPrimaryVariant.apply {
-            isVisible = !currentWord.wordPrimaryVariant.isNullOrBlank()
-            text = "(${currentWord.wordPrimary})"
+        binding.answer.visibility = if (isAnswerVisible) View.VISIBLE else View.INVISIBLE
+        if (practiceType == PracticeType.GUESS_THE_MEANING) {
+            guessTheMeaningCardInit(currentWord)
+        } else {
+            guessTheWordCardInit(currentWord)
         }
-        binding.audioButton.text = groupLanguage
-        binding.audioButton.setOnClickListener {
-            wordGuessCallback?.sayWord(currentWord.wordPrimary)
-        }
-        binding.wordMeaning.text = currentWord.wordMeaning
-        binding.wordMeaning.visibility = if (isAnswerVisible) View.VISIBLE else View.INVISIBLE
         binding.guessLayout.setEndIconOnClickListener {
             if (!binding.guess.text.isNullOrBlank()) {
                 binding.guessLayout.isEnabled = false
                 binding.cardPracticeItemRoot.transitionToState(R.id.merged)
             }
         }
-        binding.cardPracticeItemRoot.setTransitionListener(object : TransitionAdapter() {
-            override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
-                super.onTransitionCompleted(motionLayout, currentId)
-                if (currentId == R.id.merged) {
-                    val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
-                    val wordMeaning = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
-                    if (guess == wordMeaning) {
-                        wordGuessCallback?.onWordGuessed(currentPosition, true)
-                        motionLayout.transitionToState(R.id.success)
-                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
-                    } else {
-                        wordGuessCallback?.onWordGuessed(currentPosition, false)
-                        motionLayout.transitionToState(R.id.failure)
-                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
-                    }
-                }
-                if (currentId == R.id.success || currentId == R.id.failure) {
-                    binding.wordMeaning.isVisible = true
-                }
-            }
-        })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean(IS_ANSWER_VISIBLE, binding.wordMeaning.isVisible)
+        outState.putBoolean(IS_ANSWER_VISIBLE, binding.answer.isVisible)
         outState.putBoolean(IS_GUESS_ENABLED, binding.guessLayout.isEnabled)
     }
 
@@ -106,7 +80,78 @@ class PracticeCardFragment : Fragment() {
         wordGuessCallback = null
     }
 
+    private fun guessTheMeaningCardInit(currentWord: Word) {
+        binding.hint.text = if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
+        binding.hintVariant.apply {
+            isVisible = !currentWord.wordPrimaryVariant.isNullOrBlank()
+            text = "(${currentWord.wordPrimary})"
+        }
+        binding.answer.text = currentWord.wordMeaning
+        val currentPosition: Int = requireArguments().get(CURRENT_POSITION) as Int
+        binding.cardPracticeItemRoot.setTransitionListener(object : TransitionAdapter() {
+            override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                super.onTransitionCompleted(motionLayout, currentId)
+                if (currentId == R.id.merged) {
+                    val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
+                    val answer = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
+                    if (guess == answer) {
+                        wordGuessCallback?.onWordGuessed(currentPosition, true)
+                        motionLayout.transitionToState(R.id.success)
+                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
+                    } else {
+                        wordGuessCallback?.onWordGuessed(currentPosition, false)
+                        motionLayout.transitionToState(R.id.failure)
+                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
+                    }
+                }
+                if (currentId == R.id.success || currentId == R.id.failure) {
+                    binding.answer.isVisible = true
+                }
+            }
+        })
+        audioButtonInit(currentWord)
+    }
+
+    private fun guessTheWordCardInit(currentWord: Word) {
+        binding.hint.text = currentWord.wordMeaning
+        binding.hintVariant.isVisible = false
+        binding.answer.text = currentWord.wordPrimaryVariant ?: currentWord.wordPrimary
+        val currentPosition: Int = requireArguments().get(CURRENT_POSITION) as Int
+        binding.cardPracticeItemRoot.setTransitionListener(object : TransitionAdapter() {
+            override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+                super.onTransitionCompleted(motionLayout, currentId)
+                if (currentId == R.id.merged) {
+                    val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
+                    val answer = currentWord.wordPrimary.toLowerCase(Locale.getDefault())
+                    val answerVariant = currentWord.wordPrimaryVariant?.toLowerCase(Locale.getDefault())
+                    if (guess == answer || guess == answerVariant) {
+                        wordGuessCallback?.onWordGuessed(currentPosition, true)
+                        motionLayout.transitionToState(R.id.success)
+                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
+                    } else {
+                        wordGuessCallback?.onWordGuessed(currentPosition, false)
+                        motionLayout.transitionToState(R.id.failure)
+                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
+                    }
+                }
+                if (currentId == R.id.success || currentId == R.id.failure) {
+                    binding.answer.isVisible = true
+                }
+            }
+        })
+        audioButtonInit(currentWord)
+    }
+
+    private fun audioButtonInit(currentWord: Word) {
+        val groupLanguage: String = requireArguments().get(GROUP_LANGUAGE) as String
+        binding.audioButton.text = groupLanguage
+        binding.audioButton.setOnClickListener {
+            wordGuessCallback?.sayWord(currentWord.wordPrimary)
+        }
+    }
+
     companion object {
+        private const val PRACTICE_TYPE = "PRACTICE_TYPE"
         private const val CURRENT_WORD = "CURRENT_WORD"
         private const val GROUP_LANGUAGE = "GROUP_LANGUAGE"
         private const val CURRENT_POSITION = "CURRENT_POSITION"
@@ -114,9 +159,10 @@ class PracticeCardFragment : Fragment() {
         private const val IS_GUESS_ENABLED = "IS_GUESS_ENABLED"
 
         @JvmStatic
-        fun newInstance(currentWord: Word, groupLanguage: String, currentPosition: Int) =
+        fun newInstance(practiceType: PracticeType, currentWord: Word, groupLanguage: String, currentPosition: Int) =
             PracticeCardFragment().apply {
                 arguments = Bundle().apply {
+                    putSerializable(PRACTICE_TYPE, practiceType)
                     putParcelable(CURRENT_WORD, currentWord)
                     putString(GROUP_LANGUAGE, groupLanguage)
                     putInt(CURRENT_POSITION, currentPosition)

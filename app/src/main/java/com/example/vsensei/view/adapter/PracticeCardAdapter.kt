@@ -4,10 +4,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.Word
 import com.example.vsensei.view.ui.PracticeCardFragment
 
 class PracticeCardAdapter(
+    private val practiceType: PracticeType,
     private val words: List<Word>,
     private val selectedLanguage: String,
     fragmentManager: FragmentManager,
@@ -19,7 +21,7 @@ class PracticeCardAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return PracticeCardFragment.newInstance(words[position], selectedLanguage, position)
+        return PracticeCardFragment.newInstance(practiceType, words[position], selectedLanguage, position)
     }
 
     interface WordGuessCallback {
