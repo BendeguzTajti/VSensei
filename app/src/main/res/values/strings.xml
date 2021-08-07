@@ -50,4 +50,6 @@
     <string name="practice_result_saved_message">Your practice has been saved. You can find it under the Scores section</string>
     <string name="good_job">Good job!</string>
     <string name="better_luck_next_time">Better luck next time!</string>
+    <string name="light_mode">Light mode</string>
+    <string name="dark_mode">Dark mode</string>
 </resources>

@@ -51,6 +51,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+        when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                menu?.getItem(0)?.apply {
+                    setIcon(R.drawable.ic_dark_mode)
+                    setTitle(R.string.dark_mode)
+                }
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                menu?.getItem(0)?.apply {
+                    setIcon(R.drawable.ic_light_mode)
+                    setTitle(R.string.light_mode)
+                }
+            }
+        }
         return true
     }
 
