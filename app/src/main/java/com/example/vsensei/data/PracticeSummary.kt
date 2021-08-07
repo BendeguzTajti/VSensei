@@ -6,6 +6,7 @@ import kotlin.math.roundToInt
 
 @Parcelize
 data class PracticeSummary(
+    val practiceType: PracticeType,
     val practicedGroupName: String,
     val correctGuesses: MutableList<Word>,
     val wrongGuesses: MutableList<Word>,

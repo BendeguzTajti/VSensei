@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/practiceFragment"
         android:name="com.example.vsensei.view.ui.PracticeFragment"
-        android:label="{practiceType}"
-        tools:layout="@layout/fragment_practice" >
+        android:label="{practiceTypeLabel}"
+        tools:layout="@layout/fragment_practice">
         <action
             android:id="@+id/action_practiceFragment_to_practiceResultFragment"
             app:destination="@id/practiceResultFragment"
@@ -18,10 +18,10 @@
     <fragment
         android:id="@+id/practiceResultFragment"
         android:name="com.example.vsensei.view.ui.PracticeResultFragment"
-        android:label="{practiceType}"
-        tools:layout="@layout/fragment_practice_result" >
+        android:label="{practiceTypeLabel}"
+        tools:layout="@layout/fragment_practice_result">
         <argument
-            android:name="practiceType"
+            android:name="practiceTypeLabel"
             app:argType="string" />
     </fragment>
 </navigation>

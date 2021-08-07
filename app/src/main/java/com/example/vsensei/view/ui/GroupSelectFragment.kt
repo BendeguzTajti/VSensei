@@ -20,7 +20,8 @@ class GroupSelectFragment : DialogFragment() {
             .setItems(args.wordGroupsWithWords.map { it.wordGroup.groupName }.toTypedArray()) { _, which ->
                 val action = GroupSelectFragmentDirections.actionGroupSelectFragmentToPracticeActivity(
                     args.practiceType,
-                    args.wordGroupsWithWords[which]
+                    args.wordGroupsWithWords[which],
+                    getString(args.practiceType.labelResId)
                 )
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity())
                 val extras = ActivityNavigatorExtras(options)

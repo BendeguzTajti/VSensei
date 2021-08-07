@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
+import com.example.vsensei.data.PracticeType
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,14 +43,14 @@ class PracticeHomeFragment : Fragment() {
             binding.guessTheWordButton.setOnClickListener {
                 val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
                     wordGroupsWithWords.toTypedArray(),
-                    getString(R.string.guess_the_word)
+                    PracticeType.GUESS_THE_WORD
                 )
                 findNavController().navigate(action)
             }
             binding.guessTheMeaningButton.setOnClickListener {
                 val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
                     wordGroupsWithWords.toTypedArray(),
-                    getString(R.string.guess_the_meaning)
+                    PracticeType.GUESS_THE_MEANING
                 )
                 findNavController().navigate(action)
             }

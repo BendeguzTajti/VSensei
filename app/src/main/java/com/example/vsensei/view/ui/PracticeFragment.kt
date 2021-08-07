@@ -55,6 +55,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         practiceSummary = savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(
+            args.practiceType,
             args.wordGroupWithWords.wordGroup.groupName,
             arrayListOf(),
             arrayListOf(),
@@ -118,7 +119,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         practiceViewModel.setCurrentPracticeSummary(practiceSummary)
         practiceViewModel.savePracticeSummary(practiceSummary)
         exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        val action = PracticeFragmentDirections.actionPracticeFragmentToPracticeResultFragment(args.practiceType)
+        val action = PracticeFragmentDirections.actionPracticeFragmentToPracticeResultFragment(getString(args.practiceType.labelResId))
         findNavController().navigate(action)
     }
 

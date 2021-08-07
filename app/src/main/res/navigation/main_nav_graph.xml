@@ -67,12 +67,12 @@
         <argument
             android:name="wordGroupsWithWords"
             app:argType="com.example.vsensei.data.WordGroupWithWords[]" />
-        <argument
-            android:name="practiceType"
-            app:argType="string" />
         <action
             android:id="@+id/action_groupSelectFragment_to_practiceActivity"
             app:destination="@id/practiceActivity" />
+        <argument
+            android:name="practiceType"
+            app:argType="com.example.vsensei.data.PracticeType" />
     </dialog>
     <activity
         android:id="@+id/practiceActivity"
@@ -81,9 +81,12 @@
         tools:layout="@layout/activity_practice">
         <argument
             android:name="practiceType"
-            app:argType="string" />
+            app:argType="com.example.vsensei.data.PracticeType" />
         <argument
             android:name="wordGroupWithWords"
             app:argType="com.example.vsensei.data.WordGroupWithWords" />
+        <argument
+            android:name="practiceTypeLabel"
+            app:argType="string" />
     </activity>
 </navigation>
