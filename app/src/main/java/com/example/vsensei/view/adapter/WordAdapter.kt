@@ -35,7 +35,7 @@ class WordAdapter : ListAdapter<Word, WordAdapter.WordHolder>(WordDiffCallback) 
     object WordDiffCallback : DiffUtil.ItemCallback<Word>() {
 
         override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.wordId == newItem.wordId
         }
 
         override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {

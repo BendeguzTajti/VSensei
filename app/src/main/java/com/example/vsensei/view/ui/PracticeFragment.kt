@@ -55,6 +55,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         practiceSummary = savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(
+            0,
             args.practiceType,
             args.wordGroupWithWords.wordGroup.groupName,
             arrayListOf(),
