@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vsensei.data.PracticeSummary
+import com.example.vsensei.repository.Repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class PracticeViewModel : ViewModel() {
+class PracticeViewModel(private val repository: Repository) : ViewModel() {
+
+    val allPracticeSummaries: LiveData<List<PracticeSummary>> = repository.allPracticeSummaries
 
     private val currentCardPosition: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>().also {
@@ -35,6 +39,8 @@ class PracticeViewModel : ViewModel() {
     }
 
     fun savePracticeSummary(practiceSummary: PracticeSummary) {
-        // TODO SAVE SUMMARY
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addPracticeSummary(practiceSummary)
+        }
     }
 }

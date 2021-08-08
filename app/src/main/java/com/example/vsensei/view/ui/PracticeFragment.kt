@@ -113,7 +113,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         } else {
             wrongAnswerSoundPlayer.start()
         }
-//        practiceSummary.guesses.add(wordGuess)
+        practiceSummary.wordGuesses.add(wordGuess)
     }
 
     private fun navigateToPracticeResult() {

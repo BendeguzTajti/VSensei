@@ -27,7 +27,7 @@ val appModules = module {
 
     // VIEW-MODEL
     viewModel { WordViewModel(get()) }
-    viewModel { PracticeViewModel() }
+    viewModel { PracticeViewModel(get()) }
     viewModel { UserOptionsViewModel(get()) }
 
     // DataBase
