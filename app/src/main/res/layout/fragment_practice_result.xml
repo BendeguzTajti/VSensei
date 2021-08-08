@@ -1,92 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
+    android:fillViewport="true"
     tools:context=".view.ui.PracticeResultFragment">
 
-    <ImageView
-        android:id="@+id/result_icon"
-        android:layout_width="260dp"
-        android:layout_height="300dp"
-        android:src="@drawable/ic_result"
-        app:layout_constraintBottom_toTopOf="@id/practice_result_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:ignore="ContentDescription" />
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/correct_guess_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:indicatorColor="?attr/colorSecondary"
-        app:indicatorSize="70dp"
-        app:layout_constraintBottom_toBottomOf="@id/result_icon"
-        app:layout_constraintEnd_toEndOf="@id/result_icon"
-        app:layout_constraintHorizontal_bias="0.065"
-        app:layout_constraintStart_toStartOf="@id/result_icon"
-        app:layout_constraintTop_toTopOf="@id/result_icon"
-        app:layout_constraintVertical_bias="0.008"
-        app:trackColor="?attr/colorPrimary"
-        app:trackThickness="2dp"
-        tools:progress="100" />
-
-    <TextView
-        android:id="@+id/percent_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="?attr/colorSecondary"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@id/correct_guess_percent"
-        app:layout_constraintEnd_toEndOf="@id/correct_guess_percent"
-        app:layout_constraintStart_toStartOf="@id/correct_guess_percent"
-        app:layout_constraintTop_toTopOf="@id/correct_guess_percent"
-        tools:text="100%" />
-
-    <TextView
-        android:id="@+id/practice_result_title"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="18dp"
-        android:textAlignment="center"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/practice_result_message"
-        app:layout_constraintTop_toBottomOf="@id/result_icon"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="@string/good_job" />
+        android:padding="18dp"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/practice_result_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:text="@string/practice_result_saved_message"
-        android:textAlignment="center"
-        android:textColor="?attr/colorOnSurface"
-        app:layout_constraintBottom_toTopOf="@id/home_button"
-        app:layout_constraintTop_toBottomOf="@id/practice_result_title"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <ImageView
+            android:id="@+id/result_icon"
+            android:layout_width="260dp"
+            android:layout_height="300dp"
+            android:src="@drawable/ic_result"
+            app:layout_constraintBottom_toTopOf="@id/practice_result_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:ignore="ContentDescription" />
 
-    <Button
-        android:id="@+id/home_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="18dp"
-        android:backgroundTint="?attr/colorPrimaryVariant"
-        android:text="@string/home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/practice_result_message"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/correct_guess_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorColor="?attr/colorSecondary"
+            app:indicatorSize="70dp"
+            app:layout_constraintBottom_toBottomOf="@id/result_icon"
+            app:layout_constraintEnd_toEndOf="@id/result_icon"
+            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintStart_toStartOf="@id/result_icon"
+            app:layout_constraintTop_toTopOf="@id/result_icon"
+            app:layout_constraintVertical_bias="0.008"
+            app:trackColor="?attr/colorPrimary"
+            app:trackThickness="2dp"
+            tools:progress="100" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/percent_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/correct_guess_percent"
+            app:layout_constraintEnd_toEndOf="@id/correct_guess_percent"
+            app:layout_constraintStart_toStartOf="@id/correct_guess_percent"
+            app:layout_constraintTop_toTopOf="@id/correct_guess_percent"
+            tools:text="100%" />
+
+        <TextView
+            android:id="@+id/practice_result_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/practice_result_message"
+            app:layout_constraintTop_toBottomOf="@id/result_icon"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@string/good_job" />
+
+        <TextView
+            android:id="@+id/practice_result_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/practice_result_saved_message"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintBottom_toTopOf="@id/home_button"
+            app:layout_constraintTop_toBottomOf="@id/practice_result_title"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Button
+            android:id="@+id/home_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="?attr/colorPrimaryVariant"
+            android:text="@string/home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/practice_result_message"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?attr/colorSurface"
     tools:context=".view.ui.ScoresFragment">
 
     <LinearLayout
@@ -13,13 +16,6 @@
         android:orientation="vertical"
         android:padding="18dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_scores_empty"
-            tools:ignore="ContentDescription" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,8 +24,10 @@
             android:text="@string/missing_scores"
             android:textAlignment="center"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:drawablePadding="12dp"
+            app:drawableTopCompat="@drawable/ic_scores_empty" />
 
     </LinearLayout>
 
-</FrameLayout>
+</androidx.core.widget.NestedScrollView>
