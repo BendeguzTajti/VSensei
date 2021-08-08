@@ -6,7 +6,8 @@ import androidx.room.RoomDatabase
 @Database(
     entities = [
         WordGroup::class,
-        Word::class
+        Word::class,
+        PracticeSummary::class
        ],
     version = 1,
     exportSchema = false

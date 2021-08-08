@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.Word
+import com.example.vsensei.data.WordGuess
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
@@ -95,11 +96,13 @@ class PracticeCardFragment : Fragment() {
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val answer = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
                     if (guess == answer) {
-                        wordGuessCallback?.onWordGuessed(currentPosition, true)
+                        val wordGuess = WordGuess(answer, null, guess, true)
+                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.success)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
                     } else {
-                        wordGuessCallback?.onWordGuessed(currentPosition, false)
+                        val wordGuess = WordGuess(answer, null, guess, false)
+                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.failure)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
                     }
@@ -125,11 +128,13 @@ class PracticeCardFragment : Fragment() {
                     val answer = currentWord.wordPrimary.toLowerCase(Locale.getDefault())
                     val answerVariant = currentWord.wordPrimaryVariant?.toLowerCase(Locale.getDefault())
                     if (guess == answer || guess == answerVariant) {
-                        wordGuessCallback?.onWordGuessed(currentPosition, true)
+                        val wordGuess = WordGuess(answer, answerVariant, guess, true)
+                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.success)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
                     } else {
-                        wordGuessCallback?.onWordGuessed(currentPosition, false)
+                        val wordGuess = WordGuess(answer, answerVariant, guess, false)
+                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.failure)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
                     }

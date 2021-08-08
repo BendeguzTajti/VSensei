@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.Word
+import com.example.vsensei.data.WordGuess
 import com.example.vsensei.view.ui.PracticeCardFragment
 
 class PracticeCardAdapter(
@@ -26,6 +27,6 @@ class PracticeCardAdapter(
 
     interface WordGuessCallback {
         fun sayWord(word: String)
-        fun onWordGuessed(position: Int, isCorrectGuess: Boolean)
+        fun onWordGuessed(wordGuess: WordGuess)
     }
 }

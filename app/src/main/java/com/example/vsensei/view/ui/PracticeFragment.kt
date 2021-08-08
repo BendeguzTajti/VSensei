@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeSummary
+import com.example.vsensei.data.WordGuess
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
@@ -58,7 +59,6 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
             0,
             args.practiceType,
             args.wordGroupWithWords.wordGroup.groupName,
-            arrayListOf(),
             arrayListOf(),
             System.currentTimeMillis()
         )
@@ -107,14 +107,13 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         textToSpeech?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
-    override fun onWordGuessed(position: Int, isCorrectGuess: Boolean) {
-        if (isCorrectGuess) {
-            practiceSummary.correctGuesses.add(args.wordGroupWithWords.words[position])
+    override fun onWordGuessed(wordGuess: WordGuess) {
+        if (wordGuess.isCorrectGuess) {
             correctAnswerSoundPlayer.start()
         } else {
-            practiceSummary.wrongGuesses.add(args.wordGroupWithWords.words[position])
             wrongAnswerSoundPlayer.start()
         }
+//        practiceSummary.guesses.add(wordGuess)
     }
 
     private fun navigateToPracticeResult() {

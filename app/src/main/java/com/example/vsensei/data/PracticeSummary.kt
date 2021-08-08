@@ -1,6 +1,7 @@
 package com.example.vsensei.data
 
 import android.os.Parcelable
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
@@ -13,13 +14,16 @@ data class PracticeSummary(
     val practiceSummaryId: Long,
     val practiceType: PracticeType,
     val practicedGroupName: String,
-    val correctGuesses: MutableList<Word>,
-    val wrongGuesses: MutableList<Word>,
+    @Embedded
+    val guesses: List<WordGuess>,
     val timeCreated: Long
 ) : Parcelable {
 
     fun getPercent(): Int {
-        val allWords = (correctGuesses.size + wrongGuesses.size).toFloat()
-        return ((correctGuesses.size / allWords) * 100).roundToInt()
+        return ((guesses.count { it.isCorrectGuess } / guesses.size.toFloat()) * 100).roundToInt()
     }
+
+//    fun addWordGuess(wordGuess: WordGuess) {
+//        guesses.add
+//    }
 }
