@@ -41,6 +41,7 @@ class PracticeViewModel(private val repository: Repository) : ViewModel() {
     fun savePracticeSummary(practiceSummary: PracticeSummary) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addPracticeSummary(practiceSummary)
+            repository.deleteOldPracticeSummaries()
         }
     }
 }

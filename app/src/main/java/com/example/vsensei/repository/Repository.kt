@@ -43,6 +43,10 @@ class Repository(private val sharedPreferences: SharedPreferences, private val w
         wordGroupDao.deleteWord(word)
     }
 
+    suspend fun deleteOldPracticeSummaries() {
+        wordGroupDao.deleteOldPracticeSummaries()
+    }
+
     fun wordsByGroupId(groupId: Long) : LiveData<List<Word>> {
         return wordGroupDao.getWordsByGroupId(groupId)
     }
