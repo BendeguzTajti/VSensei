@@ -14,6 +14,7 @@ data class PracticeSummary(
     val practiceType: PracticeType,
     val practicedGroupName: String,
     val wordGuesses: MutableList<WordGuess>,
+    val hasVariants: Boolean,
     val timeCreated: Long
 ) : Parcelable {
 

@@ -18,13 +18,19 @@ class PracticeSummaryAdapter(
 
     inner class PracticeSummaryHolder(
         private val binding: PracticeSummaryItemBinding
-        ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(practiceSummary: PracticeSummary) {
-            val wordGuessAdapter = WordGuessAdapter(currentNightMode, practiceSummary.wordGuesses, practiceSummary.practiceType)
+            val wordGuessAdapter = WordGuessAdapter(
+                currentNightMode,
+                practiceSummary.wordGuesses,
+                practiceSummary.hasVariants,
+                practiceSummary.practiceType
+            )
             val practicePercent = practiceSummary.getPercent()
             binding.practicedGroupName.text = practiceSummary.practicedGroupName
-            binding.practiceType.text = itemView.context.getString(practiceSummary.practiceType.labelResId)
+            binding.practiceType.text =
+                itemView.context.getString(practiceSummary.practiceType.labelResId)
             binding.practiceDate.text = simpleDateFormat.format(Date(practiceSummary.timeCreated))
             binding.practicePercent.progress = practicePercent
             binding.wordGuessRecyclerView.adapter = wordGuessAdapter
@@ -32,7 +38,8 @@ class PracticeSummaryAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PracticeSummaryHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.practice_summary_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.practice_summary_item, parent, false)
         val binding = PracticeSummaryItemBinding.bind(view)
         return PracticeSummaryHolder(binding)
     }

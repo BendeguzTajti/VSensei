@@ -82,10 +82,11 @@ class PracticeCardFragment : Fragment() {
     }
 
     private fun guessTheMeaningCardInit(currentWord: Word) {
+        val hasVariants = requireArguments().getBoolean(HAS_VARIANTS)
         binding.hint.text = if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
         binding.hintVariant.apply {
-            isVisible = !currentWord.wordPrimaryVariant.isNullOrBlank()
-            if (this.isVisible) {
+            isVisible = hasVariants
+            if (!currentWord.wordPrimaryVariant.isNullOrBlank()) {
                 text = "(${currentWord.wordPrimary})"
             }
         }
@@ -164,17 +165,19 @@ class PracticeCardFragment : Fragment() {
         private const val PRACTICE_TYPE = "PRACTICE_TYPE"
         private const val CURRENT_WORD = "CURRENT_WORD"
         private const val GROUP_LANGUAGE = "GROUP_LANGUAGE"
+        private const val HAS_VARIANTS = "HAS_VARIANTS"
         private const val CURRENT_POSITION = "CURRENT_POSITION"
         private const val IS_ANSWER_VISIBLE = "IS_ANSWER_VISIBLE"
         private const val IS_GUESS_ENABLED = "IS_GUESS_ENABLED"
 
         @JvmStatic
-        fun newInstance(practiceType: PracticeType, currentWord: Word, groupLanguage: String, currentPosition: Int) =
+        fun newInstance(practiceType: PracticeType, currentWord: Word, groupLanguage: String, hasVariants: Boolean, currentPosition: Int) =
             PracticeCardFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(PRACTICE_TYPE, practiceType)
                     putParcelable(CURRENT_WORD, currentWord)
                     putString(GROUP_LANGUAGE, groupLanguage)
+                    putBoolean(HAS_VARIANTS, hasVariants)
                     putInt(CURRENT_POSITION, currentPosition)
                 }
             }

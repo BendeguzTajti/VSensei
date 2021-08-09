@@ -4,7 +4,7 @@
     <string name="scores">Scores</string>
     <string name="words">Dictionary</string>
     <string name="add_words">Add words</string>
-    <string name="missing_words">It looks like you don\'t have any words added.\n Add words and start practicing!</string>
+    <string name="missing_words">It looks like you don\'t have enough words added.\n Create a group, add at least 5 words and start practicing!</string>
     <string name="new_group">New group</string>
     <string name="group_name">Group name</string>
     <string name="create_group">Create group</string>
@@ -33,7 +33,7 @@
     <string name="add_word">Add word</string>
     <string name="kanji" translatable="false">Kanji</string>
     <string name="kanji_example">E.g. 面白い</string>
-    <string name="hiragana" translatable="false">Hiragana</string>
+    <string name="hiragana_or_katakana" translatable="false">Hiragana/Katakana</string>
     <string name="hiragana_example">E.g. おもしろい</string>
     <string name="romaji" translatable="false">Romaji</string>
     <string name="romaji_example">E.g. omoshiroi</string>

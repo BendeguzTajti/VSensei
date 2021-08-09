@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 class WordViewModel(private val repository: Repository) : ViewModel() {
 
     val allWordGroups: LiveData<List<WordGroupWithWords>> = repository.allWordGroups
-    val wordGroupsWithWords: LiveData<List<WordGroupWithWords>> =
-        Transformations.map(allWordGroups) { wordGroups -> wordGroups.filter { it.words.isNotEmpty() } }
+    val wordGroupsWithEnoughWords: LiveData<List<WordGroupWithWords>> =
+        Transformations.map(allWordGroups) { wordGroups -> wordGroups.filter { it.words.size >= 5 } }
     private var wordsByGroupId: LiveData<List<Word>>? = null
 
     fun addWordGroup(wordGroup: WordGroup) {

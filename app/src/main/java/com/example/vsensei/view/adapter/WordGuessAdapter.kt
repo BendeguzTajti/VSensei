@@ -15,8 +15,9 @@ import com.example.vsensei.databinding.WordGuessItemBinding
 class WordGuessAdapter(
     private val currentNightMode: Int,
     private val wordGuesses: List<WordGuess>,
+    private val hasVariants: Boolean,
     private val practiceType: PracticeType
-    ) : RecyclerView.Adapter<WordGuessAdapter.WordGuessHolder>() {
+) : RecyclerView.Adapter<WordGuessAdapter.WordGuessHolder>() {
 
     inner class WordGuessHolder(
         private val binding: WordGuessItemBinding
@@ -30,13 +31,14 @@ class WordGuessAdapter(
             }
             binding.hint.text = wordGuess.hint
             binding.hintVariant.text = wordGuess.hintVariant
-            binding.hintVariant.isVisible = !wordGuess.hintVariant.isNullOrBlank()
+            binding.hintVariant.isVisible = hasVariants && practiceType == PracticeType.GUESS_THE_MEANING
             binding.answer.text = wordGuess.answer
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordGuessHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.word_guess_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.word_guess_item, parent, false)
         val binding = WordGuessItemBinding.bind(view)
         return WordGuessHolder(binding)
     }
@@ -50,7 +52,7 @@ class WordGuessAdapter(
     }
 
     private fun getPositiveColor(context: Context): Int {
-        return when(currentNightMode) {
+        return when (currentNightMode) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 ContextCompat.getColor(context, R.color.green_300)
             }
@@ -59,7 +61,7 @@ class WordGuessAdapter(
     }
 
     private fun getNegativeColor(context: Context): Int {
-        return when(currentNightMode) {
+        return when (currentNightMode) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 ContextCompat.getColor(context, R.color.red_300)
             }

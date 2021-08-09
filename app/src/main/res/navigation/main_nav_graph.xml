@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_practiceHomeFragment_to_groupSelectFragment"
             app:destination="@id/groupSelectFragment" />
+        <action
+            android:id="@+id/action_practiceHomeFragment_to_practiceActivity"
+            app:destination="@id/practiceActivity" />
     </fragment>
     <fragment
         android:id="@+id/dictionaryFragment"

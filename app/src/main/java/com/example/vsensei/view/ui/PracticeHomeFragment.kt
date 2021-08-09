@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
+import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
@@ -37,22 +39,46 @@ class PracticeHomeFragment : Fragment() {
                 .findViewById<BottomNavigationView>(R.id.bottom_navigation)
                 ?.selectedItemId = R.id.dictionaryFragment
         }
-        wordViewModel.wordGroupsWithWords.observe(viewLifecycleOwner, { wordGroupsWithWords ->
+        wordViewModel.wordGroupsWithEnoughWords.observe(viewLifecycleOwner, { wordGroupsWithWords ->
             binding.emptyGroupsDisplay.isVisible = wordGroupsWithWords.isEmpty()
             binding.practiceDisplay.isVisible = wordGroupsWithWords.isNotEmpty()
             binding.guessTheWordButton.setOnClickListener {
-                val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
-                    wordGroupsWithWords.toTypedArray(),
-                    PracticeType.GUESS_THE_WORD
-                )
-                findNavController().navigate(action)
+                if (wordGroupsWithWords.size > 1) {
+                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
+                        wordGroupsWithWords.toTypedArray(),
+                        PracticeType.GUESS_THE_WORD
+                    )
+                    findNavController().navigate(action)
+                } else {
+                    val practiceType = PracticeType.GUESS_THE_WORD
+                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeActivity(
+                        practiceType,
+                        wordGroupsWithWords.first(),
+                        getString(practiceType.labelResId)
+                    )
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity())
+                    val extras = ActivityNavigatorExtras(options)
+                    findNavController().navigate(action, extras)
+                }
             }
             binding.guessTheMeaningButton.setOnClickListener {
-                val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
-                    wordGroupsWithWords.toTypedArray(),
-                    PracticeType.GUESS_THE_MEANING
-                )
-                findNavController().navigate(action)
+                if (wordGroupsWithWords.size > 1) {
+                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
+                        wordGroupsWithWords.toTypedArray(),
+                        PracticeType.GUESS_THE_MEANING
+                    )
+                    findNavController().navigate(action)
+                } else {
+                    val practiceType = PracticeType.GUESS_THE_MEANING
+                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeActivity(
+                        practiceType,
+                        wordGroupsWithWords.first(),
+                        getString(practiceType.labelResId)
+                    )
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity())
+                    val extras = ActivityNavigatorExtras(options)
+                    findNavController().navigate(action, extras)
+                }
             }
         })
     }

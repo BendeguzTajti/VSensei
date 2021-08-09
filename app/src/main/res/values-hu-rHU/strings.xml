@@ -5,7 +5,7 @@
     <string name="scores">Eredmények</string>
     <string name="words">Szótár</string>
     <string name="add_words">Szavak hozzáadása</string>
-    <string name="missing_words">Úgy tűnik, hogy még nem adtál meg szavakat. Adj meg néhány szót és kezdd el a gyakorlást!</string>
+    <string name="missing_words">Úgy tűnik, hogy még nem adtál meg elég szót. Hozz létre egy csoportot, adj meg legalább 5 szót és kezdd el a gyakorlást!</string>
     <string name="new_group">Új csoport</string>
     <string name="group_name">Csoportnév</string>
     <string name="create_group">Csoport létrehozása</string>

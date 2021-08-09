@@ -35,7 +35,7 @@
             android:layout_marginTop="18dp"
             app:layout_constraintTop_toBottomOf="@id/card_title"
             tools:helperText="@string/hiragana_example"
-            tools:hint="@string/hiragana">
+            tools:hint="@string/hiragana_or_katakana">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/word_primary_input"

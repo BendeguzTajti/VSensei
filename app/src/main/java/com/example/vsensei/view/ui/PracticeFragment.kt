@@ -55,11 +55,16 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // THE SELECTED INDEX IS THE SAME AS THE INDEX OF JAPANESE LANGUAGE IN THE STRING ARRAY,
+        // BECAUSE TIGHT NOW ONLY JAPANESE CAN HAVE VARIANTS (KANJI, HIRAGANA, KATAKANA)
+        val hasVariants = args.wordGroupWithWords.wordGroup.selectedLanguageIndex == 1
+
         practiceSummary = savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(
             0,
             args.practiceType,
             args.wordGroupWithWords.wordGroup.groupName,
             arrayListOf(),
+            hasVariants,
             System.currentTimeMillis()
         )
         val wordGroupWithWords = args.wordGroupWithWords
@@ -69,6 +74,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
             args.practiceType,
             wordGroupWithWords.words,
             displayLanguages[selectedLanguageIndex],
+            hasVariants,
             childFragmentManager,
             lifecycle
         )
