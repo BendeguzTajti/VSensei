@@ -14,7 +14,8 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="3"
-        tools:listitem="@layout/practice_summary_item" />
+        tools:listitem="@layout/practice_summary_item"
+        tools:visibility="gone" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/empty_groups_display"

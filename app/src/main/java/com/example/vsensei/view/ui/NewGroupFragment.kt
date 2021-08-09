@@ -60,7 +60,6 @@ class NewGroupFragment : BottomSheetDialogFragment() {
                 val wordGroup = WordGroup(
                     0,
                     groupName,
-                    0,
                     selectedLanguageIndex,
                     localeLanguages[selectedLanguageIndex],
                     System.currentTimeMillis()

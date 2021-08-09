@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity
 data class WordGuess(
+    val hint: String,
+    val hintVariant: String?,
     val answer: String,
-    val answerVariant: String?,
-    val guess: String,
     val isCorrectGuess: Boolean
 ) : Parcelable

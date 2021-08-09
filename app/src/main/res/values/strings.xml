@@ -52,5 +52,5 @@
     <string name="better_luck_next_time">Better luck next time!</string>
     <string name="light_mode">Light mode</string>
     <string name="dark_mode">Dark mode</string>
-    <string name="missing_scores">You don’t have any saved practices. Once you start practicing you can find detailed information about your progress</string>
+    <string name="missing_scores">You don’t have any saved practices. Once you start practicing you can find detailed information about your latest 5 practices</string>
 </resources>

@@ -11,7 +11,6 @@ data class WordGroup(
     @PrimaryKey(autoGenerate = true)
     val groupId: Long,
     val groupName : String,
-    val wordsCount: Int,
     val selectedLanguageIndex: Int,
     val localeLanguage: String,
     val timeCreated: Long

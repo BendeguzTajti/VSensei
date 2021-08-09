@@ -85,7 +85,9 @@ class PracticeCardFragment : Fragment() {
         binding.hint.text = if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
         binding.hintVariant.apply {
             isVisible = !currentWord.wordPrimaryVariant.isNullOrBlank()
-            text = "(${currentWord.wordPrimary})"
+            if (this.isVisible) {
+                text = "(${currentWord.wordPrimary})"
+            }
         }
         binding.answer.text = currentWord.wordMeaning
         val currentPosition: Int = requireArguments().get(CURRENT_POSITION) as Int
@@ -93,15 +95,17 @@ class PracticeCardFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == R.id.merged) {
+                    val hint = binding.hint.text.toString()
+                    val hintVariant = binding.hintVariant.text.toString()
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val answer = currentWord.wordMeaning.toLowerCase(Locale.getDefault())
                     if (guess == answer) {
-                        val wordGuess = WordGuess(answer, null, guess, true)
+                        val wordGuess = WordGuess(hint, hintVariant, currentWord.wordMeaning, true)
                         wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.success)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
                     } else {
-                        val wordGuess = WordGuess(answer, null, guess, false)
+                        val wordGuess = WordGuess(hint, hintVariant, answer, false)
                         wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.failure)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
@@ -124,16 +128,17 @@ class PracticeCardFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == R.id.merged) {
+                    val hint = binding.hint.text.toString()
                     val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
                     val answer = currentWord.wordPrimary.toLowerCase(Locale.getDefault())
                     val answerVariant = currentWord.wordPrimaryVariant?.toLowerCase(Locale.getDefault())
                     if (guess == answer || guess == answerVariant) {
-                        val wordGuess = WordGuess(answer, answerVariant, guess, true)
+                        val wordGuess = WordGuess(hint, null, binding.answer.text.toString(), true)
                         wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.success)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
                     } else {
-                        val wordGuess = WordGuess(answer, answerVariant, guess, false)
+                        val wordGuess = WordGuess(hint, null, binding.answer.text.toString(), false)
                         wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.failure)
                         practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)

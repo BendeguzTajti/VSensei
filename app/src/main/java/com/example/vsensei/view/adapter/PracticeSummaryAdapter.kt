@@ -1,33 +1,40 @@
 package com.example.vsensei.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeSummary
+import com.example.vsensei.databinding.PracticeSummaryItemBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class PracticeSummaryAdapter : ListAdapter<PracticeSummary, PracticeSummaryAdapter.PracticeSummaryHolder>(PracticeDiffCallback) {
+class PracticeSummaryAdapter(
+    private val currentNightMode: Int,
+    private val simpleDateFormat: SimpleDateFormat
+) : ListAdapter<PracticeSummary, PracticeSummaryAdapter.PracticeSummaryHolder>(PracticeDiffCallback) {
 
-    inner class PracticeSummaryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PracticeSummaryHolder(
+        private val binding: PracticeSummaryItemBinding
+        ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(practiceSummary: PracticeSummary) {
-            val practicedGroupName: TextView = itemView.findViewById(R.id.practiced_group_name)
-            val practiceType: TextView = itemView.findViewById(R.id.practice_type)
-            val practicePercent: TextView = itemView.findViewById(R.id.practice_percent)
-
-            practicedGroupName.text = practiceSummary.practicedGroupName
-            practiceType.text = itemView.context.getString(practiceSummary.practiceType.labelResId)
-            practicePercent.text = itemView.context.getString(R.string.practice_percent, practiceSummary.getPercent())
+            val wordGuessAdapter = WordGuessAdapter(currentNightMode, practiceSummary.wordGuesses, practiceSummary.practiceType)
+            val practicePercent = practiceSummary.getPercent()
+            binding.practicedGroupName.text = practiceSummary.practicedGroupName
+            binding.practiceType.text = itemView.context.getString(practiceSummary.practiceType.labelResId)
+            binding.practiceDate.text = simpleDateFormat.format(Date(practiceSummary.timeCreated))
+            binding.practicePercent.progress = practicePercent
+            binding.wordGuessRecyclerView.adapter = wordGuessAdapter
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PracticeSummaryHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.practice_summary_item, parent, false)
-        return PracticeSummaryHolder(view)
+        val binding = PracticeSummaryItemBinding.bind(view)
+        return PracticeSummaryHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PracticeSummaryHolder, position: Int) {
