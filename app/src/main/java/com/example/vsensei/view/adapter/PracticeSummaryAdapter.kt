@@ -27,12 +27,11 @@ class PracticeSummaryAdapter(
                 practiceSummary.hasVariants,
                 practiceSummary.practiceType
             )
-            val practicePercent = practiceSummary.getPercent()
             binding.practicedGroupName.text = practiceSummary.practicedGroupName
             binding.practiceType.text =
                 itemView.context.getString(practiceSummary.practiceType.labelResId)
             binding.practiceDate.text = simpleDateFormat.format(Date(practiceSummary.timeCreated))
-            binding.practicePercent.progress = practicePercent
+            binding.practicePercent.text = itemView.context.getString(R.string.practice_percent, practiceSummary.getPercent())
             binding.wordGuessRecyclerView.adapter = wordGuessAdapter
         }
     }

@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/practiced_group_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
@@ -15,9 +15,21 @@
         android:textColor="?attr/colorOnSurface"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/practice_percent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Foods and Drinks" />
+
+    <TextView
+        android:id="@+id/practice_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintBottom_toBottomOf="@id/practiced_group_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/practiced_group_name"
+        tools:text="100%" />
 
     <TextView
         android:id="@+id/practice_type"
@@ -44,26 +56,29 @@
         app:layout_constraintTop_toBottomOf="@id/practice_type"
         tools:text="2021.08.09." />
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/practice_percent"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/words_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="12dp"
+        android:text="@string/past_guesses_label"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/practice_date" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/word_guess_recycler_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/practice_percent"
+        app:layout_constraintTop_toBottomOf="@id/words_label"
         tools:itemCount="2"
         tools:listitem="@layout/word_guess_item" />
 
