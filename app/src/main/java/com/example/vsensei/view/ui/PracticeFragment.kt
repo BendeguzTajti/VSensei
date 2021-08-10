@@ -18,7 +18,6 @@ import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.transition.MaterialSharedAxis
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
@@ -30,16 +29,22 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private val binding get() = _binding!!
 
     private val practiceViewModel: PracticeViewModel by sharedViewModel()
-    private val textToSpeech: TextToSpeech? by inject()
 
+    private var textToSpeech: TextToSpeech? = null
     private lateinit var practiceSummary: PracticeSummary
     private lateinit var correctAnswerSoundPlayer: MediaPlayer
     private lateinit var wrongAnswerSoundPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
-        textToSpeech?.language = locale
+        textToSpeech = TextToSpeech(requireActivity().applicationContext) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
+                textToSpeech?.language = locale
+            } else {
+                textToSpeech = null
+            }
+        }
         correctAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.correct_answer)
         wrongAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.wrong_answer)
     }
@@ -106,7 +111,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         super.onDestroy()
         correctAnswerSoundPlayer.release()
         wrongAnswerSoundPlayer.release()
-        textToSpeech?.stop()
+        textToSpeech?.shutdown()
     }
 
     override fun sayWord(word: String) {

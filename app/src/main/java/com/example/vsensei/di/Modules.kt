@@ -2,7 +2,6 @@ package com.example.vsensei.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.speech.tts.TextToSpeech
 import androidx.room.Room
 import com.example.vsensei.data.WordGroupDao
 import com.example.vsensei.data.WordGroupDatabase
@@ -18,9 +17,6 @@ val appModules = module {
 
     // SHARED PREF
     single { provideSharedPreferences(get()) }
-
-    // TEXT TO SPEECH
-    single { provideTextToSpeech(get()) }
 
     // REPOSITORY
     single { Repository(get(), get()) }
@@ -38,16 +34,6 @@ val appModules = module {
 }
 
 private fun provideSharedPreferences(context: Context): SharedPreferences = context.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
-
-private fun provideTextToSpeech(context: Context): TextToSpeech? {
-    var textToSpeech: TextToSpeech?
-    textToSpeech = TextToSpeech(context) { status ->
-        if (status != TextToSpeech.SUCCESS) {
-            textToSpeech = null
-        }
-    }
-    return textToSpeech
-}
 
 private fun provideDataBase(context: Context): WordGroupDatabase {
     return Room.databaseBuilder(
