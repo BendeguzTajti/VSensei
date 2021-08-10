@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:background="?attr/colorSurface"
-    android:padding="18dp"
+    android:padding="@dimen/container_padding"
     tools:background="#FAFAFA"
     tools:context=".view.ui.NewGroupFragment">
 
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/new_group"
         android:textColor="?attr/colorOnSurface"
-        android:textSize="19sp"
+        android:textSize="@dimen/bottom_sheet_title_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="@dimen/text_input_layout_margin_top"
         android:hint="@string/group_name"
         app:helperText="@string/group_name_ex"
         app:layout_constraintTop_toBottomOf="@id/card_title">
@@ -47,7 +47,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="@dimen/text_input_layout_margin_top"
         android:hint="@string/practiced_language"
         app:layout_constraintTop_toBottomOf="@id/group_name_input_container">
 
@@ -65,7 +65,7 @@
         android:id="@+id/create_group_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/bottom_sheet_button_margin_top"
         android:text="@string/create_group"
         android:textColor="@android:color/white"
         app:backgroundTint="?attr/colorPrimaryVariant"

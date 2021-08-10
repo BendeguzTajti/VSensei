@@ -17,7 +17,7 @@ class WordAdapter : ListAdapter<Word, WordAdapter.WordHolder>(WordDiffCallback) 
 
         fun bind(word: Word) {
             binding.wordPrimary.text = if (word.wordPrimaryVariant.isNullOrBlank()) word.wordPrimary else "${word.wordPrimaryVariant} (${word.wordPrimary})"
-            binding.wordMeaning.text = word.wordMeaning
+            binding.wordMeaning.text = word.wordMeanings.joinToString(separator = ", ")
         }
     }
 

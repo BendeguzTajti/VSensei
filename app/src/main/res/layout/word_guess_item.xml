@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
+    android:layout_margin="@dimen/word_guess_item_card_margin"
     app:cardBackgroundColor="?attr/colorPositive"
-    app:cardCornerRadius="12dp">
+    app:cardCornerRadius="@dimen/corner_radius">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:minWidth="200dp"
+        android:minWidth="@dimen/word_guess_item_container_min_width"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="@dimen/word_guess_item_text_container_padding">
 
         <TextView
             android:id="@+id/hint"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="@dimen/word_guess_item_text_size_large"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="楽しい" />
@@ -33,17 +33,17 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/word_guess_item_text_size_medium"
             tools:text="(たのしい)" />
 
         <TextView
             android:id="@+id/answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/word_guess_item_answer_margin_top"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/word_guess_item_text_size_medium"
             tools:text="enjoyable, fun"
             tools:visibility="visible" />
 

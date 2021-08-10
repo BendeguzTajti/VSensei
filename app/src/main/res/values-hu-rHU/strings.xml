@@ -41,4 +41,5 @@
     <string name="light_mode">Világos mód</string>
     <string name="missing_scores">Még nincs elmentett gyakorlásod. Amint elkezded a gyakorlást, itt találhatsz részletes információt a korábbi 5 eredményedről</string>
     <string name="past_guesses_label">Szavak:</string>
+    <string name="word_meaning_helper_text">Több szó esetén válaszd el a szavakat vesszővel!</string>
 </resources>

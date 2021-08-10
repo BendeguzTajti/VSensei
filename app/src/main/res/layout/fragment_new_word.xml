@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="18dp">
+        android:padding="@dimen/container_padding">
 
         <TextView
             android:id="@+id/card_title"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:text="@string/new_word"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="19sp"
+            android:textSize="@dimen/bottom_sheet_title_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/text_input_layout_margin_top"
             app:layout_constraintTop_toBottomOf="@id/card_title"
             tools:helperText="@string/hiragana_example"
             tools:hint="@string/hiragana_or_katakana">
@@ -51,7 +51,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/text_input_layout_margin_top"
             android:hint="@string/kanji"
             app:helperText="@string/kanji_example"
             app:layout_constraintTop_toBottomOf="@id/word_primary_container">
@@ -70,8 +70,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/text_input_layout_margin_top"
             android:hint="@string/word_meaning"
+            app:helperText="@string/word_meaning_helper_text"
             app:layout_constraintTop_toBottomOf="@id/word_primary_variant_container">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -87,7 +88,7 @@
             android:id="@+id/add_word_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/bottom_sheet_button_margin_top"
             android:text="@string/add_word"
             android:textColor="@android:color/white"
             app:backgroundTint="?attr/colorPrimaryVariant"

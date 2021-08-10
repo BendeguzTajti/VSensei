@@ -56,7 +56,7 @@ class NewWordFragment : BottomSheetDialogFragment() {
                     args.wordGroup.groupId,
                     wordPrimary,
                     wordPrimaryVariant,
-                    wordMeaning
+                    wordMeaning.split(",").map { it.trim() }
                 )
                 wordViewModel.addWord(word)
                 dismiss()

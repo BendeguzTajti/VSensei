@@ -13,5 +13,5 @@ data class Word(
     val groupId: Long,
     val wordPrimary: String,
     val wordPrimaryVariant: String?,
-    val wordMeaning: String
+    val wordMeanings: List<String>
 ) : Parcelable

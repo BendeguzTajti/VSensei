@@ -75,7 +75,7 @@
 
     <style name="Widget.App.PracticeButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/dark_blue_400</item>
-        <item name="cornerRadius">12dp</item>
+        <item name="cornerRadius">@dimen/corner_radius</item>
     </style>
 
     <style name="ThemeOverlay.App.TextInputLayout.Secondary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -84,10 +84,10 @@
         <item name="boxStrokeColor">@color/yellow_200</item>
         <item name="endIconTint">@color/yellow_200</item>
         <item name="boxBackgroundColor">@color/color_states_guess_input</item>
-        <item name="boxCornerRadiusTopStart">12dp</item>
-        <item name="boxCornerRadiusTopEnd">12dp</item>
-        <item name="boxCornerRadiusBottomStart">12dp</item>
-        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/corner_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corner_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corner_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/corner_radius</item>
     </style>
 
 </resources>

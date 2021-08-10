@@ -12,18 +12,18 @@
         android:id="@+id/card_practice_item_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="@dimen/motion_layout_margin_bottom"
         app:layoutDescription="@xml/practice_card_item_scene">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/guess_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginStart="@dimen/practice_card_margin_sides"
+            android:layout_marginTop="@dimen/answer_card_margin_top"
+            android:layout_marginEnd="@dimen/practice_card_margin_sides"
             app:cardBackgroundColor="?attr/colorPrimaryVariant"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="@dimen/corner_radius"
             app:layout_constraintEnd_toEndOf="@id/word_container"
             app:layout_constraintStart_toStartOf="@id/word_container"
             app:layout_constraintTop_toBottomOf="@id/word_container">
@@ -52,10 +52,10 @@
             android:id="@+id/word_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="@dimen/practice_card_margin_sides"
+            android:layout_marginEnd="@dimen/practice_card_margin_sides"
             app:cardBackgroundColor="?attr/colorPrimaryVariant"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="@dimen/corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias=".35">
@@ -65,16 +65,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="@dimen/practice_info_container_padding">
 
                 <TextView
                     android:id="@+id/hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/hint_margin_top"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
-                    android:textSize="22sp"
+                    android:textSize="@dimen/hint_text_size"
                     android:textStyle="bold"
                     tools:text="楽しい" />
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/hint_variant_text_size"
                     tools:text="(たのしい)" />
 
                 <com.google.android.material.button.MaterialButton
@@ -102,10 +102,10 @@
                     android:id="@+id/answer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="@dimen/answer_margin_bottom"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/answer_text_size"
                     tools:text="enjoyable, fun"
                     tools:visibility="visible" />
 

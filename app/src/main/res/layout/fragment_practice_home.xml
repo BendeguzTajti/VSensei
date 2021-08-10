@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="18dp">
+        android:padding="@dimen/container_padding">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/practice_display"
@@ -25,8 +25,8 @@
                 android:id="@+id/ic_guess_the_word"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="18dp"
-                android:elevation="9dp"
+                android:layout_marginEnd="@dimen/practice_button_icon_margin"
+                android:elevation="@dimen/practice_button_icon_elevation"
                 android:src="@drawable/ic_guess_the_word"
                 app:layout_constraintBottom_toTopOf="@id/guess_the_word_button"
                 app:layout_constraintEnd_toEndOf="@id/guess_the_word_button"
@@ -37,8 +37,8 @@
                 android:id="@+id/guess_the_word_button"
                 style="@style/Widget.App.PracticeButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="70dp"
+                android:layout_height="@dimen/practice_button_height"
+                android:layout_marginBottom="@dimen/guess_the_word_button_margin_bottom"
                 android:text="@string/guess_the_word"
                 android:textAlignment="viewStart"
                 android:textStyle="bold"
@@ -51,8 +51,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:elevation="9dp"
+                android:layout_marginStart="@dimen/practice_button_icon_margin"
+                android:elevation="@dimen/practice_button_icon_elevation"
                 android:src="@drawable/ic_guess_the_meaning"
                 app:layout_constraintBottom_toTopOf="@id/guess_the_meaning_button"
                 app:layout_constraintStart_toStartOf="@id/guess_the_meaning_button"
@@ -63,7 +63,7 @@
                 android:id="@+id/guess_the_meaning_button"
                 style="@style/Widget.App.PracticeButton"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="@dimen/practice_button_height"
                 android:text="@string/guess_the_meaning"
                 android:textAlignment="viewEnd"
                 android:textStyle="bold"
@@ -82,28 +82,22 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_not_found"
-                tools:ignore="ContentDescription" />
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="12dp"
+                android:drawablePadding="@dimen/drawable_padding"
                 android:text="@string/missing_words"
                 android:textAlignment="center"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="14sp" />
+                android:textSize="@dimen/text_size_regular"
+                app:drawableTopCompat="@drawable/ic_not_found" />
 
             <Button
                 android:id="@+id/add_words_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/navigation_button_margin_top"
                 android:backgroundTint="?attr/colorPrimaryVariant"
                 android:text="@string/add_words" />
 
