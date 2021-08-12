@@ -50,6 +50,7 @@ class PracticeHomeFragment : Fragment() {
                     )
                     findNavController().navigate(action)
                 } else {
+                    wordGroupsWithWords.first().words.shuffle()
                     val practiceType = PracticeType.GUESS_THE_WORD
                     val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeActivity(
                         practiceType,
@@ -69,6 +70,7 @@ class PracticeHomeFragment : Fragment() {
                     )
                     findNavController().navigate(action)
                 } else {
+                    wordGroupsWithWords.first().words.shuffle()
                     val practiceType = PracticeType.GUESS_THE_MEANING
                     val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeActivity(
                         practiceType,

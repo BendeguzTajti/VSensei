@@ -14,5 +14,5 @@ data class WordGroupWithWords(
         entity = Word::class,
         entityColumn = "groupId"
     )
-    val words: List<Word>
+    val words: MutableList<Word>
 ) : Parcelable
