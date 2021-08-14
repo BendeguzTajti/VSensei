@@ -32,6 +32,7 @@ class NewWordFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val selectedWord = args.word
         val displayLanguages = resources.getStringArray(R.array.display_languages)
         val selectedLanguageIndex = args.wordGroup.selectedLanguageIndex
         when(displayLanguages[selectedLanguageIndex]) {
@@ -44,21 +45,36 @@ class NewWordFragment : BottomSheetDialogFragment() {
                 binding.wordPrimaryVariantContainer.visibility = View.GONE
             }
         }
+        if (selectedWord != null) {
+            binding.cardTitle.text = selectedWord.wordPrimaryVariant ?: selectedWord.wordPrimary
+            binding.wordPrimaryInput.setText(selectedWord.wordPrimary)
+            binding.wordPrimaryVariantInput.setText(selectedWord.wordPrimaryVariant)
+            binding.wordMeaningInput.setText(selectedWord.wordMeanings.joinToString(", "))
+            binding.addWordButton.setText(R.string.update_word)
+        } else {
+            binding.cardTitle.setText(R.string.new_word)
+            binding.addWordButton.setText(R.string.add_word)
+        }
         binding.addWordButton.setOnClickListener {
             val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputManager.hideSoftInputFromWindow(view.windowToken, 0)
             if (isValidData()) {
+                val wordId = selectedWord?.wordId ?: 0
                 val wordPrimary = binding.wordPrimaryInput.text.toString()
                 val wordPrimaryVariant = if (binding.wordPrimaryVariantInput.text.isNullOrBlank()) null else binding.wordPrimaryVariantInput.text.toString()
                 val wordMeaning = binding.wordMeaningInput.text.toString()
                 val word = Word(
-                    0,
+                    wordId,
                     args.wordGroup.groupId,
                     wordPrimary,
                     wordPrimaryVariant,
                     wordMeaning.split(",").map { it.trim() }
                 )
-                wordViewModel.addWord(word)
+                if (selectedWord != null) {
+                    wordViewModel.updateWord(word)
+                } else {
+                    wordViewModel.addWord(word)
+                }
                 dismiss()
             }
         }

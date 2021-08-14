@@ -9,11 +9,18 @@ import com.example.vsensei.R
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.WordItemBinding
 
-class WordAdapter : ListAdapter<Word, WordAdapter.WordHolder>(WordDiffCallback) {
+class WordAdapter(
+    private val onWordClicked: (Word) -> Unit
+) : ListAdapter<Word, WordAdapter.WordHolder>(WordDiffCallback) {
 
     inner class WordHolder(
         private val binding: WordItemBinding,
+        private val onWordClicked: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener { onWordClicked(adapterPosition) }
+        }
 
         fun bind(word: Word) {
             binding.wordPrimary.text = if (word.wordPrimaryVariant.isNullOrBlank()) word.wordPrimary else "${word.wordPrimaryVariant} (${word.wordPrimary})"
@@ -24,7 +31,7 @@ class WordAdapter : ListAdapter<Word, WordAdapter.WordHolder>(WordDiffCallback) 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.word_item, parent, false)
         val binding = WordItemBinding.bind(view)
-        return WordHolder(binding)
+        return WordHolder(binding) { position -> onWordClicked(getItem(position)) }
     }
 
     override fun onBindViewHolder(holder: WordHolder, position: Int) {

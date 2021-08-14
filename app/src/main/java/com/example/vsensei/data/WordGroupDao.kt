@@ -18,6 +18,9 @@ interface WordGroupDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addPracticeSummary(practiceSummary: PracticeSummary)
 
+    @Update
+    suspend fun updateWord(word: Word)
+
     @Transaction
     @Query("SELECT * FROM word_group_table ORDER BY timeCreated DESC")
     fun getAllWordGroups(): LiveData<List<WordGroupWithWords>>

@@ -31,6 +31,10 @@ class Repository(private val sharedPreferences: SharedPreferences, private val w
         wordGroupDao.addWord(word)
     }
 
+    suspend fun updateWord(word: Word) {
+        wordGroupDao.updateWord(word)
+    }
+
     suspend fun addPracticeSummary(practiceSummary: PracticeSummary) {
         wordGroupDao.addPracticeSummary(practiceSummary)
     }

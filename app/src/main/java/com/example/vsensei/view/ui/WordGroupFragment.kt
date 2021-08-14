@@ -40,7 +40,7 @@ class WordGroupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addNewWordButton.setOnClickListener {
-            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(args.wordGroup)
+            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(args.wordGroup, null)
             findNavController().navigate(action)
         }
         wordsRecyclerViewInit()
@@ -52,7 +52,10 @@ class WordGroupFragment : Fragment() {
     }
 
     private fun wordsRecyclerViewInit() {
-        val adapter = WordAdapter()
+        val adapter = WordAdapter { word ->
+            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(args.wordGroup, word)
+            findNavController().navigate(action)
+        }
         binding.wordRecyclerView.apply {
             this.adapter = adapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

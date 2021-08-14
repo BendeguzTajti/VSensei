@@ -62,6 +62,10 @@
         <argument
             android:name="wordGroup"
             app:argType="com.example.vsensei.data.WordGroup" />
+        <argument
+            android:name="word"
+            app:argType="com.example.vsensei.data.Word"
+            app:nullable="true" />
     </dialog>
     <dialog
         android:id="@+id/groupSelectFragment"
