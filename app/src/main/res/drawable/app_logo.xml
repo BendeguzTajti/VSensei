@@ -1,62 +1,12 @@
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt">
-    <aapt:attr name="android:drawable">
-        <vector
-            android:name="vector"
-            android:width="24dp"
-            android:height="24dp"
-            android:viewportWidth="24"
-            android:viewportHeight="24">
-            <path
-                android:name="path_1"
-                android:pathData="M 19.071 19.071 C 22.976 15.165 22.976 8.835 19.071 4.929 C 15.165 1.024 8.835 1.024 4.929 4.929 C 1.024 8.835 1.024 15.165 4.929 19.071 C 8.835 22.976 15.165 22.976 19.071 19.071 Z"
-                android:strokeWidth="1.8"
-                android:strokeColor="?attr/colorPrimaryVariant" />
-            <group
-                android:name="group"
-                android:pivotX="12"
-                android:pivotY="12"
-                android:scaleX="0"
-                android:scaleY="0">
-                <path
-                    android:name="path_2"
-                    android:fillColor="?attr/colorPrimary"
-                    android:pathData="M 2 0 L 8.875 0 C 9.608 4.625 10.957 8.424 12 12.63 C 13.379 8.735 14.248 4.156 15.437 0 L 22 0 C 19.538 7.911 17.207 15.999 14.811 24 L 9.19 24 C 6.834 15.947 4.401 7.996 2 0 Z"
-                    android:strokeWidth="1" />
-            </group>
-        </vector>
-    </aapt:attr>
-    <target android:name="group">
-        <aapt:attr name="android:animation">
-            <set>
-                <objectAnimator
-                    android:duration="400"
-                    android:interpolator="@android:anim/overshoot_interpolator"
-                    android:propertyName="scaleY"
-                    android:startOffset="400"
-                    android:valueFrom="0"
-                    android:valueTo="0.9"
-                    android:valueType="floatType" />
-                <objectAnimator
-                    android:duration="400"
-                    android:interpolator="@android:anim/overshoot_interpolator"
-                    android:propertyName="scaleX"
-                    android:startOffset="400"
-                    android:valueFrom="0"
-                    android:valueTo="0.9"
-                    android:valueType="floatType" />
-            </set>
-        </aapt:attr>
-    </target>
-    <target android:name="path_1">
-        <aapt:attr name="android:animation">
-            <objectAnimator
-                android:duration="300"
-                android:interpolator="@android:anim/linear_interpolator"
-                android:propertyName="trimPathEnd"
-                android:valueFrom="0"
-                android:valueTo="1"
-                android:valueType="floatType" />
-        </aapt:attr>
-    </target>
-</animated-vector>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <path
+        android:fillColor="#3F3D56"
+        android:pathData="M58.546,121.908C51.874,112.751 48.977,101.69 50.38,90.73C51.784,79.77 57.394,69.638 66.195,62.17C74.996,54.702 86.404,50.394 98.35,50.026C110.296,49.658 121.99,53.254 131.31,60.164C140.631,67.073 146.961,76.838 149.152,87.687C151.344,98.535 149.252,109.75 143.257,119.297C137.261,128.844 127.758,136.092 116.471,139.725C105.184,143.358 92.861,143.136 81.737,139.099C81.015,141.476 79.667,143.651 77.812,145.429C75.958,147.206 73.654,148.532 71.109,149.286C68.563,150.04 65.855,150.2 63.226,149.751C60.597,149.302 58.13,148.258 56.046,146.712C53.961,145.167 52.324,143.168 51.281,140.896C50.238,138.623 49.822,136.147 50.07,133.689C50.317,131.231 51.221,128.869 52.7,126.813C54.18,124.757 56.188,123.071 58.546,121.908V121.908Z" />
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M73.029,78.996L90.196,140.379C90.413,141.159 91.08,141.731 91.884,141.82C98.154,142.509 102.093,142.431 108.101,141.81C108.913,141.727 109.588,141.152 109.808,140.365L126.968,79.007C127.353,77.631 126.212,76.307 124.794,76.484L111.323,78.168C110.522,78.268 109.86,78.84 109.644,79.619L101.983,107.285C101.437,109.254 98.637,109.234 98.12,107.257L90.9,79.649C90.692,78.855 90.02,78.268 89.205,78.17L75.196,76.471C73.78,76.3 72.645,77.622 73.029,78.996Z" />
+</vector>

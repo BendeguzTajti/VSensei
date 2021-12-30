@@ -26,6 +26,13 @@
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
 
+    <style name="Theme.VSensei.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.VSensei</item>
+    </style>
+
     <style name="ThemeOverlay.App.ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/dark_blue_700</item>
     </style>

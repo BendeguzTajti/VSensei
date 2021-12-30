@@ -9,18 +9,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VSensei">
-        <activity android:name=".view.ui.SplashScreenActivity"
-            android:configChanges="orientation|screenSize">
+        android:theme="@style/Theme.VSensei.SplashScreen">
+        <activity
+            android:name=".view.ui.MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.ui.MainActivity"
-            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".view.ui.PracticeActivity"
             android:windowSoftInputMode="adjustPan" />
