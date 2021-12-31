@@ -3,15 +3,20 @@ package com.example.vsensei.view.ui
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityMainBinding
 import com.example.vsensei.viewmodel.UserOptionsViewModel
@@ -31,20 +36,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
-        navController = navHostFragment.navController
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.practiceHomeFragment,
-                R.id.dictionaryFragment,
-                R.id.scoresFragment,
-            )
-        )
-        setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.bottomNavigation.setupWithNavController(navController)
-        binding.bottomNavigation.setOnItemReselectedListener {  }
-
+        navInit()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -56,14 +48,14 @@ class MainActivity : AppCompatActivity() {
         when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 menu?.getItem(0)?.apply {
-                    setIcon(R.drawable.ic_dark_mode)
-                    setTitle(R.string.dark_mode)
+                    setIcon(R.drawable.ic_light_mode)
+                    setTitle(R.string.light_mode)
                 }
             }
             Configuration.UI_MODE_NIGHT_NO -> {
                 menu?.getItem(0)?.apply {
-                    setIcon(R.drawable.ic_light_mode)
-                    setTitle(R.string.light_mode)
+                    setIcon(R.drawable.ic_dark_mode)
+                    setTitle(R.string.dark_mode)
                 }
             }
         }
@@ -85,6 +77,45 @@ class MainActivity : AppCompatActivity() {
             true
         } else {
             false
+        }
+    }
+
+    private fun navInit() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
+        navController = navHostFragment.navController
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.practiceHomeFragment,
+                R.id.dictionaryFragment,
+                R.id.scoresFragment,
+            )
+        )
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.bottomNavigation.setupWithNavController(navController)
+        binding.bottomNavigation.setOnItemReselectedListener { }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.newWordFragment,
+                R.id.wordGroupFragment -> {
+                    TransitionManager.beginDelayedTransition(
+                        binding.root,
+                        Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
+                    )
+                    binding.bottomNavContainer.visibility = View.GONE
+                }
+                else -> {
+                    if (!binding.bottomNavContainer.isVisible) {
+                        TransitionManager.beginDelayedTransition(
+                            binding.root,
+                            Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
+                        )
+                        binding.bottomNavContainer.visibility = View.VISIBLE
+                    }
+                }
+            }
         }
     }
 }

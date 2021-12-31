@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    tools:context=".view.ui.DictionaryFragment">
+    tools:context=".view.ui.DictionaryFragment"
+    tools:theme="@style/Theme.VSensei">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/word_group_recycler_view"
