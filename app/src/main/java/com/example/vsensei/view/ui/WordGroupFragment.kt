@@ -16,7 +16,7 @@ import com.example.vsensei.view.adapter.WordAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WordGroupFragment : Fragment() {
 

@@ -16,7 +16,7 @@ import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityMainBinding
 import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.google.android.material.transition.platform.MaterialFadeThrough
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 

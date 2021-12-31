@@ -16,8 +16,7 @@ import com.example.vsensei.data.WordGuess
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
-import org.koin.android.viewmodel.ext.android.sharedViewModel
-import java.util.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PracticeCardFragment : Fragment() {
 
@@ -99,8 +98,8 @@ class PracticeCardFragment : Fragment() {
                 if (currentId == R.id.merged) {
                     val hint = binding.hint.text.toString()
                     val hintVariant = binding.hintVariant.text.toString()
-                    val guesses = binding.guess.text.toString().split(",").map { it.trim().toLowerCase(Locale.getDefault()) }
-                    val matches = currentWord.wordMeanings.filter { guesses.contains(it.toLowerCase(Locale.getDefault())) }
+                    val guesses = binding.guess.text.toString().split(",").map { it.trim().lowercase() }
+                    val matches = currentWord.wordMeanings.filter { guesses.contains(it.lowercase()) }
                     if (matches.isNotEmpty()) {
                         val wordGuess = WordGuess(hint, hintVariant, binding.answer.text.toString(), true)
                         wordGuessCallback?.onWordGuessed(wordGuess)
@@ -131,10 +130,10 @@ class PracticeCardFragment : Fragment() {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == R.id.merged) {
                     val hint = binding.hint.text.toString()
-                    val guess = binding.guess.text.toString().toLowerCase(Locale.getDefault())
-                    val answer = currentWord.wordPrimary.toLowerCase(Locale.getDefault())
+                    val guess = binding.guess.text.toString().lowercase()
+                    val answer = currentWord.wordPrimary.lowercase()
                     val answerVariant =
-                        currentWord.wordPrimaryVariant?.toLowerCase(Locale.getDefault())
+                        currentWord.wordPrimaryVariant?.lowercase()
                     if (guess == answer || guess == answerVariant) {
                         val wordGuess = WordGuess(hint, null, binding.answer.text.toString(), true)
                         wordGuessCallback?.onWordGuessed(wordGuess)

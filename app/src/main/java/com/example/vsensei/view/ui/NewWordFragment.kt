@@ -12,7 +12,7 @@ import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentNewWordBinding
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewWordFragment : BottomSheetDialogFragment() {
 

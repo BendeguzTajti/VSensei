@@ -10,7 +10,7 @@ import com.example.vsensei.util.Constants
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.example.vsensei.viewmodel.WordViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModules = module {

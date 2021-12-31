@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.vsensei.databinding.FragmentScoresBinding
 import com.example.vsensei.view.adapter.PracticeSummaryAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 

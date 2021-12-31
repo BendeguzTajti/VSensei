@@ -14,7 +14,7 @@ import com.example.vsensei.data.PracticeType
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PracticeHomeFragment : Fragment() {
 

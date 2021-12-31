@@ -15,7 +15,7 @@ import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.Hold
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DictionaryFragment : Fragment() {
 

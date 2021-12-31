@@ -9,7 +9,7 @@ import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentPracticeResultBinding
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.google.android.material.transition.MaterialSharedAxis
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PracticeResultFragment : Fragment() {
 
