@@ -1,5 +1,6 @@
 package com.example.vsensei.view.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,17 +15,29 @@ import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentWordGroupBinding
 import com.example.vsensei.view.adapter.WordAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
+import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WordGroupFragment : Fragment() {
 
+    private var bottomNavActivity: BottomNavActivity? = null
     private var _binding: FragmentWordGroupBinding? = null
     private val binding get() = _binding!!
     private val args: WordGroupFragmentArgs by navArgs()
 
     private val wordViewModel: WordViewModel by viewModel()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        bottomNavActivity = requireActivity() as BottomNavActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        bottomNavActivity = null
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +46,7 @@ class WordGroupFragment : Fragment() {
         exitTransition = Fade().apply {
             duration = 150
         }
+        bottomNavActivity?.hideBottomNav()
         _binding = FragmentWordGroupBinding.inflate(inflater, container, false)
         return binding.root
     }

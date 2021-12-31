@@ -19,11 +19,12 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityMainBinding
+import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.google.android.material.transition.platform.MaterialFadeThrough
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomNavActivity {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -95,27 +96,25 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
         binding.bottomNavigation.setOnItemReselectedListener { }
+    }
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.newWordFragment,
-                R.id.wordGroupFragment -> {
-                    TransitionManager.beginDelayedTransition(
-                        binding.root,
-                        Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
-                    )
-                    binding.bottomNavContainer.visibility = View.GONE
-                }
-                else -> {
-                    if (!binding.bottomNavContainer.isVisible) {
-                        TransitionManager.beginDelayedTransition(
-                            binding.root,
-                            Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
-                        )
-                        binding.bottomNavContainer.visibility = View.VISIBLE
-                    }
-                }
-            }
+    override fun showBottomNav() {
+        if (this::binding.isInitialized && !binding.bottomNavContainer.isVisible) {
+            TransitionManager.beginDelayedTransition(
+                binding.root,
+                Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
+            )
+            binding.bottomNavContainer.visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideBottomNav() {
+        if (this::binding.isInitialized && binding.bottomNavContainer.isVisible) {
+            TransitionManager.beginDelayedTransition(
+                binding.root,
+                Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
+            )
+            binding.bottomNavContainer.visibility = View.GONE
         }
     }
 }
