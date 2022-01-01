@@ -2,6 +2,7 @@ package com.example.vsensei.view.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,6 @@ import com.example.vsensei.databinding.FragmentScoresBinding
 import com.example.vsensei.view.adapter.PracticeSummaryAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ScoresFragment : Fragment() {
 
@@ -33,8 +32,8 @@ class ScoresFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentNightMode = resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val adapter = PracticeSummaryAdapter(currentNightMode, simpleDateFormat)
+        val dateFormat = DateFormat.getDateFormat(requireContext())
+        val adapter = PracticeSummaryAdapter(currentNightMode, dateFormat)
         binding.practiceSummaryRecyclerView.apply {
             this.adapter = adapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

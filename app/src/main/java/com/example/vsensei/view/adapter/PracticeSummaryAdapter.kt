@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.databinding.PracticeSummaryItemBinding
-import java.text.SimpleDateFormat
+import java.text.DateFormat
 import java.util.*
 
 class PracticeSummaryAdapter(
     private val currentNightMode: Int,
-    private val simpleDateFormat: SimpleDateFormat
+    private val dateFormat: DateFormat
 ) : ListAdapter<PracticeSummary, PracticeSummaryAdapter.PracticeSummaryHolder>(PracticeDiffCallback) {
 
     inner class PracticeSummaryHolder(
@@ -30,7 +30,7 @@ class PracticeSummaryAdapter(
             binding.practicedGroupName.text = practiceSummary.practicedGroupName
             binding.practiceType.text =
                 itemView.context.getString(practiceSummary.practiceType.labelResId)
-            binding.practiceDate.text = simpleDateFormat.format(Date(practiceSummary.timeCreated))
+            binding.practiceDate.text = dateFormat.format(Date(practiceSummary.timeCreated))
             binding.practicePercent.text = itemView.context.getString(R.string.practice_percent, practiceSummary.getPercent())
             binding.wordGuessRecyclerView.adapter = wordGuessAdapter
         }
