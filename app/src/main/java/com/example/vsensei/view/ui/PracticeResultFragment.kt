@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentPracticeResultBinding
 import com.example.vsensei.viewmodel.PracticeViewModel
@@ -34,7 +35,7 @@ class PracticeResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.homeButton.setOnClickListener {
-            requireActivity().finishAfterTransition()
+            findNavController().navigateUp()
         }
         practiceViewModel.currentPracticeSummary().observe(viewLifecycleOwner, { practiceSummary ->
             val practicePercent = practiceSummary.getPercent()

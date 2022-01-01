@@ -8,7 +8,8 @@
     android:layout_gravity="bottom"
     android:background="?attr/colorSurface"
     tools:background="#FAFAFA"
-    tools:context=".view.ui.NewWordFragment">
+    tools:context=".view.ui.NewWordFragment"
+    tools:theme="@style/Theme.VSensei">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

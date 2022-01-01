@@ -1,34 +1,46 @@
 package com.example.vsensei.view.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
-import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
+import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.transition.MaterialFadeThrough
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PracticeHomeFragment : Fragment() {
 
+    private var bottomNavActivity: BottomNavActivity? = null
     private var _binding: FragmentPracticeHomeBinding? = null
     private val binding get() = _binding!!
 
     private val wordViewModel: WordViewModel by sharedViewModel()
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        bottomNavActivity = requireActivity() as BottomNavActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        bottomNavActivity = null
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        bottomNavActivity?.showBottomNav()
         _binding = FragmentPracticeHomeBinding.inflate(inflater, container, false)
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)?.isVisible = true
         return binding.root
     }
 
@@ -52,14 +64,12 @@ class PracticeHomeFragment : Fragment() {
                 } else {
                     wordGroupsWithWords.first().words.shuffle()
                     val practiceType = PracticeType.GUESS_THE_WORD
-                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeActivity(
+                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeFragment(
                         practiceType,
                         wordGroupsWithWords.first(),
                         getString(practiceType.labelResId)
                     )
-                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity())
-                    val extras = ActivityNavigatorExtras(options)
-                    findNavController().navigate(action, extras)
+                    findNavController().navigate(action)
                 }
             }
             binding.guessTheMeaningButton.setOnClickListener {
@@ -72,14 +82,14 @@ class PracticeHomeFragment : Fragment() {
                 } else {
                     wordGroupsWithWords.first().words.shuffle()
                     val practiceType = PracticeType.GUESS_THE_MEANING
-                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeActivity(
+                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeFragment(
                         practiceType,
                         wordGroupsWithWords.first(),
                         getString(practiceType.labelResId)
                     )
-                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity())
-                    val extras = ActivityNavigatorExtras(options)
-                    findNavController().navigate(action, extras)
+                    exitTransition = MaterialFadeThrough()
+                    reenterTransition = MaterialFadeThrough()
+                    findNavController().navigate(action)
                 }
             }
         })

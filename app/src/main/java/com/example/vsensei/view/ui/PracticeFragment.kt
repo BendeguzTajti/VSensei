@@ -1,13 +1,14 @@
 package com.example.vsensei.view.ui
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
@@ -15,19 +16,20 @@ import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.data.WordGuess
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
+import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.PracticeViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
-    private val args by navArgs<PracticeActivityArgs>()
-
+    private var bottomNavActivity: BottomNavActivity? = null
     private var _binding: FragmentPracticeBinding? = null
     private val binding get() = _binding!!
 
+    private val args: PracticeFragmentArgs by navArgs()
     private val practiceViewModel: PracticeViewModel by sharedViewModel()
 
     private var textToSpeech: TextToSpeech? = null
@@ -35,8 +37,20 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private lateinit var correctAnswerSoundPlayer: MediaPlayer
     private lateinit var wrongAnswerSoundPlayer: MediaPlayer
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        bottomNavActivity = requireActivity() as BottomNavActivity
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        bottomNavActivity = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        returnTransition = MaterialFadeThrough()
         textToSpeech = TextToSpeech(requireActivity().applicationContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
@@ -53,8 +67,8 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        bottomNavActivity?.hideBottomNav()
         _binding = FragmentPracticeBinding.inflate(inflater, container, false)
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)?.isVisible = false
         return binding.root
     }
 
@@ -129,7 +143,8 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     private fun navigateToPracticeResult() {
         practiceViewModel.setCurrentPracticeSummary(practiceSummary)
-        practiceViewModel.savePracticeSummary(practiceSummary)
+        // TODO ENABLE WHEN BUG IS FIXED
+//        practiceViewModel.savePracticeSummary(practiceSummary)
         exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
         val action = PracticeFragmentDirections.actionPracticeFragmentToPracticeResultFragment(getString(args.practiceType.labelResId))
         findNavController().navigate(action)

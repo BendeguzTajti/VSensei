@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    tools:context=".view.ui.PracticeFragment">
+    tools:context=".view.ui.PracticeFragment"
+    tools:theme="@style/Theme.VSensei">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/practice_cards_view_pager"

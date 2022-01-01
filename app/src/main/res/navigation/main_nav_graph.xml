@@ -14,8 +14,8 @@
             android:id="@+id/action_practiceHomeFragment_to_groupSelectFragment"
             app:destination="@id/groupSelectFragment" />
         <action
-            android:id="@+id/action_practiceHomeFragment_to_practiceActivity"
-            app:destination="@id/practiceActivity" />
+            android:id="@+id/action_practiceHomeFragment_to_practiceFragment"
+            app:destination="@id/practiceFragment" />
     </fragment>
     <fragment
         android:id="@+id/dictionaryFragment"
@@ -74,18 +74,18 @@
         <argument
             android:name="wordGroupsWithWords"
             app:argType="com.example.vsensei.data.WordGroupWithWords[]" />
-        <action
-            android:id="@+id/action_groupSelectFragment_to_practiceActivity"
-            app:destination="@id/practiceActivity" />
         <argument
             android:name="practiceType"
             app:argType="com.example.vsensei.data.PracticeType" />
+        <action
+            android:id="@+id/action_groupSelectFragment_to_practiceFragment"
+            app:destination="@id/practiceFragment" />
     </dialog>
-    <activity
-        android:id="@+id/practiceActivity"
-        android:name="com.example.vsensei.view.ui.PracticeActivity"
-        android:label="activity_practice"
-        tools:layout="@layout/activity_practice">
+    <fragment
+        android:id="@+id/practiceFragment"
+        android:name="com.example.vsensei.view.ui.PracticeFragment"
+        android:label="{practiceTypeLabel}"
+        tools:layout="@layout/fragment_practice">
         <argument
             android:name="practiceType"
             app:argType="com.example.vsensei.data.PracticeType" />
@@ -95,5 +95,18 @@
         <argument
             android:name="practiceTypeLabel"
             app:argType="string" />
-    </activity>
+        <action
+            android:id="@+id/action_practiceFragment_to_practiceResultFragment"
+            app:destination="@id/practiceResultFragment"
+            app:popUpTo="@id/practiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/practiceResultFragment"
+        android:name="com.example.vsensei.view.ui.PracticeResultFragment"
+        android:label="{practiceTypeLabel}"
+        tools:layout="@layout/fragment_practice_result">
+        <argument
+            android:name="practiceTypeLabel"
+            app:argType="string" />
+    </fragment>
 </navigation>
