@@ -11,14 +11,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.transition.Fade
-import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentWordGroupBinding
 import com.example.vsensei.view.adapter.WordAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.WordViewModel
-import com.google.android.material.snackbar.Snackbar
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class WordGroupFragment : Fragment() {
 
@@ -27,7 +25,7 @@ class WordGroupFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: WordGroupFragmentArgs by navArgs()
 
-    private val wordViewModel: WordViewModel by viewModel()
+    private val wordViewModel: WordViewModel by sharedViewModel()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,12 +74,6 @@ class WordGroupFragment : Fragment() {
             val itemTouchHelperCallback = SwipeDeleteItemTouchHelper(0, ItemTouchHelper.LEFT) { position: Int ->
                 val swipedWord = adapter.currentList[position]
                 wordViewModel.deleteWord(swipedWord)
-                val wordName = if (swipedWord.wordPrimaryVariant.isNullOrBlank()) swipedWord.wordPrimary else swipedWord.wordPrimaryVariant
-                Snackbar.make(binding.root, context.getString(R.string.item_removed, wordName), Snackbar.LENGTH_LONG)
-                    .setAction(context.getString(R.string.undo)) {
-                        wordViewModel.addWord(swipedWord)
-                    }
-                    .show()
             }
             ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(this)
         }

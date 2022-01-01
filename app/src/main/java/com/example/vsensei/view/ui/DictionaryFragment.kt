@@ -75,11 +75,6 @@ class DictionaryFragment : Fragment() {
             val itemTouchHelperCallback = SwipeDeleteItemTouchHelper(0, ItemTouchHelper.LEFT) { position: Int ->
                 val swipedWordGroup = adapter.currentList[position]
                 wordViewModel.deleteWordGroup(swipedWordGroup)
-                Snackbar.make(binding.root, context.getString(R.string.item_removed, swipedWordGroup.wordGroup.groupName), Snackbar.LENGTH_LONG)
-                    .setAction(context.getString(R.string.undo)) {
-                        wordViewModel.restoreWordGroup(swipedWordGroup)
-                    }
-                    .show()
             }
             ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(this)
         }

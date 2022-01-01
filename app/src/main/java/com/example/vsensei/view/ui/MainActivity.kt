@@ -10,6 +10,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,6 +24,10 @@ import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityMainBinding
 import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.UserOptionsViewModel
+import com.example.vsensei.viewmodel.WordViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), BottomNavActivity {
@@ -28,6 +35,7 @@ class MainActivity : AppCompatActivity(), BottomNavActivity {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
+    private val wordViewModel: WordViewModel by viewModel()
     private val userOptionsViewModel: UserOptionsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +44,38 @@ class MainActivity : AppCompatActivity(), BottomNavActivity {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navInit()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                wordViewModel.recentlyDeletedGroup.collect { group ->
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.item_removed, group.wordGroup.groupName),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAction(getString(R.string.undo)) {
+                            wordViewModel.restoreWordGroup(group)
+                        }
+                        .show()
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                wordViewModel.recentlyDeletedWord.collect { word ->
+                    val wordName =
+                        if (word.wordPrimaryVariant.isNullOrBlank()) word.wordPrimary else word.wordPrimaryVariant
+                    Snackbar.make(
+                        binding.root,
+                        getString(R.string.item_removed, wordName),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAction(getString(R.string.undo)) {
+                            wordViewModel.addWord(word)
+                        }
+                        .show()
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
