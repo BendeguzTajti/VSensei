@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:theme="@style/Theme.VSensei">
 
     <TextView
         android:id="@+id/practiced_group_name"
@@ -56,19 +57,6 @@
         app:layout_constraintTop_toBottomOf="@id/practice_type"
         tools:text="2021.08.09." />
 
-    <TextView
-        android:id="@+id/words_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/practice_summary_item_margin_large"
-        android:layout_marginTop="@dimen/practice_summary_item_margin_small"
-        android:text="@string/past_guesses_label"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="@dimen/practice_summary_item_text_size"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/practice_date" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/word_guess_recycler_view"
         android:layout_width="0dp"
@@ -78,7 +66,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/words_label"
+        app:layout_constraintTop_toBottomOf="@id/practice_date"
         tools:itemCount="2"
         tools:listitem="@layout/word_guess_item" />
 

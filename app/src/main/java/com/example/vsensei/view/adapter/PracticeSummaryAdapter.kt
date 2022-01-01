@@ -27,12 +27,12 @@ class PracticeSummaryAdapter(
                 practiceSummary.hasVariants,
                 practiceSummary.practiceType
             )
-//            binding.practicedGroupName.text = practiceSummary.practicedGroupName
-//            binding.practiceType.text =
-//                itemView.context.getString(practiceSummary.practiceType.labelResId)
-//            binding.practiceDate.text = simpleDateFormat.format(Date(practiceSummary.timeCreated))
-//            binding.practicePercent.text = itemView.context.getString(R.string.practice_percent, practiceSummary.getPercent())
-//            binding.wordGuessRecyclerView.adapter = wordGuessAdapter
+            binding.practicedGroupName.text = practiceSummary.practicedGroupName
+            binding.practiceType.text =
+                itemView.context.getString(practiceSummary.practiceType.labelResId)
+            binding.practiceDate.text = simpleDateFormat.format(Date(practiceSummary.timeCreated))
+            binding.practicePercent.text = itemView.context.getString(R.string.practice_percent, practiceSummary.getPercent())
+            binding.wordGuessRecyclerView.adapter = wordGuessAdapter
         }
     }
 

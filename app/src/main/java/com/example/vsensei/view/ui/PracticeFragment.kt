@@ -4,7 +4,6 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -102,7 +101,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
             offscreenPageLimit = 1
             this.adapter = adapter
         }
-        practiceViewModel.currentCardPosition().observe(viewLifecycleOwner, { currentPosition ->
+        practiceViewModel.currentCardPosition.observe(viewLifecycleOwner, { currentPosition ->
             if (currentPosition < args.wordGroupWithWords.words.size) {
                 binding.practiceCardsViewPager.currentItem = currentPosition
             } else {
@@ -143,10 +142,12 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     private fun navigateToPracticeResult() {
         practiceViewModel.setCurrentPracticeSummary(practiceSummary)
-        // TODO ENABLE WHEN BUG IS FIXED
-//        practiceViewModel.savePracticeSummary(practiceSummary)
+        practiceViewModel.savePracticeSummary(practiceSummary)
         exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
-        val action = PracticeFragmentDirections.actionPracticeFragmentToPracticeResultFragment(getString(args.practiceType.labelResId))
+        val action = PracticeFragmentDirections.actionPracticeFragmentToPracticeResultFragment(
+            args.practiceTypeLabel,
+            practiceSummary.getPercent()
+        )
         findNavController().navigate(action)
     }
 

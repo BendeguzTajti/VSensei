@@ -12,30 +12,29 @@ import kotlinx.coroutines.launch
 
 class PracticeViewModel(private val repository: Repository) : ViewModel() {
 
-    val allPracticeSummaries: LiveData<List<PracticeSummary>> = repository.allPracticeSummaries
-
-    private val currentCardPosition: MutableLiveData<Int> by lazy {
+    private val _currentCardPosition: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>().also {
             it.value = 0
         }
     }
-    private val currentPracticeSummary: MutableLiveData<PracticeSummary> by lazy {
+    private val _currentPracticeSummary: MutableLiveData<PracticeSummary> by lazy {
         MutableLiveData()
     }
 
-    fun currentCardPosition(): LiveData<Int> = currentCardPosition
+    val allPracticeSummaries: LiveData<List<PracticeSummary>> by lazy {
+        repository.allPracticeSummaries
+    }
+    val currentCardPosition: LiveData<Int> = _currentCardPosition
 
     fun setCurrentCardPosition(currentPosition: Int, replaceDelay: Long) {
         viewModelScope.launch {
             delay(replaceDelay)
-            currentCardPosition.value = currentPosition
+            _currentCardPosition.value = currentPosition
         }
     }
 
-    fun currentPracticeSummary(): LiveData<PracticeSummary> = currentPracticeSummary
-
     fun setCurrentPracticeSummary(practiceSummary: PracticeSummary) {
-        currentPracticeSummary.value = practiceSummary
+        _currentPracticeSummary.value = practiceSummary
     }
 
     fun savePracticeSummary(practiceSummary: PracticeSummary) {

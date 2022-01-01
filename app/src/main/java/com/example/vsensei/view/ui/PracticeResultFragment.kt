@@ -6,22 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentPracticeResultBinding
-import com.example.vsensei.viewmodel.PracticeViewModel
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class PracticeResultFragment : Fragment() {
 
     private var _binding: FragmentPracticeResultBinding? = null
     private val binding get() = _binding!!
 
-    private val practiceViewModel: PracticeViewModel by sharedViewModel()
+    private val args: PracticeResultFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
+        returnTransition = MaterialFadeThrough()
     }
 
     override fun onCreateView(
@@ -37,20 +38,18 @@ class PracticeResultFragment : Fragment() {
         binding.homeButton.setOnClickListener {
             findNavController().navigateUp()
         }
-        practiceViewModel.currentPracticeSummary().observe(viewLifecycleOwner, { practiceSummary ->
-            val practicePercent = practiceSummary.getPercent()
-            binding.percentLabel.text = getString(R.string.practice_percent, practicePercent)
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                binding.correctGuessPercent.setProgress(practicePercent, true)
-            } else {
-                binding.correctGuessPercent.progress = practicePercent
-            }
-            if (practicePercent >= 60) {
-                binding.practiceResultTitle.text = getString(R.string.good_job)
-            } else {
-                binding.practiceResultTitle.text = getString(R.string.better_luck_next_time)
-            }
-        })
+        val practicePercent = args.practicePercent
+        binding.percentLabel.text = getString(R.string.practice_percent, practicePercent)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            binding.correctGuessPercent.setProgress(practicePercent, true)
+        } else {
+            binding.correctGuessPercent.progress = practicePercent
+        }
+        if (practicePercent >= 60) {
+            binding.practiceResultTitle.text = getString(R.string.good_job)
+        } else {
+            binding.practiceResultTitle.text = getString(R.string.better_luck_next_time)
+        }
     }
 
     override fun onDestroyView() {
