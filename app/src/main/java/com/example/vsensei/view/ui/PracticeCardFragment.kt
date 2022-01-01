@@ -151,7 +151,6 @@ class PracticeCardFragment : Fragment() {
                 }
             }
         })
-        audioButtonInit(currentWord)
     }
 
     private fun audioButtonInit(currentWord: Word) {
@@ -160,6 +159,7 @@ class PracticeCardFragment : Fragment() {
         binding.audioButton.setOnClickListener {
             wordGuessCallback?.sayWord(currentWord.wordPrimary)
         }
+        binding.audioButton.isVisible = true
     }
 
     companion object {

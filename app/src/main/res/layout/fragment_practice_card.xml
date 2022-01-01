@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:theme="@style/Theme.VSensei">
 
     <com.example.vsensei.view.widget.SavingMotionLayout
         android:id="@+id/card_practice_item_root"
@@ -93,6 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
+                    android:visibility="invisible"
                     app:icon="@drawable/ic_volume"
                     app:iconTint="@android:color/white"
                     app:rippleColor="@android:color/darker_gray"

@@ -19,8 +19,7 @@
             android:id="@+id/practice_display"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ic_guess_the_word"
@@ -81,7 +80,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="match_parent"
@@ -93,14 +92,6 @@
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="@dimen/text_size_regular"
                 app:drawableTopCompat="@drawable/ic_not_found" />
-
-            <Button
-                android:id="@+id/add_words_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/navigation_button_margin_top"
-                android:backgroundTint="?attr/colorPrimaryVariant"
-                android:text="@string/add_words" />
 
         </LinearLayout>
 

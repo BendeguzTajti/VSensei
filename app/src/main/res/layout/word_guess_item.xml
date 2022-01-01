@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/word_guess_item_card_margin"
     app:cardBackgroundColor="?attr/colorPositive"
-    app:cardCornerRadius="@dimen/corner_radius">
+    app:cardCornerRadius="@dimen/corner_radius"
+    tools:theme="@style/Theme.VSensei">
 
     <LinearLayout
         android:layout_width="wrap_content"
