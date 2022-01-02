@@ -8,4 +8,5 @@ Virtual Sensei (VSensei) is a language learning app to help you learn English, J
 - `Navigation Component`
 - `Material design`
 
-I also created a mock design in `Figma`, which you can find here: https://www.figma.com/file/GgsBrznP8CK1vrtmEUCosh/VSensei?node-id=0%3A1
+I also created a mock design in `Figma`, which you can find here: 
+https://www.figma.com/file/GgsBrznP8CK1vrtmEUCosh/VSensei?node-id=0%3A1
