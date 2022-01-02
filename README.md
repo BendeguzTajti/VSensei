@@ -18,7 +18,12 @@ https://www.figma.com/file/GgsBrznP8CK1vrtmEUCosh/VSensei?node-id=0%3A1
 
 <img src="https://github.com/BendeguzTajti/VSensei/blob/main/README%20files/group-and-words.gif" width="400" height="700" />
 
-### Create topics and add words to them
+### Practice words by guessing the words or their meanings
+
+<p float="left">
+  <img src="https://github.com/BendeguzTajti/VSensei/blob/main/README%20files/guess-the-meaning.gif" width="400" height="700" />
+  <img src="https://github.com/BendeguzTajti/VSensei/blob/main/README%20files/guess-the-word.gif" width="400" height="700" />
+</p>
 
 ### The app also supports light and dark mode
 
