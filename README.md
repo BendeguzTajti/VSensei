@@ -14,4 +14,6 @@ https://www.figma.com/file/GgsBrznP8CK1vrtmEUCosh/VSensei?node-id=0%3A1
 
 ## Usage
 
-### Create Topics and add words to them
+### Create topics and add words to them
+
+<img src="https://github.com/BendeguzTajti/VSensei/blob/main/README%20files/group-and-words.gif" width="400" height="700" />
