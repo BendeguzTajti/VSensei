@@ -14,9 +14,8 @@
     <dimen name="splash_screen_logo_size">150dp</dimen>
     <dimen name="dropdown_item_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="bottom_sheet_title_text_size">19sp</dimen>
-    <dimen name="text_input_layout_margin_top">18dp</dimen>
-    <dimen name="bottom_sheet_button_margin_top">24dp</dimen>
+    <dimen name="text_input_layout_margin_top">6dp</dimen>
+    <dimen name="bottom_sheet_button_margin_top">12dp</dimen>
     <dimen name="practice_card_margin_sides">14dp</dimen>
     <dimen name="answer_card_margin_top">32dp</dimen>
     <dimen name="answer_text_size">16sp</dimen>
@@ -51,4 +50,5 @@
     <dimen name="word_guess_item_text_size_large">18sp</dimen>
     <dimen name="word_guess_item_text_size_medium">16sp</dimen>
     <dimen name="word_guess_item_answer_margin_top">8dp</dimen>
+    <dimen name="bottom_sheet_title_margin_bottom">10dp</dimen>
 </resources>

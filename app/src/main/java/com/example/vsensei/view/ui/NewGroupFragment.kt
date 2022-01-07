@@ -74,9 +74,9 @@ class NewGroupFragment : BottomSheetDialogFragment() {
         if (binding.groupNameInput.text.isNullOrBlank()) {
             binding.groupNameInputContainer.error = getString(R.string.group_name_error)
         } else {
-            binding.groupNameInputContainer.isErrorEnabled = false
+            binding.groupNameInputContainer.error = null
         }
-        return !binding.groupNameInputContainer.isErrorEnabled
+        return !binding.groupNameInput.text.isNullOrBlank()
     }
 
     override fun onDestroyView() {

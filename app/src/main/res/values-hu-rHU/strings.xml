@@ -9,7 +9,6 @@
     <string name="new_group">Új csoport</string>
     <string name="group_name">Csoportnév</string>
     <string name="create_group">Csoport létrehozása</string>
-    <string name="group_name_ex">Pl. Ételek és Italok</string>
     <string name="group_name_error">Nem adtál meg csoportnevet</string>
     <string name="groups">Csoportok</string>
     <string name="num_of_words">%1$d szó</string>
@@ -22,9 +21,6 @@
     <string name="hungarian">Magyar</string>
     <string name="english">Angol</string>
     <string name="add_word">Szó hozzáadása</string>
-    <string name="kanji_example">Pl. 面白い</string>
-    <string name="hiragana_example">Pl. おもしろい</string>
-    <string name="romaji_example">Pl. omoshiroi</string>
     <string name="word_meaning">Szó jelentése</string>
     <string name="new_word_hint">%1$s szó</string>
     <string name="main_word_error">Nem adtál meg szót</string>
@@ -40,6 +36,6 @@
     <string name="dark_mode">Sötét mód</string>
     <string name="light_mode">Világos mód</string>
     <string name="missing_scores">Még nincs elmentett gyakorlásod. Amint elkezded a gyakorlást, itt találhatsz részletes információt a korábbi 5 eredményedről</string>
-    <string name="word_meaning_helper_text">Több szó esetén válaszd el a szavakat vesszővel!</string>
+    <string name="word_meaning_helper_text">Több jelentés esetén válaszd el a szavakat vesszővel!</string>
     <string name="update_word">Szó módosítása</string>
 </resources>

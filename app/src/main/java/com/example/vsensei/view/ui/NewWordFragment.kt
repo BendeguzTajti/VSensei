@@ -38,7 +38,6 @@ class NewWordFragment : BottomSheetDialogFragment() {
         when(displayLanguages[selectedLanguageIndex]) {
             getString(R.string.japanese) -> {
                 binding.wordPrimaryContainer.setHint(R.string.hiragana_or_katakana)
-                binding.wordPrimaryContainer.helperText = getString(R.string.hiragana_example)
             }
             else -> {
                 binding.wordPrimaryContainer.hint = getString(R.string.new_word_hint, displayLanguages[selectedLanguageIndex])
@@ -89,13 +88,13 @@ class NewWordFragment : BottomSheetDialogFragment() {
         if (binding.wordPrimaryInput.text.isNullOrBlank()) {
             binding.wordPrimaryContainer.error = getString(R.string.main_word_error)
         } else {
-            binding.wordPrimaryContainer.isErrorEnabled = false
+            binding.wordPrimaryContainer.error = null
         }
         if (binding.wordMeaningInput.text.isNullOrBlank()) {
             binding.wordMeaningContainer.error = getString(R.string.word_meaning_error)
         } else {
-            binding.wordMeaningContainer.isErrorEnabled = false
+            binding.wordMeaningContainer.error = null
         }
-        return !binding.wordPrimaryContainer.isErrorEnabled && !binding.wordMeaningContainer.isErrorEnabled
+        return !binding.wordPrimaryInput.text.isNullOrBlank() && !binding.wordMeaningInput.text.isNullOrBlank()
     }
 }

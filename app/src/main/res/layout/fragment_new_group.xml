@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:background="?attr/colorSurface"
+    android:orientation="vertical"
     android:padding="@dimen/container_padding"
     tools:background="#FAFAFA"
     tools:context=".view.ui.NewGroupFragment"
@@ -13,12 +14,15 @@
 
     <TextView
         android:id="@+id/card_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bottom_sheet_title_margin_bottom"
         android:text="@string/new_group"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="?attr/colorOnSurface"
-        android:textSize="@dimen/bottom_sheet_title_text_size"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/group_name_input_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_input_layout_margin_top"
         android:hint="@string/group_name"
-        app:helperText="@string/group_name_ex"
+        app:errorEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/card_title">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -73,4 +77,4 @@
         app:layout_constraintTop_toBottomOf="@id/language_selector_container"
         app:rippleColor="@android:color/darker_gray" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

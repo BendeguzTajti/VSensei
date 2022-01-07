@@ -19,7 +19,8 @@
             android:id="@+id/practice_display"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <ImageView
                 android:id="@+id/ic_guess_the_word"
@@ -80,7 +81,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="visible">
+            tools:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"

@@ -8,7 +8,6 @@
     <string name="new_group">New group</string>
     <string name="group_name">Group name</string>
     <string name="create_group">Create group</string>
-    <string name="group_name_ex">E.g. Foods and Drinks</string>
     <string name="group_name_error">Missing group name</string>
     <string name="groups">Groups</string>
     <string name="num_of_words">%1$d word(s)</string>
@@ -32,11 +31,7 @@
     <string name="new_word">New word</string>
     <string name="add_word">Add word</string>
     <string name="kanji" translatable="false">Kanji</string>
-    <string name="kanji_example">E.g. 面白い</string>
     <string name="hiragana_or_katakana" translatable="false">Hiragana/Katakana</string>
-    <string name="hiragana_example">E.g. おもしろい</string>
-    <string name="romaji" translatable="false">Romaji</string>
-    <string name="romaji_example">E.g. omoshiroi</string>
     <string name="word_meaning">Meaning</string>
     <string name="new_word_hint">%1$s word</string>
     <string name="main_word_error">Missing word</string>
@@ -53,6 +48,6 @@
     <string name="light_mode">Light mode</string>
     <string name="dark_mode">Dark mode</string>
     <string name="missing_scores">You don’t have any saved practices. Once you start practicing you can find detailed information about your latest 5 practices</string>
-    <string name="word_meaning_helper_text">If you want to add multiple words separate them with comas!</string>
+    <string name="word_meaning_helper_text">If you want to add multiple meanings separate them with comas!</string>
     <string name="update_word">Update word</string>
 </resources>

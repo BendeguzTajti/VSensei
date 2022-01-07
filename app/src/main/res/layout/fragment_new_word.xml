@@ -11,19 +11,22 @@
     tools:context=".view.ui.NewWordFragment"
     tools:theme="@style/Theme.VSensei">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="@dimen/container_padding">
 
         <TextView
             android:id="@+id/card_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottom_sheet_title_margin_bottom"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="@dimen/bottom_sheet_title_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_input_layout_margin_top"
+            app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/card_title"
-            tools:helperText="@string/hiragana_example"
             tools:hint="@string/hiragana_or_katakana">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -56,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_input_layout_margin_top"
             android:hint="@string/kanji"
-            app:helperText="@string/kanji_example"
+            app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/word_primary_container">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -75,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_input_layout_margin_top"
             android:hint="@string/word_meaning"
+            app:errorEnabled="true"
             app:helperText="@string/word_meaning_helper_text"
             app:layout_constraintTop_toBottomOf="@id/word_primary_variant_container">
 
@@ -98,6 +102,6 @@
             app:rippleColor="@android:color/darker_gray"
             tools:text="@string/add_word" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
