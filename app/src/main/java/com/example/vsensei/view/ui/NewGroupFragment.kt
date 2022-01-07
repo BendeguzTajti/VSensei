@@ -83,4 +83,6 @@ class NewGroupFragment : BottomSheetDialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun getTheme(): Int = R.style.ThemeOverlay_App_BottomSheetDialog
 }

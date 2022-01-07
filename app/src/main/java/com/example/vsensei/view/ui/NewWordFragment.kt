@@ -84,6 +84,8 @@ class NewWordFragment : BottomSheetDialogFragment() {
         _binding = null
     }
 
+    override fun getTheme(): Int = R.style.ThemeOverlay_App_BottomSheetDialog
+
     private fun isValidData(): Boolean {
         if (binding.wordPrimaryInput.text.isNullOrBlank()) {
             binding.wordPrimaryContainer.error = getString(R.string.main_word_error)
