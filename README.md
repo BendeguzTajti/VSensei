@@ -5,6 +5,7 @@ Virtual Sensei (VSensei) is a language learning app to help you learn English, J
 - `Kotlin` and `Kotlin coroutines`
 - `MVVM` Architecture
 - `Room` persistence library
+- `Koin`
 - `Navigation Component`
 - `Material design`
 
