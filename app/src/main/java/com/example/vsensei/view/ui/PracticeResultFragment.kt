@@ -17,7 +17,7 @@ class PracticeResultFragment : Fragment() {
     private var _binding: FragmentPracticeResultBinding? = null
     private val binding get() = _binding!!
 
-    private val args: PracticeResultFragmentArgs by navArgs()
+    private val args by navArgs<PracticeResultFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

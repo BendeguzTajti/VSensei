@@ -18,7 +18,7 @@ class NewWordFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentNewWordBinding? = null
     private val binding get() = _binding!!
-    private val args: NewWordFragmentArgs by navArgs()
+    private val args by navArgs<NewWordFragmentArgs>()
 
     private val wordViewModel: WordViewModel by sharedViewModel()
 

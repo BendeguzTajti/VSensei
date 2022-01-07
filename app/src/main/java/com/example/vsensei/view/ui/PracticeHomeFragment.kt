@@ -53,7 +53,6 @@ class PracticeHomeFragment : Fragment() {
                 practiceViewModel.setCurrentCardPosition(0, 0)
                 if (wordGroupsWithWords.size > 1) {
                     val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
-                        wordGroupsWithWords.toTypedArray(),
                         PracticeType.GUESS_THE_WORD
                     )
                     findNavController().navigate(action)
@@ -65,6 +64,7 @@ class PracticeHomeFragment : Fragment() {
                         wordGroupsWithWords.first(),
                         getString(practiceType.labelResId)
                     )
+                    reenterTransition = MaterialFadeThrough()
                     findNavController().navigate(action)
                 }
             }
@@ -72,7 +72,6 @@ class PracticeHomeFragment : Fragment() {
                 practiceViewModel.setCurrentCardPosition(0, 0)
                 if (wordGroupsWithWords.size > 1) {
                     val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
-                        wordGroupsWithWords.toTypedArray(),
                         PracticeType.GUESS_THE_MEANING
                     )
                     findNavController().navigate(action)
@@ -84,7 +83,6 @@ class PracticeHomeFragment : Fragment() {
                         wordGroupsWithWords.first(),
                         getString(practiceType.labelResId)
                     )
-                    exitTransition = MaterialFadeThrough()
                     reenterTransition = MaterialFadeThrough()
                     findNavController().navigate(action)
                 }

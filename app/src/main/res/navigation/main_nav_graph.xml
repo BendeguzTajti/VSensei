@@ -72,9 +72,6 @@
         android:name="com.example.vsensei.view.ui.GroupSelectFragment"
         android:label="fragment_group_select">
         <argument
-            android:name="wordGroupsWithWords"
-            app:argType="com.example.vsensei.data.WordGroupWithWords[]" />
-        <argument
             android:name="practiceType"
             app:argType="com.example.vsensei.data.PracticeType" />
         <action

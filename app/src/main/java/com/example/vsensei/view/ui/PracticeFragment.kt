@@ -28,7 +28,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private var _binding: FragmentPracticeBinding? = null
     private val binding get() = _binding!!
 
-    private val args: PracticeFragmentArgs by navArgs()
+    private val args by navArgs<PracticeFragmentArgs>()
     private val practiceViewModel: PracticeViewModel by sharedViewModel()
 
     private var textToSpeech: TextToSpeech? = null
@@ -49,7 +49,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enterTransition = MaterialFadeThrough()
-        returnTransition = MaterialFadeThrough()
+//        returnTransition = MaterialFadeThrough()
         textToSpeech = TextToSpeech(requireActivity().applicationContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)

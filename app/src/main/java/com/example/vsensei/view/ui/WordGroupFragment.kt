@@ -23,7 +23,7 @@ class WordGroupFragment : Fragment() {
     private var bottomNavActivity: BottomNavActivity? = null
     private var _binding: FragmentWordGroupBinding? = null
     private val binding get() = _binding!!
-    private val args: WordGroupFragmentArgs by navArgs()
+    private val args by navArgs<WordGroupFragmentArgs>()
 
     private val wordViewModel: WordViewModel by sharedViewModel()
 
