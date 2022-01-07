@@ -55,6 +55,7 @@ class PracticeHomeFragment : Fragment() {
                     val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
                         PracticeType.GUESS_THE_WORD
                     )
+                    reenterTransition = MaterialFadeThrough()
                     findNavController().navigate(action)
                 } else {
                     wordGroupsWithWords.first().words.shuffle()
@@ -74,6 +75,7 @@ class PracticeHomeFragment : Fragment() {
                     val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
                         PracticeType.GUESS_THE_MEANING
                     )
+                    reenterTransition = MaterialFadeThrough()
                     findNavController().navigate(action)
                 } else {
                     wordGroupsWithWords.first().words.shuffle()

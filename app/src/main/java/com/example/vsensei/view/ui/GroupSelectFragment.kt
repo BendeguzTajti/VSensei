@@ -8,7 +8,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.transition.MaterialFadeThrough
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class GroupSelectFragment : DialogFragment() {
@@ -28,8 +27,6 @@ class GroupSelectFragment : DialogFragment() {
                     selectedGroup,
                     getString(args.practiceType.labelResId)
                 )
-                exitTransition = MaterialFadeThrough()
-                reenterTransition = MaterialFadeThrough()
                 findNavController().navigate(action)
             }
             .show()
