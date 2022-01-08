@@ -8,17 +8,18 @@
     tools:theme="@style/Theme.VSensei">
 
     <LinearLayout
-        android:id="@+id/delete_container"
-        android:layout_width="match_parent"
+        android:id="@+id/delete_item_container"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="end"
         android:background="?attr/colorNegative"
-        android:gravity="end">
+        android:paddingStart="@dimen/delete_container_padding_start"
+        android:paddingEnd="@dimen/delete_container_padding_end">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/word_group_item_margin_large"
             android:layout_marginEnd="@dimen/word_group_item_margin_medium"
             android:text="@string/delete"
             android:textAllCaps="true"
@@ -29,7 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/word_group_item_margin_large"
             android:src="@drawable/ic_delete"
             app:tint="@android:color/white"
             tools:ignore="ContentDescription" />
@@ -40,6 +40,7 @@
         android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/item_container_margin_end"
         android:background="?attr/colorSurface"
         android:padding="@dimen/word_group_item_container_padding">
 
@@ -51,7 +52,7 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/word_group_item_name_text_size"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/delete_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Foods and Drinks" />
@@ -65,17 +66,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/group_name"
             tools:text="12 word(s)" />
-
-        <ImageView
-            android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_swipe_delete"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorControlNormal"
-            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

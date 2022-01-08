@@ -51,4 +51,7 @@
     <dimen name="word_guess_item_text_size_medium">16sp</dimen>
     <dimen name="word_guess_item_answer_margin_top">8dp</dimen>
     <dimen name="bottom_sheet_title_margin_bottom">10dp</dimen>
+    <dimen name="delete_container_padding_start">16dp</dimen>
+    <dimen name="delete_container_padding_end">12dp</dimen>
+    <dimen name="item_container_margin_end">4dp</dimen>
 </resources>
