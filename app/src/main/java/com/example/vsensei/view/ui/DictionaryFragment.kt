@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentDictionaryBinding
 import com.example.vsensei.view.adapter.WordGroupAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.WordViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.Hold
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

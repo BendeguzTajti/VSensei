@@ -36,8 +36,11 @@ class SwipeDeleteItemTouchHelper(
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
+        val backgroundView = viewHolder?.itemView?.findViewById<View>(R.id.delete_item_container)
         val foreGroundView = viewHolder?.itemView?.findViewById<View>(R.id.item_container)
-        getDefaultUIUtil().onDrawOver(c, recyclerView, foreGroundView, dX, dY, actionState, isCurrentlyActive)
+        val backgroundViewWidth = (backgroundView?.width?.minus(foreGroundView?.marginEnd ?: 0))?.toFloat() ?: 0f
+        val swipeMaxWidth = if (dX.absoluteValue <= backgroundViewWidth) dX else -backgroundViewWidth
+        getDefaultUIUtil().onDrawOver(c, recyclerView, foreGroundView, swipeMaxWidth, dY, actionState, isCurrentlyActive)
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
