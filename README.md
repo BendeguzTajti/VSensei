@@ -1,5 +1,5 @@
 # VSensei
-Virtual Sensei (VSensei) is a language learning app that helps you learn English, Japanese or Hungarian words.
+Virtual Sensei (VSensei) is a language learning app that helps you learn English, Japanese and Hungarian words.
 
 ## Technologies
 - `Kotlin` and `Kotlin coroutines`
