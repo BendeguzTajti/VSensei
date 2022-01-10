@@ -8,10 +8,10 @@
 
     <LinearLayout
         android:id="@+id/delete_item_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
         android:background="?attr/colorNegative"
+        android:gravity="end"
         android:paddingStart="@dimen/delete_container_padding_start"
         android:paddingEnd="@dimen/delete_container_padding_end">
 

@@ -2,11 +2,9 @@ package com.example.vsensei.view.adapter
 
 import android.graphics.Canvas
 import android.view.View
-import androidx.core.view.marginEnd
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vsensei.R
-import kotlin.math.absoluteValue
 
 class SwipeDeleteItemTouchHelper(
     dragDirs: Int,
@@ -36,11 +34,8 @@ class SwipeDeleteItemTouchHelper(
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
-        val backgroundView = viewHolder?.itemView?.findViewById<View>(R.id.delete_item_container)
         val foreGroundView = viewHolder?.itemView?.findViewById<View>(R.id.item_container)
-        val backgroundViewWidth = (backgroundView?.width?.minus(foreGroundView?.marginEnd ?: 0))?.toFloat() ?: 0f
-        val swipeMaxWidth = if (dX.absoluteValue <= backgroundViewWidth) dX else -backgroundViewWidth
-        getDefaultUIUtil().onDrawOver(c, recyclerView, foreGroundView, swipeMaxWidth, dY, actionState, isCurrentlyActive)
+        getDefaultUIUtil().onDrawOver(c, recyclerView, foreGroundView, dX, dY, actionState, isCurrentlyActive)
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
@@ -57,11 +52,8 @@ class SwipeDeleteItemTouchHelper(
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
-        val backgroundView = viewHolder.itemView.findViewById<View>(R.id.delete_item_container)
         val foreGroundView = viewHolder.itemView.findViewById<View>(R.id.item_container)
-        val backgroundViewWidth = (backgroundView.width - foreGroundView.marginEnd).toFloat()
-        val swipeMaxWidth = if (dX.absoluteValue <= backgroundViewWidth) dX else -backgroundViewWidth
-        getDefaultUIUtil().onDraw(c, recyclerView, foreGroundView, swipeMaxWidth, dY, actionState, isCurrentlyActive)
+        getDefaultUIUtil().onDraw(c, recyclerView, foreGroundView, dX, dY, actionState, isCurrentlyActive)
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
