@@ -52,7 +52,7 @@
             android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/word_group_item_name_text_size"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/share_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Foods and Drinks" />
@@ -66,6 +66,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/group_name"
             tools:text="12 word(s)" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share_button"
+            style="@style/Widget.App.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:icon="@drawable/ic_share"
+            app:iconTint="?attr/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

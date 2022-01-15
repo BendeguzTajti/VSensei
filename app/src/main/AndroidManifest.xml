@@ -12,7 +12,6 @@
         android:theme="@style/Theme.VSensei.SplashScreen">
         <activity
             android:name=".view.ui.MainActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

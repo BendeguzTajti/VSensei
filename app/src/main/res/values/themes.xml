@@ -78,7 +78,7 @@
     </style>
 
     <style name="Widget.App.PracticeButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@color/dark_blue_500</item>
+        <item name="backgroundTint">@color/dark_blue_700</item>
         <item name="cornerRadius">@dimen/corner_radius</item>
     </style>
 
@@ -106,6 +106,16 @@
     <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="Widget.App.Button.IconButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="cornerRadius">24dp</item>
     </style>
 
 </resources>

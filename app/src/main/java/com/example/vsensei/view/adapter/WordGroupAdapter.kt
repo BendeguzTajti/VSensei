@@ -20,6 +20,9 @@ class WordGroupAdapter(
 
         init {
             itemView.setOnClickListener { onWordGroupClicked(adapterPosition) }
+            binding.shareButton.setOnClickListener {
+                // TODO navigate to QR code fragment
+            }
         }
 
         fun bind(wordGroupWithWords: WordGroupWithWords) {

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.vsensei.databinding.FragmentScoresBinding
 import com.example.vsensei.view.adapter.PracticeSummaryAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
@@ -34,10 +33,7 @@ class ScoresFragment : Fragment() {
         val currentNightMode = resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)
         val dateFormat = DateFormat.getDateFormat(requireContext())
         val adapter = PracticeSummaryAdapter(currentNightMode, dateFormat)
-        binding.practiceSummaryRecyclerView.apply {
-            this.adapter = adapter
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        }
+        binding.practiceSummaryRecyclerView.adapter = adapter
         practiceViewModel.allPracticeSummaries.observe(viewLifecycleOwner, { practiceSummaries ->
             binding.emptyGroupsDisplay.isVisible = practiceSummaries.isEmpty()
             binding.practiceSummaryRecyclerView.isVisible = practiceSummaries.isNotEmpty()
