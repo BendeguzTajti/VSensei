@@ -48,6 +48,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "main"
+    productFlavors {
+        prod {
+            dimension "main"
+            signingConfig signingConfigs.release
+            resValue "string", "app_name", "VSensei"
+        }
+
+        staging {
+            dimension "main"
+            signingConfig signingConfigs.release
+            applicationIdSuffix ".staging"
+            resValue "string", "app_name", "VSensei Stage"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

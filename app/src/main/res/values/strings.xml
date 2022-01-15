@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">VSensei</string>
     <string name="practice">Practice</string>
     <string name="scores">Scores</string>
     <string name="words">Dictionary</string>
