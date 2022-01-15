@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -139,20 +138,20 @@ class MainActivity : AppCompatActivity(), BottomNavActivity {
     }
 
     override fun showBottomNav() {
-        if (this::binding.isInitialized && !binding.bottomNavContainer.isVisible) {
+        if (this::binding.isInitialized) {
             TransitionManager.beginDelayedTransition(
                 binding.root,
-                Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
+                Slide(Gravity.BOTTOM).addTarget(R.id.bottom_nav_container)
             )
             binding.bottomNavContainer.visibility = View.VISIBLE
         }
     }
 
     override fun hideBottomNav() {
-        if (this::binding.isInitialized && binding.bottomNavContainer.isVisible) {
+        if (this::binding.isInitialized) {
             TransitionManager.beginDelayedTransition(
                 binding.root,
-                Slide(Gravity.BOTTOM).excludeTarget(R.id.nav_host_fragment, true)
+                Slide(Gravity.BOTTOM).addTarget(R.id.bottom_nav_container)
             )
             binding.bottomNavContainer.visibility = View.GONE
         }
