@@ -54,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:elevation="@dimen/bottom_nav_elevation"
+            app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Caption"
             app:menu="@menu/bottom_navigation_menu" />
 
     </LinearLayout>

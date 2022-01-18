@@ -23,9 +23,6 @@
         android:label="@string/groups"
         tools:layout="@layout/fragment_dictionary">
         <action
-            android:id="@+id/action_dictionaryFragment_to_newGroupFragment"
-            app:destination="@id/newGroupFragment" />
-        <action
             android:id="@+id/action_dictionaryFragment_to_wordGroupFragment"
             app:destination="@id/wordGroupFragment" />
     </fragment>
@@ -65,7 +62,8 @@
         <argument
             android:name="word"
             app:argType="com.example.vsensei.data.Word"
-            app:nullable="true" />
+            app:nullable="true"
+            android:defaultValue="@null" />
     </dialog>
     <dialog
         android:id="@+id/groupSelectFragment"

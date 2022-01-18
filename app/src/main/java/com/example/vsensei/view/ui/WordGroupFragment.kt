@@ -1,6 +1,6 @@
 package com.example.vsensei.view.ui
 
-import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,30 +11,29 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.transition.Fade
+import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentWordGroupBinding
 import com.example.vsensei.view.adapter.WordAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
-import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.WordViewModel
+import com.google.android.material.transition.MaterialContainerTransform
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class WordGroupFragment : Fragment() {
 
-    private var bottomNavActivity: BottomNavActivity? = null
     private var _binding: FragmentWordGroupBinding? = null
     private val binding get() = _binding!!
     private val args by navArgs<WordGroupFragmentArgs>()
 
     private val wordViewModel: WordViewModel by sharedViewModel()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        bottomNavActivity = requireActivity() as BottomNavActivity
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        bottomNavActivity = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            drawingViewId = R.id.nav_host_fragment
+            duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+            scrimColor = Color.TRANSPARENT
+        }
     }
 
     override fun onCreateView(
@@ -44,17 +43,12 @@ class WordGroupFragment : Fragment() {
         exitTransition = Fade().apply {
             duration = 150
         }
-        bottomNavActivity?.hideBottomNav()
         _binding = FragmentWordGroupBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addNewWordButton.setOnClickListener {
-            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(args.wordGroup, null)
-            findNavController().navigate(action)
-        }
         wordsRecyclerViewInit()
     }
 

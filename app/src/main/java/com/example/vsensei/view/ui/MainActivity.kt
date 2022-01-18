@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.get
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -135,6 +136,21 @@ class MainActivity : AppCompatActivity(), BottomNavActivity {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
         binding.bottomNavigation.setOnItemReselectedListener { }
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id == R.id.wordGroupFragment || destination.id == R.id.newWordFragment) {
+                binding.bottomNavigation.menu[2].setIcon(R.drawable.ic_add_word)
+                binding.bottomNavigation.menu[2].setOnMenuItemClickListener {
+                    controller.navigate(R.id.newWordFragment, arguments)
+                    true
+                }
+            } else {
+                binding.bottomNavigation.menu[2].setIcon(R.drawable.ic_add_group)
+                binding.bottomNavigation.menu[2].setOnMenuItemClickListener {
+                    controller.navigate(R.id.newGroupFragment)
+                    true
+                }
+            }
+        }
     }
 
     override fun showBottomNav() {

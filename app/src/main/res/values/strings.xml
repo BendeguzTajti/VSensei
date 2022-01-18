@@ -49,4 +49,6 @@
     <string name="missing_scores">You don’t have any saved practices. Once you start practicing you can find detailed information about your latest 5 practices</string>
     <string name="word_meaning_helper_text">If you want to add multiple meanings separate them with comas!</string>
     <string name="update_word">Update word</string>
+    <string name="camera">Camera</string>
+    <string name="word_group_transition_name" translatable="false">word_group_transition</string>
 </resources>

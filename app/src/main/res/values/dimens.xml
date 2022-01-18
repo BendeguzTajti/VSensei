@@ -13,7 +13,6 @@
     <dimen name="bottom_nav_elevation">0dp</dimen>
     <dimen name="splash_screen_logo_size">150dp</dimen>
     <dimen name="dropdown_item_padding">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_input_layout_margin_top">6dp</dimen>
     <dimen name="bottom_sheet_button_margin_top">12dp</dimen>
     <dimen name="practice_card_margin_sides">14dp</dimen>

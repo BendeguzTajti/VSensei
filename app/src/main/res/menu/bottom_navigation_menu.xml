@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/practiceHomeFragment"
         android:icon="@drawable/ic_practice"
@@ -9,7 +10,16 @@
         android:icon="@drawable/ic_words"
         android:title="@string/words" />
     <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_add_group"
+        app:showAsAction="always"
+        android:title="" />
+    <item
         android:id="@+id/scoresFragment"
         android:icon="@drawable/ic_scores"
         android:title="@string/scores" />
+    <item
+        android:id="@+id/camera"
+        android:icon="@drawable/ic_camera"
+        android:title="@string/camera" />
 </menu>
