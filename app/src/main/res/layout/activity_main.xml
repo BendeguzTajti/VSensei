@@ -12,8 +12,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="@dimen/toolbar_elevation"
-        app:layout_constraintTop_toTopOf="parent">
+        app:elevation="@dimen/toolbar_elevation">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -34,23 +33,14 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
         app:navGraph="@navigation/main_nav_graph" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
+        style="@style/Widget.App.BottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:contentInsetEnd="@dimen/bottom_app_bar_inset"
-        app:contentInsetStart="@dimen/bottom_app_bar_inset"
-        app:elevation="@dimen/bottom_app_bar_elevation"
-        app:fabAlignmentMode="center"
-        app:fabCradleMargin="8dp"
-        app:fabCradleRoundedCornerRadius="12dp"
-        app:hideOnScroll="true"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_gravity="bottom">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -60,7 +50,6 @@
             app:elevation="@dimen/bottom_nav_elevation"
             app:itemRippleColor="@android:color/transparent"
             app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_navigation_menu" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>

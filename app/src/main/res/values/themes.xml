@@ -112,4 +112,15 @@
         <item name="cornerRadius">24dp</item>
     </style>
 
+    <style name="Widget.App.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <item name="elevation">@dimen/bottom_app_bar_elevation</item>
+        <item name="contentInsetStart">@dimen/bottom_app_bar_inset</item>
+        <item name="contentInsetEnd">@dimen/bottom_app_bar_inset</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="hideOnScroll">true</item>
+        <item name="fabAlignmentMode">center</item>
+        <item name="fabCradleMargin">@dimen/fab_cradle_margin</item>
+        <item name="fabCradleRoundedCornerRadius">@dimen/fab_cradle_corner_radius</item>
+    </style>
+
 </resources>

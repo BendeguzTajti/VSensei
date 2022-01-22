@@ -55,4 +55,6 @@
     <dimen name="item_container_margin_end">4dp</dimen>
     <dimen name="bottom_app_bar_elevation">6dp</dimen>
     <dimen name="bottom_app_bar_inset">0dp</dimen>
+    <dimen name="fab_cradle_margin">8dp</dimen>
+    <dimen name="fab_cradle_corner_radius">12dp</dimen>
 </resources>

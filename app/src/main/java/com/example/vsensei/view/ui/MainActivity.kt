@@ -11,7 +11,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -150,7 +149,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.wordGroupFragment -> {
                     binding.fab.contentDescription = getString(R.string.add_word)
                     binding.fab.setImageResource(R.drawable.ic_add_word)
-                    binding.bottomNavigation.isVisible = false
                     binding.fab.setOnClickListener {
                         val wordGroup: WordGroup? =
                             arguments?.getParcelable(Constants.WORD_GROUP_ARGS_KEY)
@@ -164,7 +162,6 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     binding.fab.contentDescription = getString(R.string.create_group)
                     binding.fab.setImageResource(R.drawable.ic_add_group)
-                    binding.bottomNavigation.isVisible = true
                     binding.fab.setOnClickListener {
                         controller.navigate(R.id.newGroupFragment)
                     }
