@@ -1,15 +1,17 @@
 package com.example.vsensei.view.ui
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,11 +20,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
 import com.example.vsensei.R
+import com.example.vsensei.data.WordGroup
 import com.example.vsensei.databinding.ActivityMainBinding
-import com.example.vsensei.view.contract.BottomNavActivity
+import com.example.vsensei.util.Constants
 import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -30,7 +31,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), BottomNavActivity {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity(), BottomNavActivity {
                         .setAction(getString(R.string.undo)) {
                             wordViewModel.restoreWordGroup(group)
                         }
+                        .setAnchorView(binding.fab)
                         .show()
                 }
             }
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity(), BottomNavActivity {
                         .setAction(getString(R.string.undo)) {
                             wordViewModel.addWord(word)
                         }
+                        .setAnchorView(binding.fab)
                         .show()
                 }
             }
@@ -137,39 +140,64 @@ class MainActivity : AppCompatActivity(), BottomNavActivity {
         binding.bottomNavigation.setupWithNavController(navController)
         binding.bottomNavigation.setOnItemReselectedListener { }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if (destination.id == R.id.wordGroupFragment || destination.id == R.id.newWordFragment) {
-                binding.bottomNavigation.menu[2].setIcon(R.drawable.ic_add_word)
-                binding.bottomNavigation.menu[2].setOnMenuItemClickListener {
-                    controller.navigate(R.id.newWordFragment, arguments)
-                    true
+            when (destination.id) {
+                R.id.practiceFragment,
+                R.id.practiceResultFragment -> {
+                    binding.fab.setOnClickListener(null)
+                    hideBottomAppBar()
                 }
-            } else {
-                binding.bottomNavigation.menu[2].setIcon(R.drawable.ic_add_group)
-                binding.bottomNavigation.menu[2].setOnMenuItemClickListener {
-                    controller.navigate(R.id.newGroupFragment)
-                    true
+                R.id.newWordFragment,
+                R.id.wordGroupFragment -> {
+                    binding.fab.contentDescription = getString(R.string.add_word)
+                    binding.fab.setImageResource(R.drawable.ic_add_word)
+                    binding.bottomNavigation.isVisible = false
+                    binding.fab.setOnClickListener {
+                        val wordGroup: WordGroup? =
+                            arguments?.getParcelable(Constants.WORD_GROUP_ARGS_KEY)
+                        if (wordGroup != null) {
+                            val bundle = bundleOf(Constants.WORD_GROUP_ARGS_KEY to wordGroup)
+                            controller.navigate(R.id.newWordFragment, bundle)
+                        }
+                    }
+                    showBottomAppBar()
+                }
+                else -> {
+                    binding.fab.contentDescription = getString(R.string.create_group)
+                    binding.fab.setImageResource(R.drawable.ic_add_group)
+                    binding.bottomNavigation.isVisible = true
+                    binding.fab.setOnClickListener {
+                        controller.navigate(R.id.newGroupFragment)
+                    }
+                    showBottomAppBar()
                 }
             }
         }
     }
 
-    override fun showBottomNav() {
-        if (this::binding.isInitialized) {
-            TransitionManager.beginDelayedTransition(
-                binding.root,
-                Slide(Gravity.BOTTOM).addTarget(R.id.bottom_nav_container)
-            )
-            binding.bottomNavContainer.visibility = View.VISIBLE
+    private fun showBottomAppBar() {
+        binding.run {
+            bottomAppBar.visibility = View.VISIBLE
+            bottomAppBar.performShow()
+            fab.show()
         }
     }
 
-    override fun hideBottomNav() {
-        if (this::binding.isInitialized) {
-            TransitionManager.beginDelayedTransition(
-                binding.root,
-                Slide(Gravity.BOTTOM).addTarget(R.id.bottom_nav_container)
-            )
-            binding.bottomNavContainer.visibility = View.GONE
+    private fun hideBottomAppBar() {
+        binding.run {
+            bottomAppBar.performHide()
+            bottomAppBar.animate().setListener(object : AnimatorListenerAdapter() {
+                var isCanceled = false
+                override fun onAnimationEnd(animation: Animator?) {
+                    if (isCanceled) return
+                    bottomAppBar.visibility = View.GONE
+                    fab.visibility = View.INVISIBLE
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                    isCanceled = true
+                }
+            })
+            fab.hide()
         }
     }
 }

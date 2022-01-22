@@ -1,6 +1,5 @@
 package com.example.vsensei.view.ui
 
-import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -15,16 +14,13 @@ import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.data.WordGuess
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
-import com.example.vsensei.view.contract.BottomNavActivity
 import com.example.vsensei.viewmodel.PracticeViewModel
-import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
-    private var bottomNavActivity: BottomNavActivity? = null
     private var _binding: FragmentPracticeBinding? = null
     private val binding get() = _binding!!
 
@@ -36,20 +32,14 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private lateinit var correctAnswerSoundPlayer: MediaPlayer
     private lateinit var wrongAnswerSoundPlayer: MediaPlayer
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        bottomNavActivity = requireActivity() as BottomNavActivity
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        bottomNavActivity = null
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enterTransition = MaterialFadeThrough()
-//        returnTransition = MaterialFadeThrough()
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
         textToSpeech = TextToSpeech(requireActivity().applicationContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
@@ -66,7 +56,6 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        bottomNavActivity?.hideBottomNav()
         _binding = FragmentPracticeBinding.inflate(inflater, container, false)
         return binding.root
     }

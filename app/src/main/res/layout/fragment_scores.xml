@@ -13,6 +13,8 @@
         android:id="@+id/practice_summary_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="3"
         tools:listitem="@layout/practice_summary_item"
@@ -22,7 +24,9 @@
         android:id="@+id/empty_groups_display"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="?attr/actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"

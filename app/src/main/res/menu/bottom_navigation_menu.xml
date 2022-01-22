@@ -10,9 +10,8 @@
         android:icon="@drawable/ic_words"
         android:title="@string/words" />
     <item
-        android:id="@+id/add"
-        android:icon="@drawable/ic_add_group"
-        app:showAsAction="always"
+        android:id="@+id/placeholder"
+        android:enabled="false"
         android:title="" />
     <item
         android:id="@+id/scoresFragment"
