@@ -2,4 +2,5 @@
 <resources>
     <attr name="colorPositive" format="color" />
     <attr name="colorNegative" format="color" />
+    <attr name="colorCard" format="color" />
 </resources>

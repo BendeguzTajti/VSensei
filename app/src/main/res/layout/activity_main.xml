@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="?attr/backgroundColor"
     tools:context=".view.ui.MainActivity"
     tools:theme="@style/Theme.VSensei">
 
@@ -16,12 +16,11 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.MaterialComponents.Toolbar.Surface"
+            style="@style/Widget.App.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.App.ToolbarTheme"
+            android:elevation="@dimen/toolbar_elevation"
             app:menu="@menu/toolbar_menu"
-            app:titleTextColor="?attr/colorOnSurface"
             tools:title="Practice" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -31,6 +30,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/backgroundColor"
         app:defaultNavHost="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:navGraph="@navigation/main_nav_graph" />

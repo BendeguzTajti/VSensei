@@ -15,11 +15,13 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/rubik</item>
         <item name="actionBarSize">56dp</item>
+        <item name="backgroundColor">@color/dark_blue_700</item>
         <item name="colorSurface">@color/dark_blue_700</item>
         <item name="colorOnSurface">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorPositive">@color/green_300</item>
         <item name="colorNegative">@color/red_300</item>
+        <item name="colorCard">@color/dark_blue_600</item>
         <item name="android:textColorPrimary">@color/dark_blue_700</item>
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
@@ -27,8 +29,23 @@
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
 
-    <style name="ThemeOverlay.App.ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <item name="colorControlNormal">@color/white</item>
+    <style name="Theme.VSensei.SplashScreen" parent="Theme.SplashScreen">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorSurface">@color/dark_blue_700</item>
+        <item name="windowSplashScreenBackground">@color/dark_blue_700</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.VSensei</item>
+    </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.ToolbarTheme</item>
+        <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="ThemeOverlay.App.ToolbarTheme" parent="">
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/dark_blue_700</item>
     </style>
 
     <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
@@ -54,12 +71,14 @@
     </style>
 
     <style name="ThemeOverlay.App.Snackbar" parent="">
-        <item name="backgroundTint">@color/dark_blue_400</item>
+        <item name="backgroundTint">@color/black_700</item>
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text
+        </item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text
+        </item>
     </style>
 
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">

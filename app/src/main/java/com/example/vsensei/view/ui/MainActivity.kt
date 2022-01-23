@@ -80,6 +80,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        changeUiMode(newConfig)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
@@ -105,19 +110,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.app_theme) {
-            when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
-                Configuration.UI_MODE_NIGHT_YES -> {
-                    userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_NO)
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
-                Configuration.UI_MODE_NIGHT_NO -> {
-                    userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_YES)
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
-            }
+            changeUiMode(resources.configuration)
             true
         } else {
             false
+        }
+    }
+
+    private fun changeUiMode(configuration: Configuration?) {
+        when (configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_NO)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_YES)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
         }
     }
 
@@ -149,15 +158,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.wordGroupFragment -> {
                     binding.fab.contentDescription = getString(R.string.add_word)
                     binding.fab.setImageResource(R.drawable.ic_add_word)
-                    binding.fab.setOnClickListener {
-                        val wordGroup: WordGroup? =
-                            arguments?.getParcelable(Constants.WORD_GROUP_ARGS_KEY)
-                        if (wordGroup != null) {
-                            val bundle = bundleOf(Constants.WORD_GROUP_ARGS_KEY to wordGroup)
-                            controller.navigate(R.id.newWordFragment, bundle)
+                    if (destination.id == R.id.wordGroupFragment) {
+                        binding.fab.setOnClickListener {
+                            val wordGroup: WordGroup? =
+                                arguments?.getParcelable(Constants.WORD_GROUP_ARGS_KEY)
+                            if (wordGroup != null) {
+                                val bundle = bundleOf(Constants.WORD_GROUP_ARGS_KEY to wordGroup)
+                                controller.navigate(R.id.newWordFragment, bundle)
+                            }
                         }
+                        showBottomAppBar()
                     }
-                    showBottomAppBar()
                 }
                 else -> {
                     binding.fab.contentDescription = getString(R.string.create_group)

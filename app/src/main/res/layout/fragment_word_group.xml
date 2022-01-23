@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:layout_margin="@dimen/words_container_margin"
     android:transitionName="@string/word_group_transition_name"
+    app:cardCornerRadius="@dimen/card_corner_radius"
     tools:context=".view.ui.WordGroupFragment"
     tools:theme="@style/Theme.VSensei">
 
@@ -13,10 +14,11 @@
         android:id="@+id/word_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/colorCard"
         android:clipToPadding="false"
         android:paddingBottom="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="6"
         tools:listitem="@layout/word_item" />
 
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

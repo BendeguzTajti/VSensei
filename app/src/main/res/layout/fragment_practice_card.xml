@@ -5,7 +5,7 @@
     android:id="@+id/practice_card_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="?attr/backgroundColor"
     android:fillViewport="true"
     tools:theme="@style/Theme.VSensei">
 

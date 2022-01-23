@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentDictionaryBinding
 import com.example.vsensei.view.adapter.WordGroupAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
 import com.example.vsensei.viewmodel.WordViewModel
-import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialElevationScale
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DictionaryFragment : Fragment() {
@@ -48,10 +47,10 @@ class DictionaryFragment : Fragment() {
 
     private fun wordGroupsRecyclerViewInit() {
         val adapter = WordGroupAdapter { view, wordGroupWithWords ->
-            exitTransition = Hold().apply {
+            exitTransition = MaterialElevationScale(false).apply {
                 duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
             }
-            reenterTransition = Hold().apply {
+            reenterTransition = MaterialElevationScale(true).apply {
                 duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
             }
             val extras = FragmentNavigatorExtras(
@@ -65,7 +64,6 @@ class DictionaryFragment : Fragment() {
         }
         binding.wordGroupRecyclerView.apply {
             this.adapter = adapter
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             val itemTouchHelperCallback = SwipeDeleteItemTouchHelper(0, ItemTouchHelper.LEFT) { position: Int ->
                 val swipedWordGroup = adapter.currentList[position]
                 wordViewModel.deleteWordGroup(swipedWordGroup)

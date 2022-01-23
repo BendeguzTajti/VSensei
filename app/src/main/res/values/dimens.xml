@@ -57,4 +57,12 @@
     <dimen name="bottom_app_bar_inset">0dp</dimen>
     <dimen name="fab_cradle_margin">8dp</dimen>
     <dimen name="fab_cradle_corner_radius">12dp</dimen>
+    <dimen name="card_corner_radius">0dp</dimen>
+    <dimen name="words_container_margin">4dp</dimen>
+    <dimen name="word_card_elevation">0dp</dimen>
+    <dimen name="group_card_margin_top">2dp</dimen>
+    <dimen name="group_card_margin_bottom">2dp</dimen>
+    <dimen name="group_card_margin_start">4dp</dimen>
+    <dimen name="group_card_margin_end">4dp</dimen>
+    <dimen name="group_card_button_size">48dp</dimen>
 </resources>

@@ -20,8 +20,8 @@ class WordGroupAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(wordGroupWithWords: WordGroupWithWords) {
-            binding.root.transitionName = wordGroupWithWords.wordGroup.groupId.toString()
-            itemView.setOnClickListener { onWordGroupClicked(binding.root, adapterPosition) }
+            itemView.transitionName = wordGroupWithWords.wordGroup.groupId.toString()
+            itemView.setOnClickListener { onWordGroupClicked(itemView, adapterPosition) }
             binding.shareButton.setOnClickListener {
                 // TODO navigate to QR code fragment
             }

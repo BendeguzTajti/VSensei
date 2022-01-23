@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_marginStart="@dimen/group_card_margin_start"
+    android:layout_marginTop="@dimen/group_card_margin_top"
+    android:layout_marginEnd="@dimen/group_card_margin_end"
+    android:layout_marginBottom="@dimen/group_card_margin_bottom"
+    app:cardCornerRadius="@dimen/card_corner_radius"
     tools:theme="@style/Theme.VSensei">
 
     <LinearLayout
@@ -41,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/item_container_margin_end"
-        android:background="?attr/colorSurface"
+        android:background="?attr/colorCard"
         android:padding="@dimen/word_group_item_container_padding">
 
         <TextView
@@ -70,8 +74,8 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/share_button"
             style="@style/Widget.App.Button.IconButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/group_card_button_size"
+            android:layout_height="@dimen/group_card_button_size"
             app:icon="@drawable/ic_share"
             app:iconTint="?attr/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,4 +84,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -51,7 +51,7 @@ class NewWordFragment : BottomSheetDialogFragment() {
             binding.wordMeaningInput.setText(selectedWord.wordMeanings.joinToString(", "))
             binding.addWordButton.setText(R.string.update_word)
         } else {
-            binding.cardTitle.setText(R.string.new_word)
+            binding.cardTitle.text = getString(R.string.new_word)
             binding.addWordButton.setText(R.string.add_word)
         }
         binding.addWordButton.setOnClickListener {
