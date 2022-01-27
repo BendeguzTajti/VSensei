@@ -83,6 +83,11 @@
         <item name="cornerRadius">@dimen/corner_radius</item>
     </style>
 
+    <style name="ThemeOverlay.App.TextInputLayout.Primary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="hintTextColor">@color/dark_blue_500</item>
+        <item name="boxStrokeColor">@color/dark_blue_500</item>
+    </style>
+
     <style name="ThemeOverlay.App.TextInputLayout.Secondary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="hintTextColor">@android:color/darker_gray</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
@@ -93,6 +98,10 @@
         <item name="boxCornerRadiusTopEnd">@dimen/corner_radius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/corner_radius</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/corner_radius</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TextInputLayout.DropDown" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/dark_blue_500</item>
     </style>
 
     <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">

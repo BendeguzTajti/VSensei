@@ -27,7 +27,14 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     private val args by navArgs<PracticeFragmentArgs>()
     private val practiceViewModel: PracticeViewModel by sharedViewModel()
 
-    private var textToSpeech: TextToSpeech? = null
+    private val textToSpeech: TextToSpeech by lazy {
+        TextToSpeech(requireContext()) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
+                textToSpeech.language = locale
+            }
+        }
+    }
     private lateinit var practiceSummary: PracticeSummary
     private val practiceCardAdapter: PracticeCardAdapter by lazy {
         val wordGroupWithWords = args.wordGroupWithWords
@@ -58,14 +65,6 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
             duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
         }
-        textToSpeech = TextToSpeech(requireActivity().applicationContext) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
-                textToSpeech?.language = locale
-            } else {
-                textToSpeech = null
-            }
-        }
     }
 
     override fun onCreateView(
@@ -78,7 +77,8 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        practiceSummary = savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(0)
+        practiceSummary =
+            savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(0)
         binding.practiceCardsViewPager.apply {
             isUserInputEnabled = false
             offscreenPageLimit = 1
@@ -108,11 +108,11 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         super.onDestroy()
         correctAnswerSoundPlayer.release()
         wrongAnswerSoundPlayer.release()
-        textToSpeech?.shutdown()
+        textToSpeech.shutdown()
     }
 
     override fun sayWord(word: String) {
-        textToSpeech?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
+        textToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     override fun onWordGuessed(wordGuess: WordGuess) {
