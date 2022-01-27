@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.transition.Fade
 import com.example.vsensei.R
 import com.example.vsensei.databinding.FragmentWordGroupBinding
 import com.example.vsensei.view.adapter.WordAdapter
@@ -27,6 +26,16 @@ class WordGroupFragment : Fragment() {
 
     private val wordViewModel: WordViewModel by sharedViewModel()
 
+    private val wordAdapter: WordAdapter by lazy {
+        WordAdapter { word ->
+            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(
+                args.wordGroup,
+                word
+            )
+            findNavController().navigate(action)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform().apply {
@@ -40,9 +49,6 @@ class WordGroupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        exitTransition = Fade().apply {
-            duration = 150
-        }
         _binding = FragmentWordGroupBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,25 +60,23 @@ class WordGroupFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.wordRecyclerView.adapter = null
         _binding = null
     }
 
     private fun wordsRecyclerViewInit() {
-        val adapter = WordAdapter { word ->
-            val action = WordGroupFragmentDirections.actionWordGroupFragmentToNewWordFragment(args.wordGroup, word)
-            findNavController().navigate(action)
-        }
         binding.wordRecyclerView.apply {
-            this.adapter = adapter
+            this.adapter = wordAdapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-            val itemTouchHelperCallback = SwipeDeleteItemTouchHelper(0, ItemTouchHelper.LEFT) { position: Int ->
-                val swipedWord = adapter.currentList[position]
-                wordViewModel.deleteWord(swipedWord)
-            }
+            val itemTouchHelperCallback =
+                SwipeDeleteItemTouchHelper(0, ItemTouchHelper.LEFT) { position: Int ->
+                    val swipedWord = wordAdapter.currentList[position]
+                    wordViewModel.deleteWord(swipedWord)
+                }
             ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(this)
         }
         wordViewModel.wordsByGroupId(args.wordGroup.groupId).observe(viewLifecycleOwner, { words ->
-            adapter.submitList(words)
+            wordAdapter.submitList(words)
         })
     }
 }

@@ -51,4 +51,9 @@
     <string name="update_word">Update word</string>
     <string name="camera">Camera</string>
     <string name="word_group_transition_name" translatable="false">word_group_transition</string>
+    <string name="guesses">Guesses</string>
+    <string name="correct">Correct</string>
+    <string name="wrong">Wrong</string>
+    <string name="practice_percentages">Practice percentages</string>
+    <string name="guesses_percentage">Guess percentages</string>
 </resources>

@@ -38,4 +38,9 @@
     <string name="word_meaning_helper_text">Több jelentés esetén válaszd el a szavakat vesszővel!</string>
     <string name="update_word">Szó módosítása</string>
     <string name="camera">Kamera</string>
+    <string name="guesses">Válaszok</string>
+    <string name="correct">Helyes</string>
+    <string name="wrong">Hibás</string>
+    <string name="practice_percentages">Gyakorlások százaléka</string>
+    <string name="guesses_percentage">Válaszok százaléka</string>
 </resources>

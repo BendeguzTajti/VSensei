@@ -1,16 +1,19 @@
 package com.example.vsensei.view.ui
 
-import android.content.res.Configuration
 import android.os.Bundle
-import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import com.example.vsensei.R
+import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.databinding.FragmentScoresBinding
-import com.example.vsensei.view.adapter.PracticeSummaryAdapter
+import com.example.vsensei.util.*
 import com.example.vsensei.viewmodel.PracticeViewModel
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.DefaultValueFormatter
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ScoresFragment : Fragment() {
@@ -30,19 +33,108 @@ class ScoresFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currentNightMode = resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)
-        val dateFormat = DateFormat.getDateFormat(requireContext())
-        val adapter = PracticeSummaryAdapter(currentNightMode, dateFormat)
-        binding.practiceSummaryRecyclerView.adapter = adapter
         practiceViewModel.allPracticeSummaries.observe(viewLifecycleOwner, { practiceSummaries ->
-            binding.emptyGroupsDisplay.isVisible = practiceSummaries.isEmpty()
-            binding.practiceSummaryRecyclerView.isVisible = practiceSummaries.isNotEmpty()
-            adapter.submitList(practiceSummaries)
+            if (practiceSummaries.isEmpty()) {
+                binding.emptyGroupsDisplay.isVisible = true
+            } else {
+                lineChartInit(practiceSummaries)
+                pieChartInit(practiceSummaries)
+                barChartInit(practiceSummaries)
+            }
         })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun lineChartInit(practiceSummaries: List<PracticeSummary>) {
+        val lineDataSet = LineDataSet(
+            practiceSummaries.toEntries(),
+            getString(R.string.practice_percentages)
+        ).apply {
+            setDrawFilled(true)
+            color = requireContext().getColorFromAttr(R.attr.colorPrimary)
+            setCircleColor(requireContext().getColorFromAttr(R.attr.colorPrimary))
+            fillColor = requireContext().getColorFromAttr(R.attr.colorPrimary)
+            valueTextColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
+            valueFormatter = DefaultValueFormatter(0)
+            valueTextSize = 12f
+        }
+        binding.scoresLineChart.apply {
+            data = LineData(lineDataSet)
+            description = null
+            xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
+            xAxis.setDrawLabels(false)
+            axisLeft.axisMinimum = 0f
+            axisLeft.axisMaximum = 100f
+            axisRight.setDrawLabels(false)
+            axisRight.setDrawGridLines(false)
+            legend.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
+            axisLeft.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
+            setScaleEnabled(false)
+            isVisible = true
+        }
+    }
+
+    private fun barChartInit(practiceSummaries: List<PracticeSummary>) {
+        val barColors = listOf(
+            requireContext().getColorFromAttr(R.attr.colorPositive),
+            requireContext().getColorFromAttr(R.attr.colorNegative)
+        )
+        val barDataSet = BarDataSet(
+            practiceSummaries.toMinMaxPercentageBarEntries(),
+            getString(R.string.guesses_percentage)
+        ).apply {
+            colors = barColors
+            valueTextColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
+            valueFormatter = DefaultValueFormatter(0)
+            valueTextSize = 12f
+        }
+        binding.scoresBarChart.apply {
+            data = BarData(barDataSet)
+            description = null
+            xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
+            xAxis.setDrawLabels(false)
+            axisLeft.axisMinimum = 0f
+            axisLeft.axisMaximum = 100f
+            axisRight.setDrawLabels(false)
+            axisRight.setDrawGridLines(false)
+            legend.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
+            axisLeft.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
+            setScaleEnabled(false)
+            isVisible = true
+        }
+    }
+
+    private fun pieChartInit(practiceSummaries: List<PracticeSummary>) {
+        val pieEntries = listOf(
+            PieEntry(
+                practiceSummaries.floatOfCorrectGuesses(),
+                getString(R.string.correct)
+            ),
+            PieEntry(
+                practiceSummaries.floatOfWrongGuesses(),
+                getString(R.string.wrong)
+            )
+        )
+        val pieColors = listOf(
+            requireContext().getColorFromAttr(R.attr.colorPositive),
+            requireContext().getColorFromAttr(R.attr.colorNegative)
+        )
+        val pieDataSet = PieDataSet(pieEntries, getString(R.string.guesses)).apply {
+            colors = pieColors
+            valueFormatter = DefaultValueFormatter(0)
+            valueTextSize = 12f
+            valueTextColor = requireContext().getColorFromAttr(R.attr.colorOnPrimary)
+        }
+        binding.scoresPieChart.apply {
+            data = PieData(pieDataSet)
+            description = null
+            isDrawHoleEnabled = false
+            legend.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
+            isVisible = true
+        }
     }
 }

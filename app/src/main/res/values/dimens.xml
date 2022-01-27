@@ -6,7 +6,7 @@
     <dimen name="text_size_regular">14sp</dimen>
     <dimen name="practice_button_icon_margin">18dp</dimen>
     <dimen name="practice_button_icon_elevation">9dp</dimen>
-    <dimen name="container_padding">18dp</dimen>
+    <dimen name="container_padding">12dp</dimen>
     <dimen name="navigation_button_margin_top">12dp</dimen>
     <dimen name="guess_the_word_button_margin_bottom">70dp</dimen>
     <dimen name="toolbar_elevation">0dp</dimen>
@@ -30,9 +30,6 @@
     <dimen name="indicator_track_thickness">2dp</dimen>
     <dimen name="practice_percent_text_size">16sp</dimen>
     <dimen name="result_title_margin_top">24dp</dimen>
-    <dimen name="practice_summary_item_margin_large">12dp</dimen>
-    <dimen name="practice_summary_item_text_size">16sp</dimen>
-    <dimen name="practice_summary_item_margin_small">4dp</dimen>
     <dimen name="word_group_item_name_text_size">16sp</dimen>
     <dimen name="word_group_item_margin_large">12dp</dimen>
     <dimen name="word_group_item_margin_medium">8dp</dimen>
@@ -43,12 +40,6 @@
     <dimen name="word_item_margin_small">4dp</dimen>
     <dimen name="word_item_container_padding">12dp</dimen>
     <dimen name="word_item_primary_name_text_size">16sp</dimen>
-    <dimen name="word_guess_item_text_container_padding">24dp</dimen>
-    <dimen name="word_guess_item_card_margin">12dp</dimen>
-    <dimen name="word_guess_item_container_min_width">200dp</dimen>
-    <dimen name="word_guess_item_text_size_large">18sp</dimen>
-    <dimen name="word_guess_item_text_size_medium">16sp</dimen>
-    <dimen name="word_guess_item_answer_margin_top">8dp</dimen>
     <dimen name="bottom_sheet_title_margin_bottom">10dp</dimen>
     <dimen name="delete_container_padding_start">16dp</dimen>
     <dimen name="delete_container_padding_end">12dp</dimen>
@@ -65,4 +56,5 @@
     <dimen name="group_card_margin_start">4dp</dimen>
     <dimen name="group_card_margin_end">4dp</dimen>
     <dimen name="group_card_button_size">48dp</dimen>
+    <dimen name="word_recycler_view_margin">4dp</dimen>
 </resources>

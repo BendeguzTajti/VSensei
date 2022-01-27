@@ -29,8 +29,26 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     private var textToSpeech: TextToSpeech? = null
     private lateinit var practiceSummary: PracticeSummary
-    private lateinit var correctAnswerSoundPlayer: MediaPlayer
-    private lateinit var wrongAnswerSoundPlayer: MediaPlayer
+    private val practiceCardAdapter: PracticeCardAdapter by lazy {
+        val wordGroupWithWords = args.wordGroupWithWords
+        val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
+        val displayLanguages = resources.getStringArray(R.array.display_languages)
+        val hasVariants = args.wordGroupWithWords.wordGroup.selectedLanguageIndex == 1
+        PracticeCardAdapter(
+            args.practiceType,
+            wordGroupWithWords.words,
+            displayLanguages[selectedLanguageIndex],
+            hasVariants,
+            childFragmentManager,
+            lifecycle
+        )
+    }
+    private val correctAnswerSoundPlayer: MediaPlayer by lazy {
+        MediaPlayer.create(requireContext(), R.raw.correct_answer)
+    }
+    private val wrongAnswerSoundPlayer: MediaPlayer by lazy {
+        MediaPlayer.create(requireContext(), R.raw.wrong_answer)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +66,6 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
                 textToSpeech = null
             }
         }
-        correctAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.correct_answer)
-        wrongAnswerSoundPlayer = MediaPlayer.create(requireContext(), R.raw.wrong_answer)
     }
 
     override fun onCreateView(
@@ -62,33 +78,11 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // THE SELECTED INDEX IS THE SAME AS THE INDEX OF JAPANESE LANGUAGE IN THE STRING ARRAY,
-        // BECAUSE TIGHT NOW ONLY JAPANESE CAN HAVE VARIANTS (KANJI, HIRAGANA, KATAKANA)
-        val hasVariants = args.wordGroupWithWords.wordGroup.selectedLanguageIndex == 1
-
-        practiceSummary = savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(
-            0,
-            args.practiceType,
-            args.wordGroupWithWords.wordGroup.groupName,
-            arrayListOf(),
-            hasVariants,
-            System.currentTimeMillis()
-        )
-        val wordGroupWithWords = args.wordGroupWithWords
-        val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
-        val displayLanguages = resources.getStringArray(R.array.display_languages)
-        val adapter = PracticeCardAdapter(
-            args.practiceType,
-            wordGroupWithWords.words,
-            displayLanguages[selectedLanguageIndex],
-            hasVariants,
-            childFragmentManager,
-            lifecycle
-        )
+        practiceSummary = savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(0)
         binding.practiceCardsViewPager.apply {
             isUserInputEnabled = false
             offscreenPageLimit = 1
-            this.adapter = adapter
+            this.adapter = practiceCardAdapter
         }
         practiceViewModel.currentCardPosition.observe(viewLifecycleOwner, { currentPosition ->
             if (currentPosition < args.wordGroupWithWords.words.size) {
@@ -106,6 +100,7 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.practiceCardsViewPager.adapter = null
         _binding = null
     }
 
@@ -121,12 +116,17 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
     }
 
     override fun onWordGuessed(wordGuess: WordGuess) {
-        if (wordGuess.isCorrectGuess) {
+        practiceSummary = if (wordGuess.isCorrectGuess) {
             correctAnswerSoundPlayer.start()
+            practiceSummary.copy(
+                correctGuesses = practiceSummary.correctGuesses + 1
+            )
         } else {
             wrongAnswerSoundPlayer.start()
+            practiceSummary.copy(
+                wrongGuesses = practiceSummary.wrongGuesses + 1
+            )
         }
-        practiceSummary.wordGuesses.add(wordGuess)
     }
 
     private fun navigateToPracticeResult() {

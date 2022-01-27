@@ -28,10 +28,10 @@ interface WordGroupDao {
     @Query("SELECT * FROM word_table WHERE groupId = :groupId ORDER BY wordPrimary")
     fun getWordsByGroupId(groupId: Long): LiveData<List<Word>>
 
-    @Query("SELECT * FROM practice_summary_table ORDER BY timeCreated DESC")
+    @Query("SELECT * FROM practice_summary_table ORDER BY practiceSummaryId DESC")
     fun getAllPracticeSummaries(): LiveData<List<PracticeSummary>>
 
-    @Query("DELETE FROM practice_summary_table WHERE practiceSummaryId IN (SELECT practiceSummaryId FROM practice_summary_table ORDER BY timeCreated DESC LIMIT 1 OFFSET 5)")
+    @Query("DELETE FROM practice_summary_table WHERE practiceSummaryId IN (SELECT practiceSummaryId FROM practice_summary_table ORDER BY practiceSummaryId DESC LIMIT 1 OFFSET 5)")
     suspend fun deleteOldPracticeSummaries()
 
     @Delete

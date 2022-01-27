@@ -24,6 +24,25 @@ class DictionaryFragment : Fragment() {
 
     private val wordViewModel: WordViewModel by sharedViewModel()
 
+    private val wordGroupAdapter: WordGroupAdapter by lazy {
+        WordGroupAdapter { view, wordGroupWithWords ->
+            exitTransition = MaterialElevationScale(false).apply {
+                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+            }
+            reenterTransition = MaterialElevationScale(true).apply {
+                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+            }
+            val extras = FragmentNavigatorExtras(
+                view to getString(R.string.word_group_transition_name)
+            )
+            val action = DictionaryFragmentDirections.actionDictionaryFragmentToWordGroupFragment(
+                wordGroupWithWords.wordGroup.groupName,
+                wordGroupWithWords.wordGroup
+            )
+            findNavController().navigate(action, extras)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,36 +61,22 @@ class DictionaryFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.wordGroupRecyclerView.adapter = null
         _binding = null
     }
 
     private fun wordGroupsRecyclerViewInit() {
-        val adapter = WordGroupAdapter { view, wordGroupWithWords ->
-            exitTransition = MaterialElevationScale(false).apply {
-                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
-            }
-            reenterTransition = MaterialElevationScale(true).apply {
-                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
-            }
-            val extras = FragmentNavigatorExtras(
-                view to getString(R.string.word_group_transition_name)
-            )
-            val action = DictionaryFragmentDirections.actionDictionaryFragmentToWordGroupFragment(
-                wordGroupWithWords.wordGroup.groupName,
-                wordGroupWithWords.wordGroup
-            )
-            findNavController().navigate(action, extras)
-        }
         binding.wordGroupRecyclerView.apply {
-            this.adapter = adapter
-            val itemTouchHelperCallback = SwipeDeleteItemTouchHelper(0, ItemTouchHelper.LEFT) { position: Int ->
-                val swipedWordGroup = adapter.currentList[position]
-                wordViewModel.deleteWordGroup(swipedWordGroup)
-            }
+            this.adapter = wordGroupAdapter
+            val itemTouchHelperCallback =
+                SwipeDeleteItemTouchHelper(0, ItemTouchHelper.LEFT) { position: Int ->
+                    val swipedWordGroup = wordGroupAdapter.currentList[position]
+                    wordViewModel.deleteWordGroup(swipedWordGroup)
+                }
             ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(this)
         }
         wordViewModel.allWordGroups.observe(viewLifecycleOwner, { wordGroupsWithWords ->
-            adapter.submitList(wordGroupsWithWords)
+            wordGroupAdapter.submitList(wordGroupsWithWords)
         })
     }
 }

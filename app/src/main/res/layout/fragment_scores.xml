@@ -1,53 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor"
-    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:paddingBottom="?attr/actionBarSize"
     tools:context=".view.ui.ScoresFragment"
     tools:theme="@style/Theme.VSensei">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/practice_summary_recycler_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="?attr/actionBarSize"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="3"
-        tools:listitem="@layout/practice_summary_item"
-        tools:visibility="gone" />
+        android:orientation="vertical"
+        android:padding="@dimen/container_padding">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/empty_groups_display"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:fillViewport="true"
-        android:paddingBottom="?attr/actionBarSize">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/container_padding">
+            app:layout_constraintGuide_percent=".5" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:drawablePadding="@dimen/drawable_padding"
-                android:text="@string/missing_scores"
-                android:textAlignment="center"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="@dimen/text_size_regular"
-                app:drawableTopCompat="@drawable/ic_scores_empty" />
+        <TextView
+            android:id="@+id/empty_groups_display"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:text="@string/missing_scores"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/text_size_regular"
+            android:visibility="gone"
+            app:drawableTopCompat="@drawable/ic_scores_empty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="18dp"
+            tools:visibility="visible" />
 
-        </LinearLayout>
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/scores_line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.core.widget.NestedScrollView>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/scores_pie_chart"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/scores_line_chart" />
 
-</LinearLayout>
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/scores_bar_chart"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/scores_pie_chart"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/scores_pie_chart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

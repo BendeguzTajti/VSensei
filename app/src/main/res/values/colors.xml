@@ -13,8 +13,9 @@
     <color name="dark_blue_200">#FF8986A9</color>
     <color name="dark_blue_400">#FF615E84</color>
     <color name="dark_blue_500">#FF575A89</color>
-    <color name="dark_blue_600">#FF525070</color>
+    <color name="dark_blue_600">#FF4B4965</color>
     <color name="dark_blue_700">#FF474561</color>
+    <color name="dark_blue_750">#FF464560</color>
     <color name="red_200">#FFFF7597</color>
     <color name="red_300">#FFD96562</color>
     <color name="red_500">#FFD14642</color>

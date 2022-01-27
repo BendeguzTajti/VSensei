@@ -8,7 +8,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/yellow_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondaryVariant">@color/yellow_500</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/dark_blue_700</item>
@@ -133,7 +133,7 @@
         <item name="elevation">@dimen/bottom_app_bar_elevation</item>
         <item name="contentInsetStart">@dimen/bottom_app_bar_inset</item>
         <item name="contentInsetEnd">@dimen/bottom_app_bar_inset</item>
-        <item name="backgroundTint">@color/dark_blue_400</item>
+        <item name="backgroundTint">@color/dark_blue_750</item>
         <item name="hideOnScroll">true</item>
         <item name="fabAlignmentMode">center</item>
         <item name="fabCradleMargin">@dimen/fab_cradle_margin</item>

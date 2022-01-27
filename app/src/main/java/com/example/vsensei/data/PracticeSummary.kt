@@ -11,14 +11,12 @@ import kotlin.math.roundToInt
 data class PracticeSummary(
     @PrimaryKey(autoGenerate = true)
     val practiceSummaryId: Long,
-    val practiceType: PracticeType,
-    val practicedGroupName: String,
-    val wordGuesses: MutableList<WordGuess>,
-    val hasVariants: Boolean,
-    val timeCreated: Long
+    val correctGuesses: Int = 0,
+    val wrongGuesses: Int = 0
 ) : Parcelable {
 
     fun getPercent(): Int {
-        return ((wordGuesses.count { it.isCorrectGuess } / wordGuesses.size.toFloat()) * 100).roundToInt()
+        val allGuesses = correctGuesses + wrongGuesses
+        return ((correctGuesses.toFloat() / allGuesses.toFloat()) * 100).roundToInt()
     }
 }
