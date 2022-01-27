@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
+import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.example.vsensei.viewmodel.WordViewModel
@@ -41,51 +42,17 @@ class PracticeHomeFragment : Fragment() {
             binding.guessTheWordButton.setOnClickListener {
                 practiceViewModel.setCurrentCardPosition(0, 0)
                 if (wordGroupsWithWords.size > 1) {
-                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
-                        PracticeType.GUESS_THE_WORD
-                    )
-                    exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-                        duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
-                    }
-                    reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
-                        duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
-                    }
-                    findNavController().navigate(action)
+                    navigateToGroupSelectorDialog(PracticeType.GUESS_THE_WORD)
                 } else {
-                    wordGroupsWithWords.first().words.shuffle()
-                    val practiceType = PracticeType.GUESS_THE_WORD
-                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeFragment(
-                        practiceType,
-                        wordGroupsWithWords.first(),
-                        getString(practiceType.labelResId)
-                    )
-                    exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-                        duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
-                    }
-                    reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
-                        duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
-                    }
-                    findNavController().navigate(action)
+                    navigateToPracticeFragment(wordGroupsWithWords.first(), PracticeType.GUESS_THE_WORD)
                 }
             }
             binding.guessTheMeaningButton.setOnClickListener {
                 practiceViewModel.setCurrentCardPosition(0, 0)
                 if (wordGroupsWithWords.size > 1) {
-                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
-                        PracticeType.GUESS_THE_MEANING
-                    )
-                    reenterTransition = MaterialFadeThrough()
-                    findNavController().navigate(action)
+                    navigateToGroupSelectorDialog(PracticeType.GUESS_THE_MEANING)
                 } else {
-                    wordGroupsWithWords.first().words.shuffle()
-                    val practiceType = PracticeType.GUESS_THE_MEANING
-                    val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeFragment(
-                        practiceType,
-                        wordGroupsWithWords.first(),
-                        getString(practiceType.labelResId)
-                    )
-                    reenterTransition = MaterialFadeThrough()
-                    findNavController().navigate(action)
+                    navigateToPracticeFragment(wordGroupsWithWords.first(), PracticeType.GUESS_THE_MEANING)
                 }
             }
         })
@@ -94,5 +61,31 @@ class PracticeHomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun navigateToGroupSelectorDialog(practiceType: PracticeType) {
+        if (findNavController().currentDestination?.id == R.id.practiceHomeFragment) {
+            val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
+                practiceType
+            )
+            reenterTransition = MaterialFadeThrough()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun navigateToPracticeFragment(wordGroupWithWords: WordGroupWithWords, practiceType: PracticeType) {
+        wordGroupWithWords.words.shuffle()
+        val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeFragment(
+            practiceType,
+            wordGroupWithWords,
+            getString(practiceType.labelResId)
+        )
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
+        findNavController().navigate(action)
     }
 }

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.repository.Repository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -38,7 +37,7 @@ class PracticeViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun savePracticeSummary(practiceSummary: PracticeSummary) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.addPracticeSummary(practiceSummary)
             repository.deleteOldPracticeSummaries()
         }

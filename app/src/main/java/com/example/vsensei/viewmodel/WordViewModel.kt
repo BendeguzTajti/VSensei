@@ -5,7 +5,6 @@ import com.example.vsensei.data.Word
 import com.example.vsensei.data.WordGroup
 import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.repository.Repository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -22,13 +21,13 @@ class WordViewModel(private val repository: Repository) : ViewModel() {
     val recentlyDeletedWord: SharedFlow<Word> = _recentlyDeletedWord
 
     fun addWordGroup(wordGroup: WordGroup) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.addWordGroup(wordGroup)
         }
     }
 
     fun deleteWordGroup(wordGroupWithWords: WordGroupWithWords) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.deleteWordGroup(wordGroupWithWords.wordGroup)
             repository.deleteWords(wordGroupWithWords.words)
             _recentlyDeletedGroup.emit(wordGroupWithWords)
@@ -36,26 +35,26 @@ class WordViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun restoreWordGroup(wordGroupWithWords: WordGroupWithWords) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.addWords(wordGroupWithWords.words)
             repository.addWordGroup(wordGroupWithWords.wordGroup)
         }
     }
 
     fun addWord(word: Word) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.addWord(word)
         }
     }
 
     fun updateWord(word: Word) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.updateWord(word)
         }
     }
 
     fun deleteWord(word: Word) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.deleteWord(word)
             _recentlyDeletedWord.emit(word)
         }
