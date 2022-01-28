@@ -7,25 +7,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeSummary
-import com.example.vsensei.data.WordGuess
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.google.android.material.transition.MaterialSharedAxis
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
+class PracticeFragment : Fragment() {
 
     private var _binding: FragmentPracticeBinding? = null
     private val binding get() = _binding!!
 
     private val args by navArgs<PracticeFragmentArgs>()
-    private val practiceViewModel: PracticeViewModel by sharedViewModel()
+    private val practiceViewModel: PracticeViewModel by viewModel()
 
     private val textToSpeech: TextToSpeech by lazy {
         TextToSpeech(requireContext()) { status ->
@@ -91,6 +95,30 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
                 navigateToPracticeResult()
             }
         })
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                practiceViewModel.onWordGuess.collect { isCorrect ->
+                    practiceSummary = if (isCorrect) {
+                        correctAnswerSoundPlayer.start()
+                        practiceSummary.copy(
+                            correctGuesses = practiceSummary.correctGuesses + 1
+                        )
+                    } else {
+                        wrongAnswerSoundPlayer.start()
+                        practiceSummary.copy(
+                            wrongGuesses = practiceSummary.wrongGuesses + 1
+                        )
+                    }
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                practiceViewModel.wordToSay.collect { word ->
+                    textToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
+                }
+            }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -109,24 +137,6 @@ class PracticeFragment : Fragment(), PracticeCardAdapter.WordGuessCallback {
         correctAnswerSoundPlayer.release()
         wrongAnswerSoundPlayer.release()
         textToSpeech.shutdown()
-    }
-
-    override fun sayWord(word: String) {
-        textToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
-    }
-
-    override fun onWordGuessed(wordGuess: WordGuess) {
-        practiceSummary = if (wordGuess.isCorrectGuess) {
-            correctAnswerSoundPlayer.start()
-            practiceSummary.copy(
-                correctGuesses = practiceSummary.correctGuesses + 1
-            )
-        } else {
-            wrongAnswerSoundPlayer.start()
-            practiceSummary.copy(
-                wrongGuesses = practiceSummary.wrongGuesses + 1
-            )
-        }
     }
 
     private fun navigateToPracticeResult() {

@@ -11,7 +11,6 @@ import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
-import com.example.vsensei.viewmodel.PracticeViewModel
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
@@ -23,7 +22,6 @@ class PracticeHomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val wordViewModel: WordViewModel by sharedViewModel()
-    private val practiceViewModel: PracticeViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +38,6 @@ class PracticeHomeFragment : Fragment() {
             binding.emptyGroupsDisplay.isVisible = wordGroupsWithWords.isEmpty()
             binding.practiceDisplay.isVisible = wordGroupsWithWords.isNotEmpty()
             binding.guessTheWordButton.setOnClickListener {
-                practiceViewModel.setCurrentCardPosition(0, 0)
                 if (wordGroupsWithWords.size > 1) {
                     navigateToGroupSelectorDialog(PracticeType.GUESS_THE_WORD)
                 } else {
@@ -48,7 +45,6 @@ class PracticeHomeFragment : Fragment() {
                 }
             }
             binding.guessTheMeaningButton.setOnClickListener {
-                practiceViewModel.setCurrentCardPosition(0, 0)
                 if (wordGroupsWithWords.size > 1) {
                     navigateToGroupSelectorDialog(PracticeType.GUESS_THE_MEANING)
                 } else {

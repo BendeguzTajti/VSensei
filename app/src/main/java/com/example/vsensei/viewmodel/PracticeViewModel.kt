@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.repository.Repository
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
 class PracticeViewModel(private val repository: Repository) : ViewModel() {
@@ -19,16 +21,27 @@ class PracticeViewModel(private val repository: Repository) : ViewModel() {
     private val _currentPracticeSummary: MutableLiveData<PracticeSummary> by lazy {
         MutableLiveData()
     }
-
     val allPracticeSummaries: LiveData<List<PracticeSummary>> by lazy {
         repository.allPracticeSummaries
     }
+    private val _wordToSay = MutableSharedFlow<String>()
+    val wordToSay: SharedFlow<String> = _wordToSay
+    private val _onWordGuess = MutableSharedFlow<Boolean>()
+    val onWordGuess: SharedFlow<Boolean> = _onWordGuess
     val currentCardPosition: LiveData<Int> = _currentCardPosition
 
-    fun setCurrentCardPosition(currentPosition: Int, replaceDelay: Long) {
+    fun sayWord(word: String) {
         viewModelScope.launch {
-            delay(replaceDelay)
-            _currentCardPosition.value = currentPosition
+            _wordToSay.emit(word)
+        }
+    }
+
+    fun onWordGuess(currentCardPosition: Int, isCorrect: Boolean) {
+        viewModelScope.launch {
+            _onWordGuess.emit(isCorrect)
+            val delayInMillis = if (isCorrect) 1400L else 2000L
+            delay(delayInMillis)
+            _currentCardPosition.value = currentCardPosition + 1
         }
     }
 

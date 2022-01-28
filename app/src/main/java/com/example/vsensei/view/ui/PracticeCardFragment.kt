@@ -1,6 +1,5 @@
 package com.example.vsensei.view.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,27 +11,17 @@ import androidx.core.view.isVisible
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.Word
-import com.example.vsensei.data.WordGuess
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
-import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class PracticeCardFragment : Fragment() {
 
     private var _binding: FragmentPracticeCardBinding? = null
     private val binding get() = _binding!!
-    private var wordGuessCallback: PracticeCardAdapter.WordGuessCallback? = null
 
-    private val practiceViewModel: PracticeViewModel by sharedViewModel()
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        wordGuessCallback = try {
-            requireParentFragment() as PracticeCardAdapter.WordGuessCallback
-        } catch (e: ClassCastException) {
-            null
-        }
+    private val practiceViewModel: PracticeViewModel by lazy {
+        requireParentFragment().getViewModel()
     }
 
     override fun onCreateView(
@@ -75,11 +64,6 @@ class PracticeCardFragment : Fragment() {
         _binding = null
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        wordGuessCallback = null
-    }
-
     private fun guessTheMeaningCardInit(currentWord: Word) {
         val hasVariants = requireArguments().getBoolean(HAS_VARIANTS)
         binding.hint.text =
@@ -96,20 +80,14 @@ class PracticeCardFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == R.id.merged) {
-                    val hint = binding.hint.text.toString()
-                    val hintVariant = binding.hintVariant.text.toString()
                     val guesses = binding.guess.text.toString().split(",").map { it.trim().lowercase() }
                     val matches = currentWord.wordMeanings.filter { guesses.contains(it.lowercase()) }
                     if (matches.isNotEmpty()) {
-                        val wordGuess = WordGuess(hint, hintVariant, binding.answer.text.toString(), true)
-                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.success)
-                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
+                        practiceViewModel.onWordGuess(currentPosition, true)
                     } else {
-                        val wordGuess = WordGuess(hint, hintVariant, binding.answer.text.toString(), false)
-                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.failure)
-                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
+                        practiceViewModel.onWordGuess(currentPosition, false)
                     }
                 }
                 if (currentId == R.id.success || currentId == R.id.failure) {
@@ -129,21 +107,16 @@ class PracticeCardFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == R.id.merged) {
-                    val hint = binding.hint.text.toString()
                     val guess = binding.guess.text.toString().lowercase()
                     val answer = currentWord.wordPrimary.lowercase()
                     val answerVariant =
                         currentWord.wordPrimaryVariant?.lowercase()
                     if (guess == answer || guess == answerVariant) {
-                        val wordGuess = WordGuess(hint, null, binding.answer.text.toString(), true)
-                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.success)
-                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 1400)
+                        practiceViewModel.onWordGuess(currentPosition, true)
                     } else {
-                        val wordGuess = WordGuess(hint, null, binding.answer.text.toString(), false)
-                        wordGuessCallback?.onWordGuessed(wordGuess)
                         motionLayout.transitionToState(R.id.failure)
-                        practiceViewModel.setCurrentCardPosition(currentPosition + 1, 2000)
+                        practiceViewModel.onWordGuess(currentPosition, false)
                     }
                 }
                 if (currentId == R.id.success || currentId == R.id.failure) {
@@ -157,7 +130,7 @@ class PracticeCardFragment : Fragment() {
         val groupLanguage: String = requireArguments().get(GROUP_LANGUAGE) as String
         binding.audioButton.text = groupLanguage
         binding.audioButton.setOnClickListener {
-            wordGuessCallback?.sayWord(currentWord.wordPrimary)
+            practiceViewModel.sayWord(currentWord.wordPrimary)
         }
         binding.audioButton.isVisible = true
     }
