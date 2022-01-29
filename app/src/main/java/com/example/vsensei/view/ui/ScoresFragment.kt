@@ -14,14 +14,14 @@ import com.example.vsensei.viewmodel.PracticeViewModel
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScoresFragment : Fragment() {
 
     private var _binding: FragmentScoresBinding? = null
     private val binding get() = _binding!!
 
-    private val practiceViewModel: PracticeViewModel by sharedViewModel()
+    private val practiceViewModel: PracticeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +75,7 @@ class ScoresFragment : Fragment() {
             axisLeft.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
             setScaleEnabled(false)
             isVisible = true
+            invalidate()
         }
     }
 
@@ -105,6 +106,7 @@ class ScoresFragment : Fragment() {
             axisLeft.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
             setScaleEnabled(false)
             isVisible = true
+            invalidate()
         }
     }
 
@@ -135,6 +137,7 @@ class ScoresFragment : Fragment() {
             isDrawHoleEnabled = false
             legend.textColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
             isVisible = true
+            invalidate()
         }
     }
 }

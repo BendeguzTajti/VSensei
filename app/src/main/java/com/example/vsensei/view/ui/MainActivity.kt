@@ -11,6 +11,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -151,11 +152,14 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.practiceFragment,
                 R.id.practiceResultFragment -> {
+                    hideBottomAppBar(true)
                     binding.fab.setOnClickListener(null)
-                    hideBottomAppBar()
+                    binding.bottomNavigation.isVisible = false
                 }
                 R.id.newWordFragment,
                 R.id.wordGroupFragment -> {
+                    hideBottomAppBar(false)
+                    binding.bottomNavigation.isVisible = false
                     binding.fab.contentDescription = getString(R.string.add_word)
                     binding.fab.setImageResource(R.drawable.ic_add_word)
                     if (destination.id == R.id.wordGroupFragment) {
@@ -167,10 +171,10 @@ class MainActivity : AppCompatActivity() {
                                 controller.navigate(R.id.newWordFragment, bundle)
                             }
                         }
-                        showBottomAppBar()
                     }
                 }
                 else -> {
+                    binding.bottomNavigation.isVisible = true
                     binding.fab.contentDescription = getString(R.string.create_group)
                     binding.fab.setImageResource(R.drawable.ic_add_group)
                     binding.fab.setOnClickListener {
@@ -190,7 +194,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideBottomAppBar() {
+    private fun hideBottomAppBar(hideFab: Boolean) {
         binding.run {
             bottomAppBar.performHide()
             bottomAppBar.animate().setListener(object : AnimatorListenerAdapter() {
@@ -198,14 +202,18 @@ class MainActivity : AppCompatActivity() {
                 override fun onAnimationEnd(animation: Animator?) {
                     if (isCanceled) return
                     bottomAppBar.visibility = View.GONE
-                    fab.visibility = View.INVISIBLE
+                    if (hideFab) {
+                        fab.visibility = View.INVISIBLE
+                    }
                 }
 
                 override fun onAnimationCancel(animation: Animator?) {
                     isCanceled = true
                 }
             })
-            fab.hide()
+            if (hideFab) {
+                fab.hide()
+            }
         }
     }
 }

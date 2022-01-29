@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
@@ -33,7 +34,10 @@ class PracticeHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        exitTransition = null
+        view.doOnPreDraw {
+            exitTransition = null
+            reenterTransition = null
+        }
         wordViewModel.wordGroupsWithEnoughWords.observe(viewLifecycleOwner, { wordGroupsWithWords ->
             binding.emptyGroupsDisplay.isVisible = wordGroupsWithWords.isEmpty()
             binding.practiceDisplay.isVisible = wordGroupsWithWords.isNotEmpty()
