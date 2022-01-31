@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.vsensei.R
-import com.example.vsensei.data.PracticeSummary
 import com.example.vsensei.databinding.FragmentPracticeBinding
 import com.example.vsensei.view.adapter.PracticeCardAdapter
 import com.example.vsensei.viewmodel.PracticeViewModel
@@ -29,7 +28,6 @@ class PracticeFragment : Fragment() {
     private val args by navArgs<PracticeFragmentArgs>()
     private val practiceViewModel: PracticeViewModel by viewModel()
 
-    private lateinit var practiceSummary: PracticeSummary
     private val practiceCardAdapter: PracticeCardAdapter by lazy {
         val wordGroupWithWords = args.wordGroupWithWords
         val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
@@ -69,42 +67,34 @@ class PracticeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        practiceSummary =
-            savedInstanceState?.getParcelable(PRACTICE_SUMMARY_KEY) ?: PracticeSummary(0)
         binding.practiceCardsViewPager.apply {
             isUserInputEnabled = false
             offscreenPageLimit = 1
             this.adapter = practiceCardAdapter
         }
-        practiceViewModel.currentCardPosition.observe(viewLifecycleOwner, { currentPosition ->
-            if (currentPosition < args.wordGroupWithWords.words.size) {
-                binding.practiceCardsViewPager.currentItem = currentPosition
-            } else {
-                navigateToPracticeResult()
-            }
-        })
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                practiceViewModel.onWordGuess.collect { isCorrect ->
-                    practiceSummary = if (isCorrect) {
+                practiceViewModel.onWordGuess.collect {
+                    val isCorrect = it.second
+                    if (isCorrect) {
                         correctAnswerSoundPlayer.start()
-                        practiceSummary.copy(
-                            correctGuesses = practiceSummary.correctGuesses + 1
-                        )
                     } else {
                         wrongAnswerSoundPlayer.start()
-                        practiceSummary.copy(
-                            wrongGuesses = practiceSummary.wrongGuesses + 1
-                        )
                     }
                 }
             }
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelable(PRACTICE_SUMMARY_KEY, practiceSummary)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                practiceViewModel.nextCardPosition.collect { nextCardPosition ->
+                    if (nextCardPosition < args.wordGroupWithWords.words.size) {
+                        binding.practiceCardsViewPager.currentItem = nextCardPosition
+                    } else {
+                        navigateToPracticeResult()
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -120,17 +110,12 @@ class PracticeFragment : Fragment() {
     }
 
     private fun navigateToPracticeResult() {
-        practiceViewModel.setCurrentPracticeSummary(practiceSummary)
-        practiceViewModel.savePracticeSummary(practiceSummary)
+        practiceViewModel.savePracticeSummary()
         exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
         val action = PracticeFragmentDirections.actionPracticeFragmentToPracticeResultFragment(
             args.practiceTypeLabel,
-            practiceSummary.getPercent()
+            practiceViewModel.getPracticePercent()
         )
         findNavController().navigate(action)
-    }
-
-    companion object {
-        private const val PRACTICE_SUMMARY_KEY = "PRACTICE_SUMMARY_KEY"
     }
 }

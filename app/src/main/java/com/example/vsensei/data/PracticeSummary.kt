@@ -10,7 +10,7 @@ import kotlin.math.roundToInt
 @Entity(tableName = "practice_summary_table")
 data class PracticeSummary(
     @PrimaryKey(autoGenerate = true)
-    val practiceSummaryId: Long,
+    val practiceSummaryId: Long = 0,
     val correctGuesses: Int = 0,
     val wrongGuesses: Int = 0
 ) : Parcelable {

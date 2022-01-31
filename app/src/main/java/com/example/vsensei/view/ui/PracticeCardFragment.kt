@@ -8,11 +8,16 @@ import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
 import com.example.vsensei.viewmodel.PracticeViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class PracticeCardFragment : Fragment() {
@@ -35,6 +40,7 @@ class PracticeCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val practiceType: PracticeType = requireArguments().get(PRACTICE_TYPE) as PracticeType
+        val currentPosition: Int = requireArguments().get(CURRENT_POSITION) as Int
         val currentWord: Word = requireArguments().get(CURRENT_WORD) as Word
         val isAnswerVisible = savedInstanceState?.getBoolean(IS_ANSWER_VISIBLE, false) ?: false
         val isGuessEnabled = savedInstanceState?.getBoolean(IS_GUESS_ENABLED, true) ?: true
@@ -43,12 +49,27 @@ class PracticeCardFragment : Fragment() {
         if (practiceType == PracticeType.GUESS_THE_WORD) {
             guessTheWordCardInit(currentWord)
         } else {
-            guessTheMeaningCardInit(currentWord)
+            guessTheMeaningCardInit(currentWord, currentPosition)
         }
         binding.guessLayout.setEndIconOnClickListener {
             if (!binding.guess.text.isNullOrBlank()) {
                 binding.guessLayout.isEnabled = false
                 binding.cardPracticeItemRoot.transitionToState(R.id.merged)
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                practiceViewModel.onWordGuess.collect {
+                    val cardPosition = it.first
+                    val isCorrect = it.second
+                    if (cardPosition == currentPosition) {
+                        if (isCorrect) {
+                            binding.cardPracticeItemRoot.transitionToState(R.id.success)
+                        } else {
+                            binding.cardPracticeItemRoot.transitionToState(R.id.failure)
+                        }
+                    }
+                }
             }
         }
     }
@@ -72,17 +93,10 @@ class PracticeCardFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == R.id.merged) {
-                    val guess = binding.guess.text.toString().lowercase()
-                    val answer = currentWord.wordPrimary.lowercase()
-                    val answerVariant =
-                        currentWord.wordPrimaryVariant?.lowercase()
-                    if (guess == answer || guess == answerVariant) {
-                        motionLayout.transitionToState(R.id.success)
-                        practiceViewModel.onWordGuess(currentPosition, true)
-                    } else {
-                        motionLayout.transitionToState(R.id.failure)
-                        practiceViewModel.onWordGuess(currentPosition, false)
-                    }
+                    val guess = binding.guess.text.toString()
+                    val answer = currentWord.wordPrimary
+                    val answerVariant = currentWord.wordPrimaryVariant
+                    practiceViewModel.onWordGuess(currentPosition, guess, answer, answerVariant)
                 }
                 if (currentId == R.id.success || currentId == R.id.failure) {
                     binding.answer.isVisible = true
@@ -91,30 +105,22 @@ class PracticeCardFragment : Fragment() {
         })
     }
 
-    private fun guessTheMeaningCardInit(currentWord: Word) {
+    private fun guessTheMeaningCardInit(currentWord: Word, currentPosition: Int) {
         binding.hint.text =
             if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
         binding.hintVariant.apply {
             if (!currentWord.wordPrimaryVariant.isNullOrBlank()) {
-                text = "(${currentWord.wordPrimary})"
+                text = getString(R.string.hint_variant_display, currentWord.wordPrimary)
                 isVisible = true
             }
         }
         binding.answer.text = currentWord.wordMeanings.joinToString(separator = ", ")
-        val currentPosition: Int = requireArguments().get(CURRENT_POSITION) as Int
         binding.cardPracticeItemRoot.setTransitionListener(object : TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == R.id.merged) {
-                    val guesses = binding.guess.text.toString().split(",").map { it.trim().lowercase() }
-                    val matches = currentWord.wordMeanings.filter { guesses.contains(it.lowercase()) }
-                    if (matches.isNotEmpty()) {
-                        motionLayout.transitionToState(R.id.success)
-                        practiceViewModel.onWordGuess(currentPosition, true)
-                    } else {
-                        motionLayout.transitionToState(R.id.failure)
-                        practiceViewModel.onWordGuess(currentPosition, false)
-                    }
+                    val guess = binding.guess.text.toString()
+                    practiceViewModel.onWordGuess(currentPosition, guess, currentWord.wordMeanings)
                 }
                 if (currentId == R.id.success || currentId == R.id.failure) {
                     binding.answer.isVisible = true

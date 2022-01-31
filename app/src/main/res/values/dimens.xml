@@ -17,7 +17,6 @@
     <dimen name="bottom_sheet_button_margin_top">12dp</dimen>
     <dimen name="practice_card_margin_sides">14dp</dimen>
     <dimen name="answer_card_margin_top">32dp</dimen>
-    <dimen name="answer_margin_bottom">16dp</dimen>
     <dimen name="hint_margin_top">16dp</dimen>
     <dimen name="motion_layout_margin_bottom">18dp</dimen>
     <dimen name="practice_info_container_padding">12dp</dimen>
@@ -54,4 +53,6 @@
     <dimen name="group_card_margin_end">4dp</dimen>
     <dimen name="group_card_button_size">48dp</dimen>
     <dimen name="word_recycler_view_margin">4dp</dimen>
+    <dimen name="practice_card_hint_variant_margin">4dp</dimen>
+    <dimen name="practice_card_answer_margin">12dp</dimen>
 </resources>
