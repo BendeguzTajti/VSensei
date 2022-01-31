@@ -97,7 +97,7 @@
         <item name="boxStrokeColor">@color/dark_blue_500</item>
     </style>
 
-    <style name="ThemeOverlay.App.TextInputLayout.Secondary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="ThemeOverlay.App.TextInputLayout.Answer" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="hintTextColor">@android:color/darker_gray</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="boxStrokeColor">@color/yellow_500</item>

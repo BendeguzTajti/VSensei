@@ -2,7 +2,6 @@ package com.example.vsensei.view.ui
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,6 @@ import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class PracticeFragment : Fragment() {
 
@@ -31,25 +29,15 @@ class PracticeFragment : Fragment() {
     private val args by navArgs<PracticeFragmentArgs>()
     private val practiceViewModel: PracticeViewModel by viewModel()
 
-    private val textToSpeech: TextToSpeech by lazy {
-        TextToSpeech(requireContext()) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val locale = Locale(args.wordGroupWithWords.wordGroup.localeLanguage)
-                textToSpeech.language = locale
-            }
-        }
-    }
     private lateinit var practiceSummary: PracticeSummary
     private val practiceCardAdapter: PracticeCardAdapter by lazy {
         val wordGroupWithWords = args.wordGroupWithWords
         val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
         val displayLanguages = resources.getStringArray(R.array.display_languages)
-        val hasVariants = args.wordGroupWithWords.wordGroup.selectedLanguageIndex == 1
         PracticeCardAdapter(
             args.practiceType,
             wordGroupWithWords.words,
             displayLanguages[selectedLanguageIndex],
-            hasVariants,
             childFragmentManager,
             lifecycle
         )
@@ -112,13 +100,6 @@ class PracticeFragment : Fragment() {
                 }
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                practiceViewModel.wordToSay.collect { word ->
-                    textToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
-                }
-            }
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -136,7 +117,6 @@ class PracticeFragment : Fragment() {
         super.onDestroy()
         correctAnswerSoundPlayer.release()
         wrongAnswerSoundPlayer.release()
-        textToSpeech.shutdown()
     }
 
     private fun navigateToPracticeResult() {

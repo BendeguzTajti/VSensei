@@ -24,17 +24,9 @@ class PracticeViewModel(private val repository: Repository) : ViewModel() {
     val allPracticeSummaries: LiveData<List<PracticeSummary>> by lazy {
         repository.allPracticeSummaries
     }
-    private val _wordToSay = MutableSharedFlow<String>()
-    val wordToSay: SharedFlow<String> = _wordToSay
     private val _onWordGuess = MutableSharedFlow<Boolean>()
     val onWordGuess: SharedFlow<Boolean> = _onWordGuess
     val currentCardPosition: LiveData<Int> = _currentCardPosition
-
-    fun sayWord(word: String) {
-        viewModelScope.launch {
-            _wordToSay.emit(word)
-        }
-    }
 
     fun onWordGuess(currentCardPosition: Int, isCorrect: Boolean) {
         viewModelScope.launch {

@@ -12,7 +12,6 @@ class PracticeCardAdapter(
     private val practiceType: PracticeType,
     private val words: List<Word>,
     private val selectedLanguage: String,
-    private val hasVariants: Boolean,
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
@@ -22,6 +21,6 @@ class PracticeCardAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return PracticeCardFragment.newInstance(practiceType, words[position], selectedLanguage, hasVariants, position)
+        return PracticeCardFragment.newInstance(practiceType, words[position], selectedLanguage, position)
     }
 }
