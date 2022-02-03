@@ -1,10 +1,15 @@
 package com.example.vsensei.view.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.isVisible
@@ -29,6 +34,8 @@ class PracticeCardFragment : Fragment() {
         requireParentFragment().getViewModel()
     }
 
+    private lateinit var speechRecognizer: ActivityResultLauncher<Intent>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +54,7 @@ class PracticeCardFragment : Fragment() {
         binding.guessLayout.isEnabled = isGuessEnabled
         binding.answer.visibility = if (isAnswerVisible) View.VISIBLE else View.INVISIBLE
         if (practiceType == PracticeType.GUESS_THE_WORD) {
+            speechToTextInit()
             guessTheWordCardInit(currentWord)
         } else {
             guessTheMeaningCardInit(currentWord, currentPosition)
@@ -103,9 +111,23 @@ class PracticeCardFragment : Fragment() {
                 }
             }
         })
+        binding.guessLayout.setStartIconOnClickListener {
+            val language = requireArguments().getString(GROUP_LANGUAGE, "")
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, language)
+                putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, true)
+                putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_recognizer_extra_prompt))
+            }
+            speechRecognizer.launch(intent)
+        }
     }
 
     private fun guessTheMeaningCardInit(currentWord: Word, currentPosition: Int) {
+        binding.guessLayout.startIconDrawable = null
         binding.hint.text =
             if (currentWord.wordPrimaryVariant.isNullOrBlank()) currentWord.wordPrimary else currentWord.wordPrimaryVariant
         binding.hintVariant.apply {
@@ -127,6 +149,17 @@ class PracticeCardFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun speechToTextInit() {
+        speechRecognizer = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val recognizedWords = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            if (result.resultCode == Activity.RESULT_OK && !recognizedWords.isNullOrEmpty()) {
+                binding.guess.setText(recognizedWords.first())
+                binding.guessLayout.isEnabled = false
+                binding.cardPracticeItemRoot.transitionToState(R.id.merged)
+            }
+        }
     }
 
     companion object {

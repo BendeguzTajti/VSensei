@@ -30,12 +30,15 @@ class PracticeFragment : Fragment() {
 
     private val practiceCardAdapter: PracticeCardAdapter by lazy {
         val wordGroupWithWords = args.wordGroupWithWords
-        val selectedLanguageIndex = wordGroupWithWords.wordGroup.selectedLanguageIndex
-        val displayLanguages = resources.getStringArray(R.array.display_languages)
+        val languageTag = when (args.wordGroupWithWords.wordGroup.localeLanguage) {
+            "en" -> "en-US"
+            "ja" -> "ja-JP"
+            else -> "hu-HU"
+        }
         PracticeCardAdapter(
             args.practiceType,
             wordGroupWithWords.words,
-            displayLanguages[selectedLanguageIndex],
+            languageTag,
             childFragmentManager,
             lifecycle
         )

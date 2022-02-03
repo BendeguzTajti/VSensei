@@ -60,7 +60,7 @@ class ScoresFragment : Fragment() {
             fillColor = requireContext().getColorFromAttr(R.attr.colorPrimary)
             valueTextColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
             valueFormatter = DefaultValueFormatter(0)
-            valueTextSize = 12f
+            valueTextSize = 10f
         }
         binding.scoresLineChart.apply {
             data = LineData(lineDataSet)
@@ -91,7 +91,7 @@ class ScoresFragment : Fragment() {
             colors = barColors
             valueTextColor = requireContext().getColorFromAttr(R.attr.colorOnSurface)
             valueFormatter = DefaultValueFormatter(0)
-            valueTextSize = 12f
+            valueTextSize = 11f
         }
         binding.scoresBarChart.apply {
             data = BarData(barDataSet)

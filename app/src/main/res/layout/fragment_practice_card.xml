@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/answer"
+                app:startIconDrawable="@drawable/ic_mic"
                 app:endIconDrawable="@drawable/ic_send"
                 app:endIconMode="custom">
 

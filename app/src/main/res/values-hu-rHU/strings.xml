@@ -43,4 +43,5 @@
     <string name="wrong">Hibás</string>
     <string name="practice_percentages">Gyakorlások százaléka</string>
     <string name="guesses_percentage">Válaszok százaléka</string>
+    <string name="speech_recognizer_extra_prompt">Mondd a válaszod</string>
 </resources>
