@@ -67,13 +67,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/create_group_button"
+        style="@style/Widget.App.Button.Primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/bottom_sheet_button_margin_top"
         android:text="@string/create_group"
         android:textColor="?attr/colorOnPrimary"
-        app:backgroundTint="?attr/colorPrimaryVariant"
-        app:layout_constraintTop_toBottomOf="@id/language_selector_container"
-        app:rippleColor="@android:color/darker_gray" />
+        app:layout_constraintTop_toBottomOf="@id/language_selector_container" />
 
 </LinearLayout>

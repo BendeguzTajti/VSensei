@@ -87,7 +87,7 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="Widget.App.PracticeButton" parent="Widget.MaterialComponents.Button">
+    <style name="Widget.App.Button.Primary" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/dark_blue_700</item>
         <item name="cornerRadius">@dimen/corner_radius</item>
     </style>

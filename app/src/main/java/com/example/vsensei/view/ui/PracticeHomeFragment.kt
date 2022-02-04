@@ -13,7 +13,6 @@ import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
 import com.example.vsensei.viewmodel.WordViewModel
-import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -68,7 +67,12 @@ class PracticeHomeFragment : Fragment() {
             val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
                 practiceType
             )
-            reenterTransition = MaterialFadeThrough()
+            exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+            }
+            reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+            }
             findNavController().navigate(action)
         }
     }

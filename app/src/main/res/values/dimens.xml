@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="corner_radius">12dp</dimen>
-    <dimen name="practice_button_height">100dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
     <dimen name="drawable_padding">12dp</dimen>
     <dimen name="text_size_regular">14sp</dimen>
     <dimen name="practice_button_icon_margin">18dp</dimen>
     <dimen name="practice_button_icon_elevation">9dp</dimen>
     <dimen name="container_padding">12dp</dimen>
     <dimen name="navigation_button_margin_top">12dp</dimen>
-    <dimen name="guess_the_word_button_margin_bottom">70dp</dimen>
     <dimen name="toolbar_elevation">0dp</dimen>
     <dimen name="bottom_nav_elevation">0dp</dimen>
     <dimen name="splash_screen_logo_size">150dp</dimen>
@@ -55,4 +53,10 @@
     <dimen name="word_recycler_view_margin">4dp</dimen>
     <dimen name="practice_card_hint_variant_margin">4dp</dimen>
     <dimen name="practice_card_answer_margin">12dp</dimen>
+    <dimen name="practice_button_margin">12dp</dimen>
+    <dimen name="practice_button_padding">12dp</dimen>
+    <dimen name="line_chart_height">250dp</dimen>
+    <dimen name="pie_chart_height">200dp</dimen>
+    <dimen name="bar_chart_height">200dp</dimen>
+    <dimen name="pie_chart_margin_top">8dp</dimen>
 </resources>

@@ -45,15 +45,15 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/scores_line_chart"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="@dimen/line_chart_height"
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/scores_pie_chart"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="@dimen/pie_chart_height"
+            android:layout_marginTop="@dimen/pie_chart_margin_top"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
@@ -62,7 +62,7 @@
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/scores_bar_chart"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/bar_chart_height"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/scores_pie_chart"
             app:layout_constraintEnd_toStartOf="@id/guideline"
