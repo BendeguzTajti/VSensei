@@ -20,7 +20,7 @@
             android:id="@+id/card_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/bottom_sheet_title_margin_bottom"
+            android:layout_marginTop="@dimen/bottom_sheet_title_margin_top"
             android:ellipsize="end"
             android:maxLines="1"
             android:textAlignment="center"
