@@ -24,16 +24,13 @@
     <dimen name="indicator_track_thickness">2dp</dimen>
     <dimen name="practice_percent_text_size">16sp</dimen>
     <dimen name="result_title_margin_top">24dp</dimen>
-    <dimen name="word_group_item_name_text_size">16sp</dimen>
-    <dimen name="word_group_item_margin_large">12dp</dimen>
-    <dimen name="word_group_item_margin_medium">8dp</dimen>
+    <dimen name="word_group_item_margin_large">8dp</dimen>
+    <dimen name="word_group_item_margin_medium">6dp</dimen>
     <dimen name="word_group_item_margin_small">4dp</dimen>
     <dimen name="word_group_item_container_padding">12dp</dimen>
-    <dimen name="word_item_margin_large">12dp</dimen>
-    <dimen name="word_item_margin_medium">8dp</dimen>
+    <dimen name="word_item_margin_medium">6dp</dimen>
     <dimen name="word_item_margin_small">4dp</dimen>
     <dimen name="word_item_container_padding">12dp</dimen>
-    <dimen name="word_item_primary_name_text_size">16sp</dimen>
     <dimen name="bottom_sheet_title_margin_bottom">10dp</dimen>
     <dimen name="delete_container_padding_start">16dp</dimen>
     <dimen name="delete_container_padding_end">12dp</dimen>
@@ -59,4 +56,5 @@
     <dimen name="pie_chart_height">200dp</dimen>
     <dimen name="bar_chart_height">200dp</dimen>
     <dimen name="pie_chart_margin_top">8dp</dimen>
+    <dimen name="words_recyclerview_elevation">1dp</dimen>
 </resources>

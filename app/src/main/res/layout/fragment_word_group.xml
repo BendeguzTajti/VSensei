@@ -17,6 +17,7 @@
         android:layout_margin="@dimen/word_recycler_view_margin"
         android:background="?attr/colorCard"
         android:clipToPadding="false"
+        android:elevation="@dimen/words_recyclerview_elevation"
         android:paddingBottom="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="6"

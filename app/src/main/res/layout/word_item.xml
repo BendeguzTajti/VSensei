@@ -24,15 +24,15 @@
             android:layout_marginEnd="@dimen/word_item_margin_medium"
             android:text="@string/delete"
             android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="?attr/colorOnPrimary" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             app:srcCompat="@drawable/ic_delete"
-            app:tint="@android:color/white"
+            app:tint="?attr/colorOnPrimary"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
@@ -50,9 +50,8 @@
             android:id="@+id/word_primary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/word_item_margin_large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="?attr/colorOnSurface"
-            android:textSize="@dimen/word_item_primary_name_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/word_item_margin_small"
-            android:layout_marginEnd="@dimen/word_item_margin_large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
