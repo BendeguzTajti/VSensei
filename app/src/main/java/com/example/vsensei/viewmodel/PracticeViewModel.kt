@@ -26,7 +26,8 @@ class PracticeViewModel(private val repository: Repository) : ViewModel() {
 
     fun onWordGuess(currentCardPosition: Int, guess: String, answer: String, answerVariant: String?) {
         viewModelScope.launch {
-            val isCorrect = guess.lowercase() == answer.lowercase() || guess.lowercase() == answerVariant?.lowercase()
+            val guesses = guess.split(",").map { it.trim().lowercase() }
+            val isCorrect = guesses.contains(answer.lowercase()) || guesses.contains(answerVariant?.lowercase())
             _onWordGuess.emit(Pair(currentCardPosition, isCorrect))
             val delayInMillis = if (isCorrect) 1400L else 2000L
             delay(delayInMillis)

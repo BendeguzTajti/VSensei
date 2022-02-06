@@ -20,10 +20,12 @@ import com.example.vsensei.R
 import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.Word
 import com.example.vsensei.databinding.FragmentPracticeCardBinding
+import com.example.vsensei.util.Constants
 import com.example.vsensei.viewmodel.PracticeViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.util.*
 
 class PracticeCardFragment : Fragment() {
 
@@ -112,13 +114,14 @@ class PracticeCardFragment : Fragment() {
             }
         })
         binding.guessLayout.setStartIconOnClickListener {
-            val language = requireArguments().getString(GROUP_LANGUAGE, "")
+            val language = requireArguments().getString(GROUP_LANGUAGE, Locale.getDefault().toLanguageTag())
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(
                     RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
                 )
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE, language)
+                putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, Constants.RECOGNIZER_MAX_RESULTS)
                 putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, true)
                 putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_recognizer_extra_prompt))
             }
@@ -155,7 +158,7 @@ class PracticeCardFragment : Fragment() {
         speechRecognizer = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val recognizedWords = result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             if (result.resultCode == Activity.RESULT_OK && !recognizedWords.isNullOrEmpty()) {
-                binding.guess.setText(recognizedWords.first())
+                binding.guess.setText(recognizedWords.joinToString(","))
                 binding.guessLayout.isEnabled = false
                 binding.cardPracticeItemRoot.transitionToState(R.id.merged)
             }
