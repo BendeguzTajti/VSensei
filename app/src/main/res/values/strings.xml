@@ -58,4 +58,5 @@
     <string name="guesses_percentage">Guess percentages</string>
     <string name="hint_variant_display" translatable="false">(%1$s)</string>
     <string name="speech_recognizer_extra_prompt">Say your answer</string>
+    <string name="share">Share</string>
 </resources>

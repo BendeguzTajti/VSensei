@@ -3,16 +3,19 @@ package com.example.vsensei.repository
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
-import com.example.vsensei.data.PracticeSummary
-import com.example.vsensei.data.Word
-import com.example.vsensei.data.WordGroup
-import com.example.vsensei.data.WordGroupDao
+import com.example.vsensei.data.*
 import com.example.vsensei.util.Constants
+import com.example.vsensei.util.compress
+import com.google.gson.Gson
 
-class Repository(private val sharedPreferences: SharedPreferences, private val wordGroupDao: WordGroupDao) {
+class Repository(
+    private val sharedPreferences: SharedPreferences,
+    private val wordGroupDao: WordGroupDao
+) {
+
+    private val gson = Gson()
 
     val allWordGroups = wordGroupDao.getAllWordGroups()
-
     val allPracticeSummaries = wordGroupDao.getAllPracticeSummaries()
 
     suspend fun addWordGroup(wordGroup: WordGroup) {
@@ -51,7 +54,7 @@ class Repository(private val sharedPreferences: SharedPreferences, private val w
         wordGroupDao.deleteOldPracticeSummaries()
     }
 
-    fun wordsByGroupId(groupId: Long) : LiveData<List<Word>> {
+    fun wordsByGroupId(groupId: Long): LiveData<List<Word>> {
         return wordGroupDao.getWordsByGroupId(groupId)
     }
 
@@ -72,4 +75,6 @@ class Repository(private val sharedPreferences: SharedPreferences, private val w
             }
         }
     }
+
+    fun compressWordGroup(wordGroup: WordGroupWithWords): String = gson.toJson(wordGroup).compress()
 }

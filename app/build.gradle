@@ -117,6 +117,9 @@ dependencies {
     // MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    // QR code generator
+    implementation 'com.google.zxing:core:3.3.3'
+
     // Leak Canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 }

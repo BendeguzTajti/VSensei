@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_dictionaryFragment_to_wordGroupFragment"
             app:destination="@id/wordGroupFragment" />
+        <action
+            android:id="@+id/action_dictionaryFragment_to_shareFragment"
+            app:destination="@id/shareFragment" />
     </fragment>
     <fragment
         android:id="@+id/scoresFragment"
@@ -107,5 +110,14 @@
         <argument
             android:name="practicePercent"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.example.vsensei.view.ui.ShareFragment"
+        android:label="@string/share"
+        tools:layout="@layout/fragment_share" >
+        <argument
+            android:name="wordGroupWithWords"
+            app:argType="com.example.vsensei.data.WordGroupWithWords" />
     </fragment>
 </navigation>

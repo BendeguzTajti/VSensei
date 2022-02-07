@@ -7,6 +7,7 @@ import com.example.vsensei.data.WordGroupDao
 import com.example.vsensei.data.WordGroupDatabase
 import com.example.vsensei.repository.Repository
 import com.example.vsensei.util.Constants
+import com.example.vsensei.viewmodel.GroupShareViewModel
 import com.example.vsensei.viewmodel.PracticeViewModel
 import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.example.vsensei.viewmodel.WordViewModel
@@ -15,16 +16,17 @@ import org.koin.dsl.module
 
 val appModules = module {
 
-    // SHARED PREF
+    // Shared preferences
     single { provideSharedPreferences(get()) }
 
-    // REPOSITORY
+    // Repository
     single { Repository(get(), get()) }
 
-    // VIEW-MODEL
+    // ViewModel
     viewModel { WordViewModel(get()) }
     viewModel { PracticeViewModel(get()) }
     viewModel { UserOptionsViewModel(get()) }
+    viewModel { GroupShareViewModel(get()) }
 
     // DataBase
     single { provideDataBase(get()) }

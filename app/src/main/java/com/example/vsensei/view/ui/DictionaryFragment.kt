@@ -10,6 +10,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.vsensei.R
+import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.databinding.FragmentDictionaryBinding
 import com.example.vsensei.view.adapter.WordGroupAdapter
 import com.example.vsensei.view.adapter.SwipeDeleteItemTouchHelper
@@ -25,22 +26,14 @@ class DictionaryFragment : Fragment() {
     private val wordViewModel: WordViewModel by sharedViewModel()
 
     private val wordGroupAdapter: WordGroupAdapter by lazy {
-        WordGroupAdapter { view, wordGroupWithWords ->
-            exitTransition = MaterialElevationScale(false).apply {
-                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        WordGroupAdapter(
+            onWordGroupClicked = { view, wordGroupWithWords ->
+                navigateToWordGroupFragment(view, wordGroupWithWords)
+            },
+            onShareButtonClicked = { view, wordGroupWithWords ->
+                navigateToShareFragment(view, wordGroupWithWords)
             }
-            reenterTransition = MaterialElevationScale(true).apply {
-                duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
-            }
-            val extras = FragmentNavigatorExtras(
-                view to getString(R.string.word_group_transition_name)
-            )
-            val action = DictionaryFragmentDirections.actionDictionaryFragmentToWordGroupFragment(
-                wordGroupWithWords.wordGroup.groupName,
-                wordGroupWithWords.wordGroup
-            )
-            findNavController().navigate(action, extras)
-        }
+        )
     }
 
     override fun onCreateView(
@@ -78,5 +71,43 @@ class DictionaryFragment : Fragment() {
         wordViewModel.allWordGroups.observe(viewLifecycleOwner, { wordGroupsWithWords ->
             wordGroupAdapter.submitList(wordGroupsWithWords)
         })
+    }
+
+    private fun navigateToWordGroupFragment(view: View, wordGroupWithWords: WordGroupWithWords) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration =
+                resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration =
+                resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
+        val extras = FragmentNavigatorExtras(
+            view to getString(R.string.word_group_transition_name)
+        )
+        val action =
+            DictionaryFragmentDirections.actionDictionaryFragmentToWordGroupFragment(
+                wordGroupWithWords.wordGroup.groupName,
+                wordGroupWithWords.wordGroup
+            )
+        findNavController().navigate(action, extras)
+    }
+
+    private fun navigateToShareFragment(view: View, wordGroupWithWords: WordGroupWithWords) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration =
+                resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration =
+                resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
+        }
+        val extras = FragmentNavigatorExtras(
+            view to getString(R.string.word_group_transition_name)
+        )
+        val action = DictionaryFragmentDirections.actionDictionaryFragmentToShareFragment(
+            wordGroupWithWords
+        )
+        findNavController().navigate(action, extras)
     }
 }

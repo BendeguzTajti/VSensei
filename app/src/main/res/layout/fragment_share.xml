@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="4dp"
+    android:transitionName="@string/word_group_transition_name"
+    app:cardBackgroundColor="?attr/colorCard"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    tools:context=".view.ui.ShareFragment"
+    tools:theme="@style/Theme.VSensei">
+
+    <ImageView
+        android:id="@+id/qr_code"
+        android:layout_width="@dimen/qr_code_size"
+        android:layout_height="@dimen/qr_code_size"
+        android:layout_gravity="center"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/qr_code_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="?attr/colorOnSurface" />
+
+</com.google.android.material.card.MaterialCardView>

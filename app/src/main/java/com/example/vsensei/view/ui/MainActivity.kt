@@ -150,6 +150,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemReselectedListener { }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
+                R.id.shareFragment,
                 R.id.practiceFragment,
                 R.id.practiceResultFragment -> {
                     hideBottomAppBar(true)
