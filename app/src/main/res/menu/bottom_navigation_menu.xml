@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_scores"
         android:title="@string/scores" />
     <item
-        android:id="@+id/camera"
+        android:id="@+id/scannerActivity"
         android:icon="@drawable/ic_camera"
         android:title="@string/camera" />
 </menu>
