@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vsensei">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -13,7 +15,8 @@
         <activity
             android:name=".view.ui.ScannerActivity"
             android:exported="false"
-            android:theme="@style/Theme.VSensei"/>
+            android:screenOrientation="userPortrait"
+            android:theme="@style/Theme.VSensei.Scanner" />
         <activity
             android:name=".view.ui.MainActivity"
             android:exported="true">

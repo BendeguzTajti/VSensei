@@ -23,9 +23,8 @@ fun String.compress(): String {
     return bos.toString(StandardCharsets.ISO_8859_1.name())
 }
 
-fun String.decompress(): String {
-    val bytes = this.toByteArray(StandardCharsets.ISO_8859_1)
-    val gis = GZIPInputStream(ByteArrayInputStream(bytes))
+fun ByteArray.decompress(): String {
+    val gis = GZIPInputStream(ByteArrayInputStream(this))
     val bf = BufferedReader(InputStreamReader(gis, StandardCharsets.ISO_8859_1))
     var outStr: String? = ""
     var line: String?

@@ -6,4 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.ScannerActivity">
 
+    <androidx.camera.view.PreviewView
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/qr_code_frame"
+        android:layout_width="@dimen/qr_code_size"
+        android:layout_height="@dimen/qr_code_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/scanner_frame"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/scanner_help_chip"
+        style="@style/Widget.MaterialComponents.Chip.Entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkable="false"
+        android:clickable="false"
+        android:text="@string/scanner_help"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:chipCornerRadius="8dp"
+        app:chipSurfaceColor="#9A000000"
+        app:closeIconVisible="false"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qr_code_frame"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/scanner_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/top_action_bar_scrim"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_close"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/flash_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="12dp"
+            app:srcCompat="@drawable/camera_flash"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

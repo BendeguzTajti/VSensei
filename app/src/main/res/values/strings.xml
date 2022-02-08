@@ -59,4 +59,8 @@
     <string name="hint_variant_display" translatable="false">(%1$s)</string>
     <string name="speech_recognizer_extra_prompt">Say your answer</string>
     <string name="share">Share</string>
+    <string name="permission_required">Permission required</string>
+    <string name="camera_rationale_message">This application needs to access the camera to scan group QR codes</string>
+    <string name="cancel">Cancel</string>
+    <string name="scanner_help">Point your camera at the QR code</string>
 </resources>

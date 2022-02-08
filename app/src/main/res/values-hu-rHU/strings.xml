@@ -45,4 +45,8 @@
     <string name="guesses_percentage">Válaszok százaléka</string>
     <string name="speech_recognizer_extra_prompt">Mondd a válaszod</string>
     <string name="share">Megosztás</string>
+    <string name="permission_required">Engedély szükséges</string>
+    <string name="camera_rationale_message">Az alkalmazásnak hozzá kell férnie a készülék kamerájához, hogy QR kódot tudjon szkennelni</string>
+    <string name="cancel">Mégse</string>
+    <string name="scanner_help">Tartsd a kamerát a QR kód felé</string>
 </resources>
