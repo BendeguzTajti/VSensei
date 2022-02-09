@@ -2,10 +2,7 @@ package com.example.vsensei.util
 
 import com.example.vsensei.data.*
 import com.google.gson.Gson
-import java.io.BufferedReader
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
@@ -14,23 +11,13 @@ fun WordGroupWithWords.compress(gson: Gson): String {
     val sharedGroup = this.toSharedGroup()
     val json = gson.toJson(sharedGroup)
     val bos = ByteArrayOutputStream()
-    val gzip = GZIPOutputStream(bos)
-    gzip.apply {
-        write(json.toByteArray(StandardCharsets.ISO_8859_1))
-        close()
-    }
-    return bos.toString(StandardCharsets.ISO_8859_1.name())
+    GZIPOutputStream(bos).bufferedWriter(StandardCharsets.UTF_8).use { it.write(json) }
+    return bos.toByteArray().toString(StandardCharsets.ISO_8859_1)
 }
 
 fun ByteArray.decompressSharedGroup(gson: Gson): SharedGroup {
-    val gis = GZIPInputStream(ByteArrayInputStream(this))
-    val bf = BufferedReader(InputStreamReader(gis, StandardCharsets.ISO_8859_1))
-    var outStr: String? = ""
-    var line: String?
-    while (bf.readLine().also { line = it } != null) {
-        outStr += line
-    }
-    return gson.fromJson(outStr, SharedGroup::class.java)
+    val json = GZIPInputStream(this.inputStream()).bufferedReader(StandardCharsets.UTF_8).use { it.readText() }
+    return gson.fromJson(json, SharedGroup::class.java)
 }
 
 private fun WordGroupWithWords.toSharedGroup(): SharedGroup {
