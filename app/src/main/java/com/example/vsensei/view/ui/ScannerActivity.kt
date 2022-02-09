@@ -14,8 +14,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.vsensei.R
 import com.example.vsensei.databinding.ActivityScannerBinding
-import com.example.vsensei.util.QrCodeAnalyzer
+import com.example.vsensei.camera.QrCodeAnalyzer
+import com.example.vsensei.camera.ScannerState
+import com.example.vsensei.viewmodel.GroupShareViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -24,6 +27,9 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScannerBinding
     private lateinit var cameraExecutor: ExecutorService
     private var camera: Camera? = null
+    private var cameraProvider: ProcessCameraProvider? = null
+
+    private val groupShareViewModel: GroupShareViewModel by viewModel()
 
     private val cameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
@@ -40,7 +46,6 @@ class ScannerActivity : AppCompatActivity() {
         binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         cameraExecutor = Executors.newSingleThreadExecutor()
-        checkCameraPermission()
         binding.closeButton.setOnClickListener {
             finish()
         }
@@ -61,6 +66,21 @@ class ScannerActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }
+        }
+        groupShareViewModel.scannerState.observe(this) { state ->
+            when (state) {
+                ScannerState.DETECTING -> {
+                    checkCameraPermission()
+                    binding.scannerHelpChip.text = getString(R.string.scanner_help)
+                }
+                ScannerState.CONFIRMING -> {
+                    cameraProvider?.unbindAll()
+                }
+                ScannerState.INVALID_QR_CODE -> {
+                    binding.scannerHelpChip.text = getString(R.string.invalid_qr_code)
+                }
+                else -> finish()
             }
         }
     }
@@ -85,18 +105,18 @@ class ScannerActivity : AppCompatActivity() {
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
-            val cameraProvider = cameraProviderFuture.get()
+            cameraProvider = cameraProviderFuture.get()
             val preview = Preview.Builder()
                 .build()
                 .also { it.setSurfaceProvider(binding.cameraPreview.surfaceProvider) }
             val imageAnalyzer = ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
-                .also { it.setAnalyzer(cameraExecutor, QrCodeAnalyzer()) }
+                .also { it.setAnalyzer(cameraExecutor, QrCodeAnalyzer(groupShareViewModel)) }
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             try {
-                cameraProvider.unbindAll()
-                camera = cameraProvider.bindToLifecycle(
+                cameraProvider?.unbindAll()
+                camera = cameraProvider?.bindToLifecycle(
                     this, cameraSelector, preview, imageAnalyzer
                 )
                 binding.scannerToolbar.isVisible = true

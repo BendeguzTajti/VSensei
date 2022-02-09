@@ -63,4 +63,5 @@
     <string name="camera_rationale_message">This application needs to access the camera to scan group QR codes</string>
     <string name="cancel">Cancel</string>
     <string name="scanner_help">Point your camera at the QR code</string>
+    <string name="invalid_qr_code">Invalid QR code</string>
 </resources>

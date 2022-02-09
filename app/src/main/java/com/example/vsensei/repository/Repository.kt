@@ -4,8 +4,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import com.example.vsensei.data.*
-import com.example.vsensei.util.Constants
-import com.example.vsensei.util.compress
+import com.example.vsensei.util.*
 import com.google.gson.Gson
 
 class Repository(
@@ -76,5 +75,13 @@ class Repository(
         }
     }
 
-    fun compressWordGroup(wordGroup: WordGroupWithWords): String = gson.toJson(wordGroup).compress()
+    fun compressWordGroup(wordGroupWithWords: WordGroupWithWords): String = wordGroupWithWords.compress(gson)
+
+    fun decompressSharedGroup(byteArray: ByteArray): SharedGroup = byteArray.decompressSharedGroup(gson)
+
+    suspend fun saveSharedGroup(sharedGroup: SharedGroup) {
+        wordGroupDao.addWordGroup(sharedGroup.toWordGroup())
+        val groupId = wordGroupDao.getLatestWordGroupId()
+        wordGroupDao.addWords(sharedGroup.sharedWords.toWords(groupId))
+    }
 }

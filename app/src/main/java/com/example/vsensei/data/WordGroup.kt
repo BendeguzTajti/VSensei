@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "word_group_table")
 data class WordGroup(
     @PrimaryKey(autoGenerate = true)
-    val groupId: Long,
+    val groupId: Long = 0,
     val groupName : String,
     val selectedLanguageIndex: Int,
     val localeLanguage: String,

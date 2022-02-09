@@ -58,11 +58,10 @@ class NewGroupFragment : BottomSheetDialogFragment() {
                 val groupName = binding.groupNameInput.text.toString()
                 val selectedLanguageIndex = wordViewModel.getLatestSelectedLanguageIndex()
                 val wordGroup = WordGroup(
-                    0,
-                    groupName,
-                    selectedLanguageIndex,
-                    localeLanguages[selectedLanguageIndex],
-                    System.currentTimeMillis()
+                    groupName = groupName,
+                    selectedLanguageIndex = selectedLanguageIndex,
+                    localeLanguage = localeLanguages[selectedLanguageIndex],
+                    timeCreated = System.currentTimeMillis()
                 )
                 wordViewModel.addWordGroup(wordGroup)
                 dismiss()

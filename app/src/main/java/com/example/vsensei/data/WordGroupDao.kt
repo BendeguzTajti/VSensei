@@ -25,6 +25,9 @@ interface WordGroupDao {
     @Query("SELECT * FROM word_group_table ORDER BY timeCreated DESC")
     fun getAllWordGroups(): LiveData<List<WordGroupWithWords>>
 
+    @Query("SELECT groupId FROM word_group_table ORDER BY timeCreated DESC LIMIT 1")
+    suspend fun getLatestWordGroupId(): Long
+
     @Query("SELECT * FROM word_table WHERE groupId = :groupId ORDER BY wordPrimary")
     fun getWordsByGroupId(groupId: Long): LiveData<List<Word>>
 

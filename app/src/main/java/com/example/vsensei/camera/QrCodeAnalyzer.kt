@@ -1,15 +1,17 @@
-package com.example.vsensei.util
+package com.example.vsensei.camera
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import com.example.vsensei.viewmodel.GroupShareViewModel
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
-class QrCodeAnalyzer : ImageAnalysis.Analyzer {
+class QrCodeAnalyzer(
+    private val groupShareViewModel: GroupShareViewModel
+) : ImageAnalysis.Analyzer {
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun analyze(image: ImageProxy) {
@@ -25,7 +27,9 @@ class QrCodeAnalyzer : ImageAnalysis.Analyzer {
                     for (barcode in barcodes) {
                         val valueType = barcode.valueType
                         if (valueType == Barcode.TYPE_TEXT) {
-                            // Check qr code
+                            barcode.rawBytes?.let {
+                                groupShareViewModel.scanBarCode(it)
+                            }
                         }
                     }
                 }

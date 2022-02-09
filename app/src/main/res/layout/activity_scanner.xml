@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:checkable="false"
         android:clickable="false"
-        android:text="@string/scanner_help"
         android:textColor="@color/white"
         android:visibility="gone"
         app:chipCornerRadius="8dp"
@@ -41,6 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qr_code_frame"
+        tools:text="@string/scanner_help"
         tools:visibility="visible" />
 
     <FrameLayout
