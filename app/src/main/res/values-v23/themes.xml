@@ -34,6 +34,7 @@
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/dark_blue_700</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <item name="fontFamily">@font/rubik</item>
         <item name="actionBarSize">64dp</item>
@@ -72,8 +73,10 @@
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text
+        </item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text
+        </item>
     </style>
 
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
@@ -141,6 +144,12 @@
         <item name="fabAlignmentMode">center</item>
         <item name="fabCradleMargin">@dimen/fab_cradle_margin</item>
         <item name="fabCradleRoundedCornerRadius">@dimen/fab_cradle_corner_radius</item>
+    </style>
+
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipCornerRadius">@dimen/chip_corner_radius</item>
+        <item name="closeIconVisible">false</item>
+        <item name="chipSurfaceColor">@color/dark_transparent</item>
     </style>
 
 </resources>

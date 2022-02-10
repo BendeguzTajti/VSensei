@@ -162,4 +162,10 @@
         <item name="fabCradleRoundedCornerRadius">@dimen/fab_cradle_corner_radius</item>
     </style>
 
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipCornerRadius">@dimen/chip_corner_radius</item>
+        <item name="closeIconVisible">false</item>
+        <item name="chipSurfaceColor">@color/dark_transparent</item>
+    </style>
+
 </resources>
