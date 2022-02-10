@@ -46,7 +46,7 @@
     <string name="better_luck_next_time">Better luck next time!</string>
     <string name="light_mode">Light mode</string>
     <string name="dark_mode">Dark mode</string>
-    <string name="missing_scores">You don’t have any saved practices. Once you start practicing you can find detailed information about your latest 5 practices</string>
+    <string name="missing_scores">You don’t have any saved practices. Once you finished practicing you can find statistics about your latest 5 practices</string>
     <string name="word_meaning_helper_text">If you want to add multiple meanings separate them with comas!</string>
     <string name="update_word">Update word</string>
     <string name="camera">Camera</string>

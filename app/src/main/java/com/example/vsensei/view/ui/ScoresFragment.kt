@@ -35,8 +35,11 @@ class ScoresFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         practiceViewModel.allPracticeSummaries.observe(viewLifecycleOwner, { practiceSummaries ->
             if (practiceSummaries.isEmpty()) {
-                binding.emptyGroupsDisplay.isVisible = true
+                binding.emptyScoresText.isVisible = true
+                binding.emptyScoresIcon.isVisible = true
             } else {
+                binding.emptyScoresText.isVisible = false
+                binding.emptyScoresIcon.isVisible = false
                 lineChartInit(practiceSummaries)
                 pieChartInit(practiceSummaries)
                 barChartInit(practiceSummaries)

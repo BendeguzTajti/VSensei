@@ -24,22 +24,34 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent=".5" />
 
-        <TextView
-            android:id="@+id/empty_groups_display"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/empty_scores_icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:text="@string/missing_scores"
-            android:textAlignment="center"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="@dimen/text_size_regular"
             android:visibility="gone"
-            app:drawableTopCompat="@drawable/ic_scores_empty"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/empty_scores_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="18dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:srcCompat="@drawable/ic_scores_empty"
+            tools:ignore="ContentDescription"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/empty_scores_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/missing_scores"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?attr/colorOnSurface"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/empty_scores_icon"
             tools:visibility="visible" />
 
         <com.github.mikephil.charting.charts.LineChart

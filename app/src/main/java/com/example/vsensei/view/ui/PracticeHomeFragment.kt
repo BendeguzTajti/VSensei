@@ -38,20 +38,31 @@ class PracticeHomeFragment : Fragment() {
             reenterTransition = null
         }
         wordViewModel.wordGroupsWithEnoughWords.observe(viewLifecycleOwner, { wordGroupsWithWords ->
-            binding.emptyGroupsDisplay.isVisible = wordGroupsWithWords.isEmpty()
-            binding.practiceDisplay.isVisible = wordGroupsWithWords.isNotEmpty()
-            binding.guessTheWordButton.setOnClickListener {
-                if (wordGroupsWithWords.size > 1) {
-                    navigateToGroupSelectorDialog(PracticeType.GUESS_THE_WORD)
-                } else {
-                    navigateToPracticeFragment(wordGroupsWithWords.first(), PracticeType.GUESS_THE_WORD)
+            binding.run {
+                emptyGroupsIcon.isVisible = wordGroupsWithWords.isEmpty()
+                emptyGroupsText.isVisible = wordGroupsWithWords.isEmpty()
+                practiceIcon.isVisible = wordGroupsWithWords.isNotEmpty()
+                guessTheWordButton.isVisible = wordGroupsWithWords.isNotEmpty()
+                guessTheMeaningButton.isVisible = wordGroupsWithWords.isNotEmpty()
+                guessTheWordButton.setOnClickListener {
+                    if (wordGroupsWithWords.size > 1) {
+                        navigateToGroupSelectorDialog(PracticeType.GUESS_THE_WORD)
+                    } else {
+                        navigateToPracticeFragment(
+                            wordGroupsWithWords.first(),
+                            PracticeType.GUESS_THE_WORD
+                        )
+                    }
                 }
-            }
-            binding.guessTheMeaningButton.setOnClickListener {
-                if (wordGroupsWithWords.size > 1) {
-                    navigateToGroupSelectorDialog(PracticeType.GUESS_THE_MEANING)
-                } else {
-                    navigateToPracticeFragment(wordGroupsWithWords.first(), PracticeType.GUESS_THE_MEANING)
+                guessTheMeaningButton.setOnClickListener {
+                    if (wordGroupsWithWords.size > 1) {
+                        navigateToGroupSelectorDialog(PracticeType.GUESS_THE_MEANING)
+                    } else {
+                        navigateToPracticeFragment(
+                            wordGroupsWithWords.first(),
+                            PracticeType.GUESS_THE_MEANING
+                        )
+                    }
                 }
             }
         })
@@ -64,9 +75,10 @@ class PracticeHomeFragment : Fragment() {
 
     private fun navigateToGroupSelectorDialog(practiceType: PracticeType) {
         if (findNavController().currentDestination?.id == R.id.practiceHomeFragment) {
-            val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
-                practiceType
-            )
+            val action =
+                PracticeHomeFragmentDirections.actionPracticeHomeFragmentToGroupSelectFragment(
+                    practiceType
+                )
             exitTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
                 duration = resources.getInteger(R.integer.material_motion_duration_long_1).toLong()
             }
@@ -77,7 +89,10 @@ class PracticeHomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToPracticeFragment(wordGroupWithWords: WordGroupWithWords, practiceType: PracticeType) {
+    private fun navigateToPracticeFragment(
+        wordGroupWithWords: WordGroupWithWords,
+        practiceType: PracticeType
+    ) {
         wordGroupWithWords.words.shuffle()
         val action = PracticeHomeFragmentDirections.actionPracticeHomeFragmentToPracticeFragment(
             practiceType,
