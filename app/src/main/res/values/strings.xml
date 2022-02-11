@@ -64,4 +64,6 @@
     <string name="cancel">Cancel</string>
     <string name="scanner_help">Point your camera at the QR code</string>
     <string name="invalid_qr_code">Invalid QR code</string>
+    <string name="group_share_title">Share group with QR code</string>
+    <string name="group_share_description">To share, can the QR code above</string>
 </resources>

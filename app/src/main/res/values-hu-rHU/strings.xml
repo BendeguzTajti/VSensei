@@ -46,8 +46,10 @@
     <string name="speech_recognizer_extra_prompt">Mondd a válaszod</string>
     <string name="share">Megosztás</string>
     <string name="permission_required">Engedély szükséges</string>
-    <string name="camera_rationale_message">Az alkalmazásnak hozzá kell férnie a készülék kamerájához, hogy QR kódot tudjon szkennelni</string>
+    <string name="camera_rationale_message">Az alkalmazásnak hozzá kell férnie a készülék kamerájához, hogy QR-kódot tudjon szkennelni</string>
     <string name="cancel">Mégse</string>
-    <string name="scanner_help">Tartsd a kamerát a QR kód felé</string>
-    <string name="invalid_qr_code">Hibás QR kód</string>
+    <string name="scanner_help">Tartsd a kamerát a QR-kód felé</string>
+    <string name="invalid_qr_code">Hibás QR-kód</string>
+    <string name="group_share_title">Csoport megosztása QR-kóddal</string>
+    <string name="group_share_description">Megosztáshoz olvasd be a fenti QR-kódot</string>
 </resources>

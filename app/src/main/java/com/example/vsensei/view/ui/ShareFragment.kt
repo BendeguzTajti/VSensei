@@ -51,6 +51,8 @@ class ShareFragment : Fragment() {
                     }
                     is Resource.Success -> {
                         binding.qrCodeLoading.isVisible = false
+                        binding.groupShareTitle.isVisible = true
+                        binding.groupShareDescription.isVisible = true
                         binding.qrCode.setImageBitmap(resource.data)
                     }
                     is Resource.Error -> {
