@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import com.example.vsensei.data.*
+import com.example.vsensei.data.SharedGroup
 import com.example.vsensei.util.*
 import com.google.gson.Gson
 

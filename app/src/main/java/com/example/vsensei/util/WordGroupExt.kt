@@ -1,6 +1,8 @@
 package com.example.vsensei.util
 
 import com.example.vsensei.data.*
+import com.example.vsensei.data.SharedGroup
+import com.example.vsensei.data.SharedWord
 import com.google.gson.Gson
 import java.io.ByteArrayOutputStream
 import java.nio.charset.StandardCharsets
