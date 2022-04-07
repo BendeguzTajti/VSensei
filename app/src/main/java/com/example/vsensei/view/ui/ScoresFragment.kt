@@ -14,6 +14,7 @@ import com.example.vsensei.viewmodel.PracticeViewModel
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
+import com.google.android.material.transition.MaterialFadeThrough
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScoresFragment : Fragment() {
@@ -22,6 +23,12 @@ class ScoresFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val practiceViewModel: PracticeViewModel by viewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

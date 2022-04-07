@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.vsensei.R
@@ -13,6 +12,7 @@ import com.example.vsensei.data.PracticeType
 import com.example.vsensei.data.WordGroupWithWords
 import com.example.vsensei.databinding.FragmentPracticeHomeBinding
 import com.example.vsensei.viewmodel.WordViewModel
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -22,6 +22,12 @@ class PracticeHomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val wordViewModel: WordViewModel by sharedViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +39,6 @@ class PracticeHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.doOnPreDraw {
-            exitTransition = null
-            reenterTransition = null
-        }
         wordViewModel.wordGroupsWithEnoughWords.observe(viewLifecycleOwner, { wordGroupsWithWords ->
             binding.run {
                 emptyGroupsIcon.isVisible = wordGroupsWithWords.isEmpty()
