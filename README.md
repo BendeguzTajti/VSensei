@@ -7,7 +7,7 @@ Virtual Sensei (VSensei) is a language learning app that helps you learn English
 - `Room` persistence library
 - `Koin`
 - `Navigation Component`
-- `MLKit` with `CameraX` 
+- `ML Kit` with `CameraX` 
 - `Material design`
 
 I also created a mock design in `Figma`, which you can find here: 
