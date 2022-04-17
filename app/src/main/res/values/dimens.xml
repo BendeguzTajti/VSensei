@@ -44,7 +44,6 @@
     <dimen name="group_card_margin_bottom">2dp</dimen>
     <dimen name="group_card_margin_start">4dp</dimen>
     <dimen name="group_card_margin_end">4dp</dimen>
-    <dimen name="group_card_button_size">48dp</dimen>
     <dimen name="word_recycler_view_margin">4dp</dimen>
     <dimen name="practice_card_hint_variant_margin">4dp</dimen>
     <dimen name="practice_card_answer_margin">12dp</dimen>
