@@ -1,9 +1,10 @@
 package com.example.vsensei.view.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
@@ -80,7 +81,10 @@ class ScannerActivity : AppCompatActivity() {
                 ScannerState.INVALID_QR_CODE -> {
                     binding.scannerHelpChip.text = getString(R.string.invalid_qr_code)
                 }
-                else -> finish()
+                else -> {
+                    vibrate()
+                    finish()
+                }
             }
         }
     }
@@ -148,5 +152,24 @@ class ScannerActivity : AppCompatActivity() {
                 setCanceledOnTouchOutside(false)
                 show()
             }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun vibrate(){
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                val vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                val vibrator = vibratorManager.defaultVibrator
+                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+                val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+            }
+            else -> {
+                val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                vibrator.vibrate(50)
+            }
+        }
     }
 }

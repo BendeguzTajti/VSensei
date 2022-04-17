@@ -64,4 +64,5 @@
     <dimen name="group_share_description_margin">12dp</dimen>
     <dimen name="share_group_card_elevation">1dp</dimen>
     <dimen name="share_group_card_margin">4dp</dimen>
+    <dimen name="bottom_sheet_title_margin_bottom">18dp</dimen>
 </resources>

@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:padding="@dimen/container_padding">
 
@@ -21,10 +22,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/bottom_sheet_title_margin_top"
+            android:layout_marginBottom="@dimen/bottom_sheet_title_margin_bottom"
             android:ellipsize="end"
             android:maxLines="1"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +39,6 @@
             style="@style/ThemeOverlay.App.TextInputLayout.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_input_layout_margin_top"
             app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/card_title"
             tools:hint="@string/hiragana_or_katakana">
