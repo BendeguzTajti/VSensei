@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/app_theme"
-        android:icon="@drawable/ic_dark_mode"
+        android:icon="@drawable/ic_daynight"
         android:title="@string/dark_mode"
         app:showAsAction="always" />
 </menu>

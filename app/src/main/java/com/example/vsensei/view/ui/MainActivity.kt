@@ -5,8 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
@@ -18,7 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.vsensei.R
 import com.example.vsensei.data.WordGroup
@@ -27,7 +25,7 @@ import com.example.vsensei.util.Constants
 import com.example.vsensei.viewmodel.UserOptionsViewModel
 import com.example.vsensei.viewmodel.WordViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         navInit()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                wordViewModel.recentlyDeletedGroup.collect { group ->
+                wordViewModel.recentlyDeletedGroup.collectLatest { group ->
                     Snackbar.make(
                         binding.root,
                         getString(R.string.item_removed, group.wordGroup.groupName),
@@ -63,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                wordViewModel.recentlyDeletedWord.collect { word ->
+                wordViewModel.recentlyDeletedWord.collectLatest { word ->
                     val wordName =
                         if (word.wordPrimaryVariant.isNullOrBlank()) word.wordPrimary else word.wordPrimaryVariant
                     Snackbar.make(
@@ -81,54 +79,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        changeUiMode(newConfig)
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> {
-                menu?.getItem(0)?.apply {
-                    setIcon(R.drawable.ic_light_mode)
-                    setTitle(R.string.light_mode)
-                }
-            }
-            Configuration.UI_MODE_NIGHT_NO -> {
-                menu?.getItem(0)?.apply {
-                    setIcon(R.drawable.ic_dark_mode)
-                    setTitle(R.string.dark_mode)
-                }
-            }
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.app_theme) {
-            changeUiMode(resources.configuration)
-            true
-        } else {
-            false
-        }
-    }
-
-    private fun changeUiMode(configuration: Configuration?) {
-        when (configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> {
-                userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_NO)
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            Configuration.UI_MODE_NIGHT_NO -> {
-                userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_YES)
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-        }
     }
 
     private fun navInit() {
@@ -144,8 +96,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.practiceResultFragment
             )
         )
-        setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        setupWithNavController(binding.toolbar, navController, appBarConfiguration)
+        binding.toolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.app_theme) {
+                changeUiMode(resources.configuration)
+                true
+            } else {
+                false
+            }
+        }
         binding.bottomNavigation.setupWithNavController(navController)
         binding.bottomNavigation.setOnItemReselectedListener { }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
@@ -183,6 +142,19 @@ class MainActivity : AppCompatActivity() {
                     }
                     showBottomAppBar()
                 }
+            }
+        }
+    }
+
+    private fun changeUiMode(configuration: Configuration?) {
+        when (configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_NO)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                userOptionsViewModel.saveUiMode(Configuration.UI_MODE_NIGHT_YES)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
     }
