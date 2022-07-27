@@ -12,14 +12,14 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="@dimen/toolbar_elevation">
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Widget.App.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:elevation="@dimen/toolbar_elevation"
+            android:elevation="0dp"
             app:menu="@menu/toolbar_menu"
             tools:title="Practice" />
 
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:backgroundTint="@android:color/transparent"
-            app:elevation="@dimen/bottom_nav_elevation"
+            app:elevation="0dp"
             app:itemRippleColor="@android:color/transparent"
             app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Caption"
             app:menu="@menu/bottom_navigation_menu" />

@@ -5,8 +5,6 @@
     <dimen name="practice_button_icon_elevation">9dp</dimen>
     <dimen name="container_padding">12dp</dimen>
     <dimen name="navigation_button_margin_top">12dp</dimen>
-    <dimen name="toolbar_elevation">0dp</dimen>
-    <dimen name="bottom_nav_elevation">0dp</dimen>
     <dimen name="splash_screen_logo_size">150dp</dimen>
     <dimen name="dropdown_item_padding">16dp</dimen>
     <dimen name="text_input_layout_margin_top">10dp</dimen>
@@ -37,13 +35,9 @@
     <dimen name="bottom_app_bar_inset">0dp</dimen>
     <dimen name="fab_cradle_margin">8dp</dimen>
     <dimen name="fab_cradle_corner_radius">12dp</dimen>
-    <dimen name="card_corner_radius">0dp</dimen>
     <dimen name="words_container_margin">4dp</dimen>
-    <dimen name="word_card_elevation">0dp</dimen>
-    <dimen name="group_card_margin_top">2dp</dimen>
-    <dimen name="group_card_margin_bottom">2dp</dimen>
-    <dimen name="group_card_margin_start">4dp</dimen>
-    <dimen name="group_card_margin_end">4dp</dimen>
+    <dimen name="group_card_margin_vertical">2dp</dimen>
+    <dimen name="group_card_margin_horizontal">4dp</dimen>
     <dimen name="word_recycler_view_margin">4dp</dimen>
     <dimen name="practice_card_hint_variant_margin">4dp</dimen>
     <dimen name="practice_card_answer_margin">12dp</dimen>
@@ -53,7 +47,6 @@
     <dimen name="pie_chart_height">200dp</dimen>
     <dimen name="bar_chart_height">200dp</dimen>
     <dimen name="pie_chart_margin_top">8dp</dimen>
-    <dimen name="words_recyclerview_elevation">1dp</dimen>
     <dimen name="qr_code_size">270dp</dimen>
     <dimen name="empty_groups_text_margin">6dp</dimen>
     <dimen name="empty_scores_text_margin">6dp</dimen>
@@ -61,7 +54,6 @@
     <dimen name="scanner_toolbar_icon_padding">12dp</dimen>
     <dimen name="group_share_title_margin">12dp</dimen>
     <dimen name="group_share_description_margin">12dp</dimen>
-    <dimen name="share_group_card_elevation">1dp</dimen>
     <dimen name="share_group_card_margin">4dp</dimen>
     <dimen name="bottom_sheet_title_margin_bottom">18dp</dimen>
 </resources>

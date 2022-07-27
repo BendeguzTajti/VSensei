@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/share_group_card_margin"
-        android:background="?attr/colorCard"
-        android:elevation="@dimen/share_group_card_elevation"
+        android:background="?attr/colorSurface"
         android:transitionName="@string/word_group_transition_name">
 
         <TextView

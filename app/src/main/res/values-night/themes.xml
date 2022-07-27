@@ -11,17 +11,16 @@
         <item name="colorSecondaryVariant">@color/yellow_500</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/dark_blue_700</item>
+        <item name="android:statusBarColor">@color/dark_blue_700</item>
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/rubik</item>
         <item name="actionBarSize">56dp</item>
         <item name="backgroundColor">@color/dark_blue_700</item>
-        <item name="colorSurface">@color/dark_blue_700</item>
+        <item name="colorSurface">@color/dark_blue_600</item>
         <item name="colorOnSurface">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorPositive">@color/green_300</item>
         <item name="colorNegative">@color/red_300</item>
-        <item name="colorCard">@color/dark_blue_600</item>
         <item name="android:textColorPrimary">@color/dark_blue_700</item>
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
@@ -156,9 +155,9 @@
 
     <style name="Widget.App.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
         <item name="elevation">@dimen/bottom_app_bar_elevation</item>
+        <item name="backgroundTint">@color/dark_blue_700</item>
         <item name="contentInsetStart">@dimen/bottom_app_bar_inset</item>
         <item name="contentInsetEnd">@dimen/bottom_app_bar_inset</item>
-        <item name="backgroundTint">@color/dark_blue_750</item>
         <item name="hideOnScroll">true</item>
         <item name="fabAlignmentMode">center</item>
         <item name="fabCradleMargin">@dimen/fab_cradle_margin</item>

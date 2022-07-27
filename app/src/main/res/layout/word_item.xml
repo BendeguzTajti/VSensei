@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/word_card_elevation"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
     tools:theme="@style/Theme.VSensei">
 
     <LinearLayout
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/item_container_margin_end"
-        android:background="?attr/colorCard"
+        android:background="?attr/colorSurface"
         android:padding="@dimen/word_item_container_padding"
         tools:visibility="visible">
 

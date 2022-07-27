@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/group_card_margin_start"
-    android:layout_marginTop="@dimen/group_card_margin_top"
-    android:layout_marginEnd="@dimen/group_card_margin_end"
-    android:layout_marginBottom="@dimen/group_card_margin_bottom"
-    app:cardCornerRadius="@dimen/card_corner_radius"
+    android:layout_marginHorizontal="@dimen/group_card_margin_horizontal"
+    android:layout_marginVertical="@dimen/group_card_margin_vertical"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
     tools:theme="@style/Theme.VSensei">
 
     <LinearLayout
@@ -45,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/item_container_margin_end"
-        android:background="?attr/colorCard"
+        android:background="?attr/colorSurface"
         android:padding="@dimen/word_group_item_container_padding">
 
         <TextView
