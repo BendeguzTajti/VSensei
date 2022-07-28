@@ -40,6 +40,7 @@ class NewGroupFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val latestPosition = wordViewModel.getLatestSelectedLanguageIndex()
         val displayLanguages = resources.getStringArray(R.array.display_languages)
+        binding.dismissButton.setOnClickListener { dismiss() }
         binding.languageSelector.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

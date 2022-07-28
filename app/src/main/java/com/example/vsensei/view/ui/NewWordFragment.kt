@@ -35,6 +35,7 @@ class NewWordFragment : BottomSheetDialogFragment() {
         val selectedWord = args.word
         val displayLanguages = resources.getStringArray(R.array.display_languages)
         val selectedLanguageIndex = args.wordGroup.selectedLanguageIndex
+        binding.dismissButton.setOnClickListener { dismiss() }
         when(displayLanguages[selectedLanguageIndex]) {
             getString(R.string.japanese) -> {
                 binding.wordPrimaryContainer.setHint(R.string.hiragana_or_katakana)

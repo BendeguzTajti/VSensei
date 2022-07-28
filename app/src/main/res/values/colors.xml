@@ -23,4 +23,5 @@
     <color name="green_500">#FF4A934A</color>
     <color name="yellow_200">#FFFBBF5F</color>
     <color name="yellow_500">#FFF9A826</color>
+    <color name="gray_transparent">#26020202</color>
 </resources>

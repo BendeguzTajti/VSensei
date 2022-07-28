@@ -145,7 +145,7 @@
 
     <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">24dp</item>
+        <item name="cornerSize">18dp</item>
     </style>
 
     <style name="Widget.App.Button.IconButton" parent="Widget.MaterialComponents.Button.TextButton">

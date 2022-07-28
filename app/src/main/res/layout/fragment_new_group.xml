@@ -12,14 +12,36 @@
     tools:context=".view.ui.NewGroupFragment"
     tools:theme="@style/Theme.VSensei">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_line"
+            tools:ignore="ContentDescription" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dismiss_button"
+            style="@style/Widget.App.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:backgroundTint="@color/gray_transparent"
+            app:icon="@drawable/ic_close" />
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/card_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/bottom_sheet_title_margin_top"
         android:layout_marginBottom="@dimen/bottom_sheet_title_margin_bottom"
         android:text="@string/new_group"
-        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?attr/colorOnSurface"
         android:textStyle="bold"
