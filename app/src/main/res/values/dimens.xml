@@ -9,7 +9,7 @@
     <dimen name="dropdown_item_padding">16dp</dimen>
     <dimen name="text_input_layout_margin_top">10dp</dimen>
     <dimen name="bottom_sheet_button_margin_top">12dp</dimen>
-    <dimen name="practice_card_margin_sides">14dp</dimen>
+    <dimen name="practice_card_margin_horizontal">14dp</dimen>
     <dimen name="answer_card_margin_top">32dp</dimen>
     <dimen name="hint_margin_top">16dp</dimen>
     <dimen name="motion_layout_margin_bottom">18dp</dimen>

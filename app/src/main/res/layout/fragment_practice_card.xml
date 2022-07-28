@@ -20,9 +20,8 @@
             android:id="@+id/guess_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/practice_card_margin_sides"
+            android:layout_marginHorizontal="@dimen/practice_card_margin_horizontal"
             android:layout_marginTop="@dimen/answer_card_margin_top"
-            android:layout_marginEnd="@dimen/practice_card_margin_sides"
             app:cardBackgroundColor="?attr/colorPrimaryVariant"
             app:cardCornerRadius="@dimen/corner_radius"
             app:layout_constraintEnd_toEndOf="@id/word_container"
@@ -35,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/answer"
-                app:startIconDrawable="@drawable/ic_mic"
                 app:endIconDrawable="@drawable/ic_send"
-                app:endIconMode="custom">
+                app:endIconMode="custom"
+                app:startIconDrawable="@drawable/ic_mic">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/guess"
@@ -54,8 +53,7 @@
             android:id="@+id/word_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/practice_card_margin_sides"
-            android:layout_marginEnd="@dimen/practice_card_margin_sides"
+            android:layout_marginHorizontal="@dimen/practice_card_margin_horizontal"
             app:cardBackgroundColor="?attr/colorPrimaryVariant"
             app:cardCornerRadius="@dimen/corner_radius"
             app:layout_constraintBottom_toBottomOf="parent"
