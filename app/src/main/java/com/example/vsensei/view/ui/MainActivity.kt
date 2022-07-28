@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
@@ -16,7 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.vsensei.R
 import com.example.vsensei.data.WordGroup
@@ -96,7 +97,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.practiceResultFragment
             )
         )
-        setupWithNavController(binding.toolbar, navController, appBarConfiguration)
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.app_theme) {
                 changeUiMode(resources.configuration)
@@ -144,6 +146,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
     }
 
     private fun changeUiMode(configuration: Configuration?) {
