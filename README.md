@@ -27,7 +27,7 @@ https://www.figma.com/file/GgsBrznP8CK1vrtmEUCosh/VSensei?node-id=0%3A1
   <img src="https://github.com/BendeguzTajti/VSensei/blob/main/README%20files/guess-the-word.gif" width="400" height="700" />
 </p>
 
-### You can also share your groups with others
+### Share your groups with others
 
 <img src="https://github.com/BendeguzTajti/VSensei/blob/main/README%20files/qr-group-sample.jpg" width="400" height="700" />
 
