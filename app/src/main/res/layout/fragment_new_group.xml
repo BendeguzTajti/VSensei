@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:background="?attr/colorSurface"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:padding="@dimen/container_padding"
+    tools:background="?attr/colorSurface"
     tools:context=".view.ui.NewGroupFragment"
     tools:theme="@style/Theme.VSensei">
 
