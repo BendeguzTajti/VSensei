@@ -50,7 +50,7 @@ class ScannerActivity : AppCompatActivity() {
         setContentView(binding.root)
         cameraExecutor = Executors.newSingleThreadExecutor()
         binding.closeButton.setOnClickListener {
-            finish()
+            finishAfterTransition()
         }
         binding.flashButton.setOnClickListener { flashButton ->
             flashButton.let { view ->
@@ -85,7 +85,7 @@ class ScannerActivity : AppCompatActivity() {
                 }
                 else -> {
                     vibrate()
-                    finish()
+                    finishAfterTransition()
                 }
             }
         }
@@ -93,7 +93,7 @@ class ScannerActivity : AppCompatActivity() {
 
     private fun setupWindowAnimations() {
         val slide = Slide().apply {
-            duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
+            duration = resources.getInteger(R.integer.material_motion_duration_medium_1).toLong()
         }
         window.enterTransition = slide
         window.returnTransition = slide
@@ -154,7 +154,7 @@ class ScannerActivity : AppCompatActivity() {
                 checkCameraPermission()
             }
             .setNegativeButton(R.string.cancel) { _, _ ->
-                finish()
+                finishAfterTransition()
             }
             .setCancelable(false)
             .create()
