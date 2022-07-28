@@ -2,6 +2,8 @@ package com.example.vsensei.view.ui
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.ActivityOptions
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +19,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.vsensei.R
@@ -108,6 +111,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.bottomNavigation.setupWithNavController(navController)
+        binding.bottomNavigation.setOnItemSelectedListener {
+            if (it.itemId == R.id.scannerActivity) {
+                navigateToCameraActivity()
+                false
+            } else {
+                NavigationUI.onNavDestinationSelected(it, navController)
+            }
+        }
         binding.bottomNavigation.setOnItemReselectedListener { }
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
@@ -195,5 +206,10 @@ class MainActivity : AppCompatActivity() {
                 fab.hide()
             }
         }
+    }
+
+    private fun navigateToCameraActivity() {
+        val intent = Intent(this, ScannerActivity::class.java)
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
     }
 }

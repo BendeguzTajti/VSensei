@@ -32,8 +32,6 @@
     <string name="practice_result_saved_message">A gyakorlásod el lett mentve. A gyakorlásodról részletesebb információkat az Eredmények menüpont alatt találsz</string>
     <string name="good_job">Szép munka!</string>
     <string name="better_luck_next_time">Még gyakorolnod kell!</string>
-    <string name="dark_mode">Sötét mód</string>
-    <string name="light_mode">Világos mód</string>
     <string name="missing_scores">Még nincs elmentett gyakorlásod. Amint befejezted a gyakorlást, itt találhatsz statisztikákat a korábbi 5 eredményedről</string>
     <string name="word_meaning_helper_text">Több jelentés esetén válaszd el a szavakat vesszővel!</string>
     <string name="update_word">Szó módosítása</string>
@@ -52,4 +50,6 @@
     <string name="invalid_qr_code">Hibás QR-kód</string>
     <string name="group_share_title">Csoport megosztása QR-kóddal</string>
     <string name="group_share_description">Megosztáshoz olvasd be a fenti QR-kódot</string>
+    <string name="scanner">Szkenner</string>
+    <string name="theme">Téma</string>
 </resources>

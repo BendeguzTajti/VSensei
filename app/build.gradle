@@ -130,5 +130,5 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-alpha28"
 
     // Leak Canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 }

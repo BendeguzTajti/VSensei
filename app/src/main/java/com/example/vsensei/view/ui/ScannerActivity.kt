@@ -4,8 +4,9 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.*
-import androidx.appcompat.app.AppCompatActivity
+import android.transition.Slide
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -14,9 +15,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.vsensei.R
-import com.example.vsensei.databinding.ActivityScannerBinding
 import com.example.vsensei.camera.QrCodeAnalyzer
 import com.example.vsensei.camera.ScannerState
+import com.example.vsensei.databinding.ActivityScannerBinding
 import com.example.vsensei.viewmodel.GroupShareViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,6 +45,7 @@ class ScannerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupWindowAnimations()
         binding = ActivityScannerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -87,6 +89,14 @@ class ScannerActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun setupWindowAnimations() {
+        val slide = Slide().apply {
+            duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
+        }
+        window.enterTransition = slide
+        window.returnTransition = slide
     }
 
     override fun onDestroy() {
